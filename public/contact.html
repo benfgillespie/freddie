@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – The Generic Foiling Podcast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://app.snipcart.com">
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">The Generic Foiling Podcast</a>
+      <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+      <nav class="main-nav" id="mainNav">
+        <a href="/">Home</a>
+        <a href="/episodes.html">Episodes</a>
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html" class="active">Contact</a>
+        <a href="/support.html">Support Us</a>
+        <a href="/shop.html">Shop</a>
+        <button class="cart-btn snipcart-checkout" aria-label="Shopping cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span class="cart-count snipcart-items-count"></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>Got a question, guest suggestion, or just want to say hello? Drop us a line.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="episodes">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact Form -->
+        <div>
+          <!-- Wire up with Formspree, Netlify Forms, or similar — set the action attribute -->
+          <form class="contact-form" onsubmit="return false;">
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" placeholder="Your name" required>
+
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" placeholder="you@example.com" required>
+
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" placeholder="What's on your mind?" required></textarea>
+
+            <button type="submit" class="btn btn-yellow">Send Message</button>
+          </form>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="contact-sidebar">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter / X</a></li>
+          </ul>
+
+          <h3>Listen On</h3>
+          <ul>
+            <li><a href="#">Apple Podcasts</a></li>
+            <li><a href="#">Spotify</a></li>
+            <li><a href="#">Google Podcasts</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <h2 class="section-title">Don't Miss Out</h2>
+      <p>Did you miss the Generic Foiling Newsletter sign-up pop-up? Subscribe below.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="Email address *" required>
+        <input type="text" placeholder="First name (optional)">
+        <button type="submit" class="btn btn-yellow">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/episodes.html">Episodes</a>
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/support.html">Support Us</a>
+        <a href="/shop.html">Shop</a>
+      </nav>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">&#9679;</a>
+        <a href="#" aria-label="YouTube">&#9679;</a>
+        <a href="#" aria-label="Facebook">&#9679;</a>
+        <a href="#" aria-label="Twitter">&#9679;</a>
+      </div>
+      <p class="copyright">&copy; 2026 The Generic Foiling Podcast. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Snipcart e-commerce — replace YOUR_SNIPCART_PUBLIC_API_KEY with your key from https://app.snipcart.com/dashboard/account/credentials -->
+  <script>
+    window.SnipcartSettings = {
+      publicApiKey: 'YOUR_SNIPCART_PUBLIC_API_KEY',
+      loadStrategy: 'on-user-interaction'
+    };
+  </script>
+  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
+  <div hidden id="snipcart" data-api-key="YOUR_SNIPCART_PUBLIC_API_KEY"></div>
+
+  <script>
+    // Mobile nav toggle
+    document.querySelector('.mobile-toggle').addEventListener('click', function () {
+      document.getElementById('mainNav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

@@ -4,13 +4,18 @@ const BLOB_PATH = 'feedback/data.json';
 
 async function getItems() {
   const { blobs } = await list({ prefix: 'feedback/' });
-  if (blobs.length === 0) return { items: [], url: null };
-  const res = await fetch(blobs[0].url);
-  return { items: await res.json(), url: blobs[0].url };
+  if (blobs.length === 0) return { items: [], urls: [] };
+  // Fetch the most recent blob
+  const latest = blobs[blobs.length - 1];
+  const res = await fetch(latest.url);
+  return { items: await res.json(), urls: blobs.map(b => b.url) };
 }
 
-async function saveItems(items, oldUrl) {
-  if (oldUrl) await del(oldUrl);
+async function saveItems(items, oldUrls) {
+  // Delete ALL old blobs to prevent duplicates
+  for (const url of oldUrls) {
+    try { await del(url); } catch (e) { /* ignore */ }
+  }
   await put(BLOB_PATH, JSON.stringify(items), {
     access: 'public',
     contentType: 'application/json',
@@ -27,18 +32,20 @@ export default async function handler(req, res) {
 
     if (req.method === 'POST') {
       const item = req.body;
-      const { items, url } = await getItems();
+      const { items, urls } = await getItems();
       items.push(item);
-      await saveItems(items, url);
+      await saveItems(items, urls);
       return res.status(201).json(item);
     }
 
     if (req.method === 'DELETE') {
       const id = req.query.id;
       if (!id) return res.status(400).json({ error: 'Missing id' });
-      const { items, url } = await getItems();
-      const filtered = items.filter(i => i.id !== id);
-      await saveItems(filtered, url);
+      const { items, urls } = await getItems();
+      // Support comma-separated IDs for batch delete
+      const idsToDelete = id.split(',');
+      const filtered = items.filter(i => !idsToDelete.includes(i.id));
+      await saveItems(filtered, urls);
       return res.status(204).end();
     }
 

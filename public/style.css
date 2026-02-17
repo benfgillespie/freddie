@@ -164,6 +164,7 @@ img { max-width: 100%; display: block; }
 .stars { color: #fbb904; font-size: 24px; letter-spacing: 2px; }
 
 .rating-text { font-size: 15px; color: #b0b0b0; }
+.rating-divider { color: #555; font-size: 15px; }
 
 /* ---------- Episodes ---------- */
 .episodes {
@@ -182,6 +183,51 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
+}
+
+/* List layout variant */
+.episode-grid:has(.episode-list) {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.episode-list {
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+  border-bottom: 1px solid #282828;
+}
+.episode-list:first-child { border-radius: 12px 12px 0 0; }
+.episode-list:last-child { border-radius: 0 0 12px 12px; border-bottom: none; }
+.episode-list:hover { transform: none; box-shadow: none; background: #222; }
+
+.episode-thumb-sm {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #282828, #1a1a1a);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.episode-thumb-sm .thumb-placeholder span { font-size: 24px; color: #fbb904; opacity: .6; }
+
+.episode-list .episode-info { padding: 14px 20px; flex: 1; min-width: 0; }
+.episode-list .episode-info h3 { margin: 4px 0 8px; font-size: 15px; }
+.episode-list .episode-info p { display: none; }
+
+.episode-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.episode-duration-inline {
+  font-size: 12px;
+  color: #888;
+  font-weight: 600;
 }
 
 .episode-card {
@@ -1035,7 +1081,6 @@ img { max-width: 100%; display: block; }
   .hero-inner { flex-direction: column; text-align: center; }
   .hero-text h1 { font-size: 32px; }
   .hero-subtitle { margin-left: auto; margin-right: auto; }
-  .episode-grid { grid-template-columns: 1fr; }
   .hosts-grid { grid-template-columns: 1fr; }
   .insta-grid { grid-template-columns: repeat(3, 1fr); }
   .shop-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1064,6 +1109,7 @@ img { max-width: 100%; display: block; }
   .section-title { font-size: 24px; }
   .insta-grid { grid-template-columns: repeat(2, 1fr); }
   .newsletter-form { flex-direction: column; }
+  .episode-thumb-sm { width: 60px; height: 60px; }
   .shop-grid { grid-template-columns: 1fr; }
   .page-header h1 { font-size: 28px; }
   .support-explainer { grid-template-columns: 1fr 1fr; }

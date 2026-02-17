@@ -37,8 +37,7 @@
     <div class="hero-inner">
       <div class="hero-text">
         <h1>Welcome to the World's #1 Foiling Podcast</h1>
-        <p class="hero-subtitle">Wing / Prone / Downwind / Kite / SUP / Foil Assist / Para foiling chat brought to you by <strong>Freddie Oldfield</strong> and <strong>Liam Proctor</strong>.</p>
-        <a href="#support" class="btn btn-yellow">Support Us</a>
+        <p class="hero-subtitle">All manor of foiling chit chat, brought to you by <strong>Freddie Oldfield</strong> and <strong>Liam Proctor</strong>.</p>
       </div>
       <div class="hero-artwork">
         <img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo/28158409/28158409-1673605107109-65e7fc5514372.jpg"
@@ -51,8 +50,10 @@
   <section class="ratings-bar">
     <div class="ratings-inner">
       <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <span class="rating-text">Based on 819+ Podcast Ratings</span>
-      <a href="#" class="btn btn-green btn-sm">Listen on Spotify</a>
+      <span class="rating-text">819+ Podcast Ratings</span>
+      <span class="rating-divider">|</span>
+      <span class="rating-text">X,XXX+ Spotify Subscribers</span>
+      <a href="https://open.spotify.com/show/yourshowid" class="btn btn-green btn-sm" target="_blank" rel="noopener">Listen on Spotify</a>
     </div>
   </section>
 
@@ -130,7 +131,7 @@
   <section class="newsletter" id="contact">
     <div class="container">
       <h2 class="section-title">Don't Miss Out</h2>
-      <p>Did you miss the Generic Foiling Newsletter sign-up pop-up? Subscribe below.</p>
+      <p>Sign up below to get a monthly email on going's on, upcoming episodes and snippets we can't share to the public.</p>
       <form class="newsletter-form" onsubmit="return false;">
         <input type="email" placeholder="Email address *" required>
         <input type="text" placeholder="First name (optional)">
@@ -160,10 +161,9 @@
         <a href="/shop.html">Shop</a>
       </nav>
       <div class="footer-social">
-        <a href="#" aria-label="Instagram">&#9679;</a>
-        <a href="#" aria-label="YouTube">&#9679;</a>
-        <a href="#" aria-label="Facebook">&#9679;</a>
-        <a href="#" aria-label="Twitter">&#9679;</a>
+        <a href="https://www.instagram.com/genericfoilingpodcast" aria-label="Instagram" target="_blank" rel="noopener">&#9679;</a>
+        <a href="https://www.youtube.com/@GenericFoilingPodcast" aria-label="YouTube" target="_blank" rel="noopener">&#9679;</a>
+        <a href="https://www.facebook.com/genericfoilingpodcast" aria-label="Facebook" target="_blank" rel="noopener">&#9679;</a>
       </div>
       <p class="copyright">&copy; 2026 The Generic Foiling Podcast. All rights reserved.</p>
     </div>
@@ -213,7 +213,7 @@
 
     // ---- RSS Feed & Audio Player ----
     const RSS_URL = '/api/rss';
-    const EPISODES_PER_PAGE = 4;
+    const EPISODES_PER_PAGE = 10;
 
     let allEpisodes = [];
     let visibleCount = 0;
@@ -282,15 +282,16 @@
         : '';
 
       return `
-        <article class="episode-card">
-          <div class="episode-thumb" style="${thumbStyle}">
+        <article class="episode-card episode-list">
+          <div class="episode-thumb-sm" style="${thumbStyle}">
             ${!ep.imageUrl ? '<div class="thumb-placeholder"><span>&#9654;</span></div>' : ''}
-            ${ep.duration ? '<span class="episode-duration">' + ep.duration + '</span>' : ''}
           </div>
           <div class="episode-info">
-            <time>${dateStr}</time>
+            <div class="episode-meta">
+              <time>${dateStr}</time>
+              ${ep.duration ? '<span class="episode-duration-inline">' + ep.duration + '</span>' : ''}
+            </div>
             <h3><a href="${ep.link}" target="_blank" rel="noopener">${ep.title}</a></h3>
-            <p>${ep.description}</p>
             <div class="episode-player">
               <button class="play-btn" data-idx="${idx}" aria-label="Play" onclick="togglePlay(this, ${idx})">&#9654;</button>
               <div class="progress-bar" data-idx="${idx}" onclick="seek(event, ${idx})">
@@ -298,7 +299,6 @@
               </div>
               <span class="time-label" id="time-${idx}">00:00 / ${ep.duration || '--:--'}</span>
             </div>
-            <a href="${ep.audioUrl}" class="download-link" download>&#8615; Download</a>
           </div>
         </article>`;
     }

@@ -6,139 +6,155 @@
   <link rel="icon" href="/img/favicon-32.png" sizes="32x32">
   <link rel="icon" href="/img/icon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-  <title>Contact – The Generic Foiling Podcast</title>
+  <title>Contact | The Generic Foiling Podcast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://app.snipcart.com">
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gfp.css">
+  <link rel="stylesheet" href="feedback.css">
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
-    <div class="header-inner">
-      <a href="/" class="logo"><img src="/img/logo.png" alt="The Generic Foiling Podcast" width="56" height="56"></a>
-      <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <img src="/img/gfp-icon.png" alt="Generic Foiling Podcast icon" width="38" height="42">
+        <span class="brand-word">Generic<br>Foiling Podcast</span>
+      </a>
       <nav class="main-nav" id="mainNav">
-        <a href="/">Home</a>
         <a href="/episodes.html">Episodes</a>
+        <a href="/newsletter.html">Newsletter</a>
         <a href="/about.html">About Us</a>
-        <a href="/contact.html" class="active">Contact</a>
-        <a href="/support.html">Support Us</a>
         <a href="/shop.html">Shop</a>
-        <button class="cart-btn snipcart-checkout" aria-label="Shopping cart">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-          <span class="cart-count snipcart-items-count"></span>
-        </button>
       </nav>
+      <div class="header-actions">
+        <a class="btn-gold" href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Listen Now</a>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-controls="mainNav">&#9776;</button>
+      </div>
     </div>
   </header>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <h1>Contact</h1>
-      <p>Send Us a Message</p>
-    </div>
-  </section>
+  <main>
+    <section class="banner-hero contact-hero">
+      <img class="banner-img active" src="/img/banner-interview-modica.jpg" alt="Recording an interview at an event" width="1920" height="1080" style="object-position: center 35%;">
+      <img class="banner-img" data-src="/img/banner-home-2.jpg" alt="Wing foiling on the river" style="object-position: center 50%;">
+      <img class="banner-img" data-src="/img/banner-interview-ewan.jpg" alt="Recording an interview indoors" style="object-position: center 25%;">
+      <img class="banner-img" data-src="/img/banner-newsletter-3.jpg" alt="Parawing selfie out on the water" style="object-position: center 50%;">
+      <div class="wrap banner-content">
+        <div class="banner-text">
+          <div class="eyebrow">Get in touch</div>
+          <h1>Drop us a line.</h1>
+          <p class="hero-sub">Guest ideas, gear questions, collabs, or just to tell Freddie his pizza question was rubbish. We&rsquo;d love to hear from you.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Contact -->
-  <section class="episodes">
-    <div class="container">
-      <div class="contact-grid">
-
-        <!-- Contact Form -->
-        <div>
-          <!-- Wire up with Formspree, Netlify Forms, or similar — set the action attribute -->
-          <p class="contact-lead">Drop us an email &ndash; we would love to hear from you!</p>
-          <form class="contact-form" onsubmit="return false;">
-            <label for="contact-name">Your name</label>
-            <input type="text" id="contact-name" name="name" required>
-
-            <label for="contact-email">Your email</label>
-            <input type="email" id="contact-email" name="email" required>
-
-            <label for="contact-subject">Subject</label>
-            <input type="text" id="contact-subject" name="subject" required>
-
-            <label for="contact-message">Your message (optional)</label>
-            <textarea id="contact-message" name="message"></textarea>
-
-            <button type="submit" class="btn btn-yellow">Send Message</button>
+    <section class="section">
+      <div class="wrap contact-grid">
+        <div class="contact-box">
+          <h2>Send us a message</h2>
+          <form class="contact-form" id="contactForm">
+            <div class="contact-row">
+              <label>Your name
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+              <label>Your email
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+            </div>
+            <label>What&rsquo;s it about?
+              <select name="topic">
+                <option>Guest or episode idea</option>
+                <option>Brand partnership or sponsorship</option>
+                <option>Gear question</option>
+                <option>Merch order</option>
+                <option>Just saying hi</option>
+              </select>
+            </label>
+            <label>Your message
+              <textarea name="message" rows="6" required></textarea>
+            </label>
+            <button class="btn-gold" type="submit">Send message</button>
+            <p class="contact-note">This opens your email app with your message ready to send to <a href="mailto:thegenericfoilingpod@gmail.com">thegenericfoilingpod@gmail.com</a>.</p>
           </form>
         </div>
 
-        <!-- Sidebar -->
-        <div class="contact-sidebar">
-          <h3>Email</h3>
-          <ul>
-            <li><a href="mailto:thegenericfoilingpod@gmail.com">thegenericfoilingpod@gmail.com</a></li>
-          </ul>
-
-          <h3>Follow Us</h3>
-          <ul>
-            <li><a href="https://www.instagram.com/genericfoilingpodcast" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://www.youtube.com/@GenericFoilingPodcast" target="_blank" rel="noopener">YouTube</a></li>
-            <li><a href="https://www.facebook.com/genericfoilingpodcast" target="_blank" rel="noopener">Facebook</a></li>
-          </ul>
-
-          <h3>Listen On</h3>
-          <ul>
-            <li><a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Spotify</a></li>
-            <li><a href="https://podcasts.apple.com/us/podcast/the-generic-foiling-podcast/id1637901696" target="_blank" rel="noopener">Apple Podcasts</a></li>
-          </ul>
-        </div>
-
+        <aside class="contact-side">
+          <div class="contact-card">
+            <h3>Email</h3>
+            <a class="contact-email" href="mailto:thegenericfoilingpod@gmail.com">thegenericfoilingpod@gmail.com</a>
+          </div>
+          <div class="contact-card">
+            <h3>Follow us</h3>
+            <a href="https://www.instagram.com/genericfoilingpodcast/" target="_blank" rel="noopener">Instagram &rarr;</a>
+            <a href="https://www.youtube.com/@GenericFoilingPodcast" target="_blank" rel="noopener">YouTube &rarr;</a>
+            <a href="https://www.facebook.com/genericfoilingpodcast" target="_blank" rel="noopener">Facebook &rarr;</a>
+          </div>
+          <div class="contact-card">
+            <h3>Listen on</h3>
+            <a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Spotify &rarr;</a>
+            <a href="https://podcasts.apple.com/us/podcast/the-generic-foiling-podcast/id1637901696" target="_blank" rel="noopener">Apple Podcasts &rarr;</a>
+            <a href="/episodes.html">Right here on the site &rarr;</a>
+          </div>
+        </aside>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Newsletter -->
-  <section class="newsletter">
-    <div class="container">
-      <h2 class="section-title">Generic Foiling Newsletter</h2>
-      <p>Did you miss the Generic Foiling Newsletter sign-up pop-up?! Don&rsquo;t worry, you can sign up below!</p>
-      <form class="newsletter-form" action="https://gmail.us12.list-manage.com/subscribe/post?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" method="post" target="_blank">
-        <input type="email" name="EMAIL" placeholder="Email address *" required>
-        <input type="text" name="FNAME" placeholder="First name (optional)">
-        <!-- Mailchimp bot trap: keep hidden and empty -->
-        <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_0a5fd5ca7498cd5715ccaa6bc_929e2eace3" tabindex="-1" value=""></div>
-        <button type="submit" class="btn btn-yellow">Subscribe</button>
-      </form>
-    </div>
-  </section>
+    <section class="nl-band">
+      <div class="wrap nl-grid">
+        <div>
+          <h2>Get the newsletter</h2>
+          <p>Episode round-ups, gear chat, and the odd rant &mdash; straight to your inbox.</p>
+        </div>
+        <div>
+          <form class="nl-form" action="https://gmail.us12.list-manage.com/subscribe/post?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" method="post" target="_blank">
+            <input type="email" name="EMAIL" placeholder="you@email.com" aria-label="Email address" required>
+            <!-- Mailchimp bot trap: keep hidden and empty -->
+            <div class="nl-trap" aria-hidden="true"><input type="text" name="b_0a5fd5ca7498cd5715ccaa6bc_929e2eace3" tabindex="-1" value=""></div>
+            <button class="btn-gold" type="submit">Subscribe</button>
+          </form>
+          <div class="past-issues-link"><a href="/newsletter.html">Read past issues &rarr;</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav">
-        <a href="/">Home</a>
-        <a href="/episodes.html">Episodes</a>
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/support.html">Support Us</a>
-        <a href="/shop.html">Shop</a>
-      </nav>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/genericfoilingpodcast" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="https://www.youtube.com/@GenericFoilingPodcast" aria-label="YouTube" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.7 3.1-5.7 3.1z"/></svg></a>
-        <a href="https://www.facebook.com/genericfoilingpodcast" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></a>
-        <a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" aria-label="Spotify" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22zm5 15.9a.7.7 0 0 1-1 .2c-2.7-1.6-6-2-10-1.1a.7.7 0 1 1-.3-1.4c4.3-1 8-.5 11 1.3.3.2.4.6.3 1zm1.3-3a.9.9 0 0 1-1.2.3c-3-1.9-7.7-2.4-11.3-1.3a.9.9 0 1 1-.5-1.7c4.1-1.2 9.3-.6 12.7 1.5.4.3.5.8.3 1.2zm.1-3.1C14.8 8.6 8.9 8.4 5.4 9.4a1 1 0 1 1-.6-2c4-1.2 10.5-1 14.6 1.5a1 1 0 0 1-1 1.8z"/></svg></a>
+  <footer class="site-footer bordered">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/img/gfp-icon.png" alt="Generic Foiling Podcast icon" width="38" height="42">
+          <p>Two mates, multiple mics, and a genuine love of foiling in all its flavours. New episodes most weeks.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="/episodes.html">Episodes</a>
+          <a href="/newsletter.html">Newsletter</a>
+          <a href="/about.html">About Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Listen On</h4>
+          <a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://www.youtube.com/@GenericFoilingPodcast" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/shop.html">Shop</a>
+          <a href="/support.html">Support Us</a>
+          <a href="https://www.instagram.com/genericfoilingpodcast/" target="_blank" rel="noopener">Instagram</a>
+          <a href="/contact.html">Contact</a>
+        </div>
       </div>
-      <p class="copyright">&copy; 2026 The Generic Foiling Podcast. All rights reserved.</p>
+      <div class="footer-bottom">
+        <small>&copy; 2026 Generic Foiling Podcast. All rights reserved.</small>
+        <span class="wanglordz-link">
+          <img src="/img/wang-lordz.png" alt="Wang Lordz" width="35" height="22">
+        </span>
+      </div>
     </div>
   </footer>
-
-  <!-- Snipcart e-commerce — replace YOUR_SNIPCART_PUBLIC_API_KEY with your key from https://app.snipcart.com/dashboard/account/credentials -->
-  <script>
-    window.SnipcartSettings = {
-      publicApiKey: 'YOUR_SNIPCART_PUBLIC_API_KEY',
-      loadStrategy: 'on-user-interaction'
-    };
-  </script>
-  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
-  <div hidden id="snipcart" data-api-key="YOUR_SNIPCART_PUBLIC_API_KEY"></div>
 
   <!-- Feedback Tool -->
   <button class="feedback-toggle" id="feedbackToggle" title="Leave feedback (shift-click to view all)">
@@ -165,11 +181,21 @@
   </div>
   <div class="feedback-panel-overlay" id="feedbackPanelOverlay"></div>
   <script src="feedback.js"></script>
+  <script src="banner-slides.js"></script>
 
   <script>
     // Mobile nav toggle
-    document.querySelector('.mobile-toggle').addEventListener('click', function () {
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
       document.getElementById('mainNav').classList.toggle('open');
+    });
+
+    // No form service is set up, so the form hands the message to the visitor's email app
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const f = e.target.elements;
+      const subject = f.topic.value + ' — from ' + f.name.value;
+      const body = f.message.value + '\n\n' + f.name.value + '\n' + f.email.value;
+      location.href = 'mailto:thegenericfoilingpod@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     });
   </script>
 </body>

@@ -414,6 +414,17 @@ img { display: block; max-width: 100%; }
 .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px; color: var(--text-muted-1); margin-bottom: 16px; }
 .footer-col a { display: block; color: var(--text-secondary); font-size: 15px; margin-bottom: 10px; }
 .footer-col a:hover { color: var(--gold); }
+.footer-coffee { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.footer-coffee p { margin: 0; color: var(--text-secondary); font-size: 15px; line-height: 1.5; max-width: 70ch; border-left: 4px solid var(--gold); padding: 4px 0 4px 20px; }
+.footer-coffee strong { color: var(--text); }
+.footer-coffee .btn-gold { flex: none; }
+.duo-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; }
+.duo-card { border: 1px solid var(--border-3); border-top: 4px solid var(--gold); background: var(--bg); padding: 28px 30px 30px; display: flex; flex-direction: column; }
+.duo-card h2 { font-size: 28px; margin-bottom: 10px; }
+.duo-card > p { color: var(--text-secondary); font-size: 16px; line-height: 1.55; margin: 0 0 22px; }
+.duo-card .nl-form input { flex: 1; min-width: 0; }
+.duo-card .nl-form { margin-top: auto; }
+.duo-card > .btn-gold { align-self: flex-start; margin-top: auto; }
 .footer-bottom { border-top: 1px solid var(--border-1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
 .footer-bottom small { color: var(--text-muted-2); font-size: 13px; }
 .wanglordz-link { opacity: 0.55; transition: opacity .15s ease; }
@@ -672,7 +683,7 @@ body.has-player .feedback-toggle { bottom: 110px; }
   .host-photo img { min-height: 320px; }
   .road-grid { grid-template-columns: repeat(3, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .nl-grid { grid-template-columns: 1fr; }
+  .nl-grid, .duo-grid { grid-template-columns: 1fr; }
   .signup-card { flex-direction: column; align-items: flex-start; }
   .post-grid { grid-template-columns: 1fr 1fr; }
   .nl-hero-grid { grid-template-columns: 1fr; gap: 40px; }

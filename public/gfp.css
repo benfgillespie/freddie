@@ -626,6 +626,39 @@ body.has-player .feedback-toggle { bottom: 110px; }
 .contact-card a:hover { color: var(--gold); }
 .contact-card .contact-email { color: var(--gold); font-weight: 600; word-break: break-all; }
 
+/* ---------- Home: gallery carousel (polaroid strip) ---------- */
+.gallery-controls { display: flex; justify-content: flex-end; gap: 10px; margin: -12px 0 6px; }
+.gallery-arrow { width: 44px; height: 44px; border: 1px solid var(--border-3); background: none; color: var(--text); font-size: 28px; line-height: 1; cursor: pointer; }
+.gallery-arrow:hover { border-color: var(--gold); color: var(--gold); }
+.gallery-track {
+  display: flex; gap: 24px; align-items: flex-start;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding: 26px 6px 34px;
+  margin: 0 -6px;
+}
+.gallery-track::-webkit-scrollbar { display: none; }
+.gallery-item {
+  flex: 0 0 260px; scroll-snap-align: start;
+  background: #F2EFE6; border: none; cursor: zoom-in;
+  padding: 10px 10px 34px;
+  box-shadow: 6px 8px 0 #000;
+  transform: rotate(-2deg);
+  transition: transform 0.25s ease;
+  text-align: center;
+}
+.gallery-item:nth-child(even) { transform: rotate(1.8deg) translateY(8px); }
+.gallery-item:nth-child(3n) { transform: rotate(-0.8deg) translateY(-4px); }
+.gallery-item:hover, .gallery-item:focus-visible { transform: rotate(0) scale(1.05); z-index: 1; position: relative; }
+.gallery-item img { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; }
+.lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(5,5,6,0.94); display: flex; align-items: center; justify-content: center; padding: 40px 70px; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+.lightbox-close, .lightbox-arrow { position: absolute; background: none; border: none; color: var(--text); cursor: pointer; font-size: 46px; line-height: 1; padding: 8px 14px; }
+.lightbox-close { top: 14px; right: 18px; font-size: 40px; }
+.lightbox-arrow.prev { left: 12px; }
+.lightbox-arrow.next { right: 12px; }
+.lightbox-close:hover, .lightbox-arrow:hover { color: var(--gold); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 920px) {
   .banner-hero { display: block; min-height: 0; }
@@ -698,6 +731,9 @@ body.has-player .feedback-toggle { bottom: 110px; }
   .post-grid { grid-template-columns: 1fr; }
   .expect-grid, .review-grid { grid-template-columns: 1fr; }
   .product-grid { grid-template-columns: 1fr; }
+  .gallery-item { flex-basis: 210px; }
+  .lightbox { padding: 60px 10px; }
+  .lightbox-arrow { top: auto; bottom: 10px; }
   .contact-row { grid-template-columns: 1fr; }
   .contact-box { padding: 24px 20px; box-shadow: 5px 5px 0 #000; }
   .header-actions .cart-btn { padding: 8px 9px; }

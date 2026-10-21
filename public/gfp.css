@@ -151,9 +151,12 @@ img { display: block; max-width: 100%; }
   transform: translateX(-50%);
   display: flex; align-items: center; gap: 8px;
   padding: 4px 8px;
-  background: rgba(11,11,12,0.55);
+  background: rgba(11,11,12,0.35);
   border-radius: 999px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
 }
+.banner-controls:hover, .banner-controls:focus-within { opacity: 1; }
 .banner-dot {
   width: 10px; height: 10px;
   padding: 0;
@@ -298,33 +301,37 @@ img { display: block; max-width: 100%; }
 .nl-hero h1 { font-size: 46px; margin-bottom: 16px; }
 .nl-hero-sub { font-size: 18px; line-height: 1.55; color: #D6D5CC; max-width: 50ch; margin: 0; }
 
+/* See-through panel over the photo; blur and shadowed text keep it readable */
 .nl-signup-box {
-  background: #141412;
-  border: 1px solid var(--border-1);
+  background: rgba(11,11,12,0.28);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(242,239,230,0.25);
   border-top: 4px solid var(--gold);
   padding: 22px 26px 24px;
-  box-shadow: 8px 8px 0 #000;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
 }
 .nl-signup-box h2 { font-size: 28px; margin-bottom: 6px; }
-.nl-signup-box > p { color: var(--text-secondary); font-size: 15px; margin: 0 0 18px; }
+.nl-signup-box > p { color: var(--text); font-size: 15px; margin: 0 0 18px; }
 .nl-signup-form { display: flex; flex-direction: column; gap: 12px; }
-.nl-signup-form label { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: var(--text-muted-1); }
-.nl-signup-form label span { text-transform: none; letter-spacing: 0; color: var(--text-muted-2); }
+.nl-signup-form label { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: var(--text); }
+.nl-signup-form label span { text-transform: none; letter-spacing: 0; color: #D6D5CC; }
 .nl-signup-form input {
   display: block;
   width: 100%;
   margin-top: 6px;
-  background: var(--bg);
-  border: 1px solid var(--border-3);
+  background: rgba(11,11,12,0.6);
+  border: 1px solid rgba(242,239,230,0.35);
   color: var(--text);
   padding: 12px 14px;
   font-family: 'Barlow', sans-serif;
   font-size: 16px;
 }
 .nl-signup-form input:focus { outline: none; border-color: var(--gold); }
-.nl-signup-form input::placeholder { color: var(--text-muted-2); }
+.nl-signup-form input::placeholder { color: #A9A89F; }
+.nl-signup-form .btn-gold { text-shadow: none; }
 .nl-signup-form .btn-gold { margin-top: 4px; padding: 14px 24px; font-size: 17px; text-align: center; }
-.nl-signup-box .nl-signup-note { font-size: 13px; color: var(--text-muted-2); margin: 12px 0 0; }
+.nl-signup-box .nl-signup-note { font-size: 13px; color: #D6D5CC; margin: 12px 0 0; }
 
 .section.issues-section { padding: 40px 0 72px; border-bottom: none; }
 .issues-section .section-head { margin-bottom: 28px; }
@@ -467,7 +474,7 @@ img { display: block; max-width: 100%; }
   .post-grid { grid-template-columns: 1fr; }
   .nl-hero h1 { font-size: 38px; }
   .nl-hero-sub { font-size: 17px; }
-  .nl-signup-box { padding: 26px 20px; box-shadow: 5px 5px 0 #000; }
+  .nl-signup-box { padding: 26px 20px; }
   .post { padding: 40px 0 56px; }
   .post-wrap { padding: 0 16px; }
   .post h1 { font-size: 34px; }

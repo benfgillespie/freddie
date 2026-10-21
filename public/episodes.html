@@ -112,6 +112,7 @@
   </div>
   <div class="feedback-panel-overlay" id="feedbackPanelOverlay"></div>
   <script src="feedback.js"></script>
+  <script src="spotify-links.js"></script>
 
   <script>
     // Mobile nav toggle
@@ -124,6 +125,9 @@
     const EPISODES_PER_PAGE = 8;
 
     let allEpisodes = [];
+    // Vertical crop position (%) per artwork file, chosen so the faces show in the card
+    let artworkFocus = {};
+    const DEFAULT_ARTWORK_FOCUS = 25;
     let visibleCount = 0;
     let currentAudio = null;
     let currentPlayBtn = null;
@@ -136,6 +140,8 @@
         const parser = new DOMParser();
         const xml = parser.parseFromString(text, 'text/xml');
         const items = xml.querySelectorAll('item');
+        const spotifyUrl = await spotifyLinks;
+        artworkFocus = await fetch('/artwork-focus.json').then(r => (r.ok ? r.json() : {})).catch(() => ({}));
 
         allEpisodes = Array.from(items).map(item => {
           const enclosure = item.querySelector('enclosure');
@@ -153,7 +159,7 @@
             duration: itunesDuration?.textContent || '',
             imageUrl: itunesImage?.getAttribute('href') || '',
             description: plainDesc,
-            link: item.querySelector('link')?.textContent || '#',
+            link: spotifyUrl(item.querySelector('title')?.textContent || ''),
           };
         });
 
@@ -184,8 +190,9 @@
     function buildCard(ep, idx) {
       const date = new Date(ep.pubDate);
       const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const focus = artworkFocus[ep.imageUrl.split('/').pop()] ?? DEFAULT_ARTWORK_FOCUS;
       const thumbStyle = ep.imageUrl
-        ? 'background-image:url(' + ep.imageUrl + ');background-size:cover;background-position:center;'
+        ? 'background-image:url(' + ep.imageUrl + ');background-size:cover;background-position:center ' + focus + '%;'
         : '';
 
       return `

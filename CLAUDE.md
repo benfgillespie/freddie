@@ -38,6 +38,10 @@ for HTML/CSS changes a browser refresh is enough.
 
 ## Git workflow
 - Commit small, clearly described changes as you go.
-- Push to GitHub (`main`) when Freddie wants to share work with Ben.
-- Don't deploy to Vercel from here: Ben's account hosts it. To put it online, push and
-  ask Ben.
+- **Pushing to `main` publishes the site.** Vercel is connected to this GitHub repo and
+  deploys every push to https://generic-foiling-podcast.vercel.app within a minute or two.
+  So before pushing, check the change locally (`npm run dev`) and tell Freddie what will go
+  live. After pushing, tell him it'll be online shortly.
+- Don't run `vercel` commands from here. Pushing is the only way to publish.
+- The repo is public: never commit passwords, API keys or tokens. They go in Vercel
+  environment variables (Ben sets those).

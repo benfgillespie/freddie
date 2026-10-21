@@ -107,28 +107,32 @@
     <section class="step">
       <h2><span class="num">5</span> Paste in this message, and Claude does the rest</h2>
       <p>Copy the whole message below, paste it into Claude, and press <kbd>Return</kbd>. Claude will walk you through everything else, one step at a time: making a GitHub account (where the website&rsquo;s files are kept), installing a couple of tools, downloading the website, and showing it to you.</p>
-      <div class="code prompt" id="setupPrompt"><button class="copy">Copy</button>Hi Claude! I'm Freddie, co-host of The Generic Foiling Podcast. My mate Ben has built our new website and I want to work on it with you. I'm NOT technical at all, so please:
-- go one step at a time, and wait for me to say I've done each thing before moving on
-- explain everything in plain, simple English with no jargon
-- tell me exactly what to click or type whenever I need to do something myself
+      <div class="code prompt" id="setupPrompt"><button class="copy">Copy</button>Hi Claude! I'm Freddie, co-host of The Generic Foiling Podcast. My mate Ben has built our new website and I want to work on it with you.
 
-The folder you're running in right now (~/Documents/GFP-Website) is where the website should live. Here's what I need:
+HOW TO TALK TO ME (please stick to this the whole time, today and every time after)
+- I'm not technical and I don't want to learn how websites work. Keep the techy stuff behind the scenes. Do it quietly and just tell me what's happened in plain, friendly English.
+- Don't show me code, commands, file names or error messages. If something goes wrong, tell me in one sentence what it means for me, then sort it.
+- No jargon. Say "save point" not commit, "put it live" not push or deploy, "get Ben's latest changes" not pull, and "your preview" for the version only I can see on my Mac.
+- One step at a time. When I need to click or type something, tell me exactly what, then wait for me to say I've done it.
+- Just before my Mac asks me to allow something, tell me in one line what it's for and whether it's safe to press Yes.
 
-1. GITHUB ACCOUNT. The website's files are kept on GitHub, in Ben's private project "benfgillespie/freddie". I don't have a GitHub account yet. Walk me through signing up at https://github.com/signup on the free plan, confirming my email, and turning on two-factor login (a passkey using Touch ID is probably easiest, and remind me to save the recovery codes somewhere safe). Then tell me to message Ben my GitHub username so he can invite me to the project, and explain how to accept the invite when the email arrives. Wait until I tell you I've accepted it.
+The folder you're in right now (Documents &gt; GFP-Website) is where the website should live. Please get me set up:
 
-2. TOOLS. Check whether my Mac has Git, the GitHub command-line tool (gh) and Node.js, and install whatever is missing in the simplest way you can. If my Mac pops up a box asking to install "command line developer tools", tell me to click Install and wait for it to finish.
+1. GITHUB ACCOUNT. The website is kept on GitHub, in Ben's project "benfgillespie/freddie". I don't have an account yet. Walk me through signing up at https://github.com/signup (free plan), confirming my email, and turning on two-factor login (a passkey with Touch ID is easiest, and remind me to save my recovery codes somewhere safe). Then tell me to message Ben my GitHub username so he can invite me, and how to accept the invite when the email arrives. Wait until I say I've accepted.
 
-3. CONNECT TO GITHUB. Help me log in with "gh auth login" (GitHub.com, HTTPS, log in with a web browser), and set up Git with my name and email.
+2. BEHIND-THE-SCENES BITS. Install whatever my Mac needs to work on the site (Git, the GitHub tool and Node.js) in the simplest way. If a box pops up asking to install "command line developer tools", tell me to click Install. Then help me log in to GitHub (I'll do the browser part), and set things up with my name and email.
 
-4. GET THE WEBSITE. Download (clone) benfgillespie/freddie into this current folder. Then read CLAUDE.md in the project so you know how it all works.
+3. GET THE WEBSITE. Download it into this folder, then read the CLAUDE.md file that comes with it. It contains the rules for how we work together, including two "gates" you must always follow: I check every change in my preview before you save it, and nothing goes live until you've told me exactly what will change and I've said yes. Follow those rules from now on.
 
-5. SHOW ME IT. Run "npm install", start the site with "npm run dev", and open http://localhost:3000 in my browser so I can see it.
+4. SHOW ME IT. Open my preview in my browser.
 
-6. QUICK LESSON. Finish with a short, simple cheat sheet of what to say to you to: make a change, see it, save my work to GitHub (which also puts it online at generic-foiling-podcast.vercel.app), get Ben's latest changes, and undo something.
+5. A PRACTICE RUN. Help me make one tiny, harmless change, so I can see how each gate works: the "does that look right?" check in my preview, then putting it live, then seeing it on the real site. Talk me through what's happening at each gate as we go.
 
-If anything goes wrong, explain what happened in simple words and fix it. If you can't fix it, tell me exactly what to send Ben.</div>
+6. CHEAT SHEET. Finish with a short, friendly list of things I can say to you: make a change, see it, put it live, get Ben's latest changes, and undo something.
+
+If you get stuck on anything, write me a short message I can copy and send to Ben.</div>
       <div class="tip">
-        <p><strong>Claude will ask permission before doing things</strong>, like <span class="screen">Do you want to run this command?</span> Read what it says, then choose <strong>Yes</strong> (press <kbd>Return</kbd>).</p>
+        <p><strong>Now and then your Mac will ask permission</strong> for Claude to do something. Claude tells you what it&rsquo;s for just before, so you know when it&rsquo;s fine to choose <strong>Yes</strong> (press <kbd>Return</kbd>).</p>
         <p><strong>If it asks for your Mac password</strong>, type it and press <kbd>Return</kbd>. Nothing appears on screen while you type. That&rsquo;s normal, it&rsquo;s a security thing.</p>
       </div>
     </section>
@@ -149,19 +153,19 @@ If anything goes wrong, explain what happened in simple words and fix it. If you
 
       <h3>Things you can say</h3>
       <ul>
-        <li>&ldquo;Start the website and open it in my browser&rdquo;</li>
+        <li>&ldquo;Open my preview again&rdquo; (Claude opens it for you when you start)</li>
         <li>&ldquo;Change the homepage headline to &hellip;&rdquo;</li>
         <li>&ldquo;Use the photo called liam-new.jpg in my Downloads folder for Liam&rsquo;s picture&rdquo;</li>
         <li>&ldquo;The shop looks squashed on my phone. Can you fix it?&rdquo;</li>
         <li>&ldquo;Undo that last change&rdquo;</li>
-        <li><strong>&ldquo;Save my work and put it online&rdquo;</strong>: this backs everything up to GitHub <em>and</em> updates the online site, usually within a minute or two. Do it when you&rsquo;re happy with something, and at the end of every session.</li>
-        <li><strong>&ldquo;Get Ben&rsquo;s latest changes&rdquo;</strong>: do this at the start if Ben&rsquo;s been tinkering.</li>
+        <li><strong>&ldquo;Put it live&rdquo;</strong>: Claude lists exactly what will change on the real site and waits for your &ldquo;yes&rdquo;. A minute later, it&rsquo;s online.</li>
+        <li><strong>&ldquo;Get Ben&rsquo;s latest changes&rdquo;</strong>: Claude does this by itself when you start, but you can ask any time.</li>
       </ul>
 
       <h3>Handy to know</h3>
       <ul>
-        <li><strong>Seeing your changes:</strong> refresh the browser tab showing <strong>localhost:3000</strong>. Only you can see that version. It&rsquo;s running on your Mac.</li>
-        <li><strong>The online version</strong> is at <a href="https://generic-foiling-podcast.vercel.app" target="_blank" rel="noopener">generic-foiling-podcast.vercel.app</a>. Open it on your phone or send it to Liam. It updates by itself whenever you save to GitHub, so check things on <strong>localhost:3000</strong> first.</li>
+        <li><strong>Two safety gates:</strong> after every change, Claude shows you the result in your <strong>preview</strong> (only you can see it) and asks &ldquo;Does that look right?&rdquo;. Nothing goes on the real site until you&rsquo;ve said yes to putting it live.</li>
+        <li><strong>The online version</strong> is at <a href="https://generic-foiling-podcast.vercel.app" target="_blank" rel="noopener">generic-foiling-podcast.vercel.app</a>. Open it on your phone or send it to Liam. It only changes when you say yes to putting something live.</li>
         <li><strong>Stuck?</strong> Tell Claude exactly what you see. You can drag a screenshot straight into the Terminal window.</li>
         <li><strong>Nothing can really break.</strong> Every saved version is kept, so you can always go back.</li>
         <li><strong>To leave Claude:</strong> type <code>/exit</code> and press <kbd>Return</kbd>, or just close the window.</li>

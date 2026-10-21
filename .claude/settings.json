@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run dev)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git restore:*)",
+      "Bash(git revert:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(open http://localhost:3000:*)",
+      "Bash(open https://generic-foiling-podcast.vercel.app:*)",
+      "Bash(curl -s https://generic-foiling-podcast.vercel.app:*)",
+      "Bash(curl -s http://localhost:3000:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --force-with-lease:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(vercel:*)",
+      "Bash(npx vercel:*)"
+    ]
+  }
+}

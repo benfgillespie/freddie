@@ -6,5 +6,5 @@ The step-by-step guide to working on the site with Claude Code is a web page:
 
 Its source is `public/start.html`, so edit that file if the steps change.
 
-Costs and infrastructure for moving genericfoilingpod.com off WordPress:
-**https://generic-foiling-podcast.vercel.app/costs** (`public/costs.html`)
+Part 2 of the same page covers the costs and setup for moving genericfoilingpod.com off WordPress:
+**https://generic-foiling-podcast.vercel.app/start#costs**

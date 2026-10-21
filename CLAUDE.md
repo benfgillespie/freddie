@@ -27,8 +27,8 @@ for HTML/CSS changes a browser refresh is enough.
 - `vercel.json` — serves `public/` with clean URLs; no build step. Also sends a
   `noindex` header on every page so search engines ignore this preview copy.
   **Remove that header when the site goes live on genericfoilingpod.com.**
-- `public/start.html` — Freddie's getting-started guide; `public/costs.html` — the
-  WordPress-to-Vercel migration costs (neither is linked from the site's menus)
+- `public/start.html` — Freddie's guide: part 1 is getting set up, part 2 is the
+  WordPress-to-Vercel migration costs (`/costs` redirects there; not in the site menus)
 
 ## Services
 - Shop: Snipcart (script on every page)

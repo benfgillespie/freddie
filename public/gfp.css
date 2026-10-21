@@ -247,7 +247,7 @@ img { display: block; max-width: 100%; }
 .page-hero { padding: 64px 0 48px; border-bottom: 1px solid var(--border-1); }
 .page-hero .eyebrow { margin-bottom: 14px; }
 .page-hero h1 { font-size: 48px; line-height: 1.02; margin-bottom: 18px; }
-.page-hero p { font-size: 18px; line-height: 1.55; color: var(--text-secondary); max-width: 56ch; margin: 0 0 32px; }
+.page-hero p { font-size: 18px; line-height: 1.55; color: var(--text-secondary); margin: 0 0 32px; }
 
 .signup-card {
   border: 1px solid var(--border-1);

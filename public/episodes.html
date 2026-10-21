@@ -6,86 +6,152 @@
   <link rel="icon" href="/img/favicon-32.png" sizes="32x32">
   <link rel="icon" href="/img/icon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-  <title>Episodes – The Generic Foiling Podcast</title>
+  <title>Episodes | The Generic Foiling Podcast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://app.snipcart.com">
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gfp.css">
+  <link rel="stylesheet" href="feedback.css">
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
-    <div class="header-inner">
-      <a href="/" class="logo"><img src="/img/logo.png" alt="The Generic Foiling Podcast" width="56" height="56"></a>
-      <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <img src="/img/gfp-icon.png" alt="Generic Foiling Podcast icon" width="43" height="40">
+        <span class="brand-word">Generic<br>Foiling Podcast</span>
+      </a>
       <nav class="main-nav" id="mainNav">
-        <a href="/">Home</a>
         <a href="/episodes.html" class="active">Episodes</a>
+        <a href="/newsletter.html">Newsletter</a>
         <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/support.html">Support Us</a>
         <a href="/shop.html">Shop</a>
-        <button class="cart-btn snipcart-checkout" aria-label="Shopping cart">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-          <span class="cart-count snipcart-items-count"></span>
-        </button>
       </nav>
+      <div class="header-actions">
+        <a class="btn-gold" href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Listen Now</a>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-controls="mainNav">&#9776;</button>
+      </div>
     </div>
   </header>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <h1>Episode List</h1>
-      <p>Go on, have a little listen. Be warned: It has been known to make grown men laugh out loud mid gym session. Why our friend was listening to us in the gym we don&rsquo;t quite know&hellip;</p>
-      <p>If you&rsquo;re new to our podcasts and want to start from the beginning&hellip;..the early ones weren&rsquo;t quite the polished masterpieces we put out nowadays so stick with it.</p>
-    </div>
-  </section>
+  <main>
+    <section class="banner-hero ep-hero">
+      <img class="banner-img active" src="/img/banner-home-4.jpg" alt="Recording an interview outdoors" width="2000" height="1333" style="object-position: center 35%;">
+      <img class="banner-img" data-src="/img/banner-home.jpg" alt="Freddie and Liam at the AWSI show in Hood River" style="object-position: center 48%;">
+      <img class="banner-img" data-src="/img/banner-newsletter-2.jpg" alt="Foiling a wave" style="object-position: center 50%;">
+      <img class="banner-img" data-src="/img/banner-home-2.jpg" alt="Wing foiling on the river" style="object-position: center 50%;">
+      <img class="banner-img" data-src="/img/banner-home-5.jpg" alt="The crew with the U-Haul" style="object-position: center 45%;">
+      <div class="wrap banner-content">
+        <div class="banner-text">
+          <div class="eyebrow" id="epEyebrow">Every episode</div>
+          <h1>Go on, have a<br>little listen.</h1>
+          <p class="hero-sub">Be warned: it&rsquo;s been known to make grown men laugh out loud mid gym session. New here? The early ones weren&rsquo;t quite the polished masterpieces we put out nowadays, so stick with it.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Episodes -->
-  <section class="episodes">
-    <div class="container">
-      <div class="episode-grid" id="episodeGrid">
-        <div class="loading-msg">Loading episodes from feed...</div>
+    <section class="section ep-list-section">
+      <div class="wrap">
+        <div class="ep-toolbar">
+          <input type="search" id="epSearch" placeholder="Search episodes, guests, gear&hellip;" aria-label="Search episodes">
+          <div class="ep-filters">
+            <div class="ep-sort" role="group" aria-label="Which episodes">
+              <button type="button" data-view="all" class="active">All episodes</button>
+              <button type="button" data-view="top" id="topTenBtn" hidden>Top 10</button>
+            </div>
+            <select class="ep-order" id="epOrder" aria-label="Sort episodes">
+              <option value="newest">New to old</option>
+              <option value="oldest">Old to new</option>
+            </select>
+          </div>
+        </div>
+        <p class="ep-count" id="epCount"></p>
+        <!-- Filled from the podcast feed by episodes.js -->
+        <div class="ep-grid" id="episodeGrid">
+          <p class="posts-status">Loading episodes&hellip;</p>
+        </div>
+        <div class="ep-more"><button type="button" class="btn-outline" id="loadMoreBtn" hidden>Load more episodes</button></div>
       </div>
-      <div class="load-more-wrap">
-        <button class="btn btn-outline" id="loadMoreBtn" style="display:none;">Load More Episodes</button>
+    </section>
+
+    <section class="nl-band">
+      <div class="wrap nl-grid">
+        <div>
+          <h2>Get the newsletter</h2>
+          <p>Episode round-ups, gear chat, and the odd rant &mdash; straight to your inbox.</p>
+        </div>
+        <div>
+          <form class="nl-form" action="https://gmail.us12.list-manage.com/subscribe/post?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" method="post" target="_blank">
+            <input type="email" name="EMAIL" placeholder="you@email.com" aria-label="Email address" required>
+            <!-- Mailchimp bot trap: keep hidden and empty -->
+            <div class="nl-trap" aria-hidden="true"><input type="text" name="b_0a5fd5ca7498cd5715ccaa6bc_929e2eace3" tabindex="-1" value=""></div>
+            <button class="btn-gold" type="submit">Subscribe</button>
+          </form>
+          <div class="past-issues-link"><a href="/newsletter.html">Read past issues &rarr;</a></div>
+        </div>
       </div>
+    </section>
+  </main>
+
+  <!-- Player bar: appears once an episode is played and stays while browsing the list -->
+  <div class="player-bar" id="playerBar" hidden>
+    <div class="wrap player-inner">
+      <img class="player-art" id="playerArt" src="" alt="">
+      <div class="player-info">
+        <div class="player-tag" id="playerTag"></div>
+        <div class="player-title" id="playerTitle"></div>
+      </div>
+      <div class="player-controls">
+        <button type="button" class="player-skip" data-skip="-15" aria-label="Back 15 seconds">&minus;15</button>
+        <button type="button" class="player-play" id="playerPlay" aria-label="Play">&#9654;</button>
+        <button type="button" class="player-skip" data-skip="30" aria-label="Forward 30 seconds">+30</button>
+      </div>
+      <div class="player-progress">
+        <span id="playerTime">0:00</span>
+        <input type="range" id="playerSeek" min="0" max="1000" value="0" aria-label="Seek">
+        <span id="playerDuration">0:00</span>
+      </div>
+      <button type="button" class="player-speed" id="playerSpeed" aria-label="Playback speed">1&times;</button>
+      <a class="player-download" id="playerDownload" href="#" download aria-label="Download episode" title="Download episode">&#8615;</a>
     </div>
-  </section>
+  </div>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav">
-        <a href="/">Home</a>
-        <a href="/episodes.html">Episodes</a>
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/support.html">Support Us</a>
-        <a href="/shop.html">Shop</a>
-      </nav>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/genericfoilingpodcast" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="https://www.youtube.com/@GenericFoilingPodcast" aria-label="YouTube" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.7 3.1-5.7 3.1z"/></svg></a>
-        <a href="https://www.facebook.com/genericfoilingpodcast" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></a>
-        <a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" aria-label="Spotify" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22zm5 15.9a.7.7 0 0 1-1 .2c-2.7-1.6-6-2-10-1.1a.7.7 0 1 1-.3-1.4c4.3-1 8-.5 11 1.3.3.2.4.6.3 1zm1.3-3a.9.9 0 0 1-1.2.3c-3-1.9-7.7-2.4-11.3-1.3a.9.9 0 1 1-.5-1.7c4.1-1.2 9.3-.6 12.7 1.5.4.3.5.8.3 1.2zm.1-3.1C14.8 8.6 8.9 8.4 5.4 9.4a1 1 0 1 1-.6-2c4-1.2 10.5-1 14.6 1.5a1 1 0 0 1-1 1.8z"/></svg></a>
+  <footer class="site-footer bordered">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/img/gfp-icon.png" alt="Generic Foiling Podcast icon" width="39" height="36">
+          <p>Two mates, one mic, and a genuine love of foiling in all its flavours. New episodes most weeks.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="/episodes.html">Episodes</a>
+          <a href="/newsletter.html">Newsletter</a>
+          <a href="/about.html">About Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Listen On</h4>
+          <a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://www.youtube.com/@GenericFoilingPodcast" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/shop.html">Shop</a>
+          <a href="/support.html">Support Us</a>
+          <a href="https://www.instagram.com/genericfoilingpodcast/" target="_blank" rel="noopener">Instagram</a>
+          <a href="/contact.html">Contact</a>
+        </div>
       </div>
-      <p class="copyright">&copy; 2026 The Generic Foiling Podcast. All rights reserved.</p>
+      <div class="footer-bottom">
+        <small>&copy; 2026 Generic Foiling Podcast. All rights reserved.</small>
+        <span class="wanglordz-link">
+          <img src="/img/wang-lordz.png" alt="Wang Lordz" width="35" height="22">
+        </span>
+      </div>
     </div>
   </footer>
-
-  <!-- Snipcart e-commerce — replace YOUR_SNIPCART_PUBLIC_API_KEY with your key from https://app.snipcart.com/dashboard/account/credentials -->
-  <script>
-    window.SnipcartSettings = {
-      publicApiKey: 'YOUR_SNIPCART_PUBLIC_API_KEY',
-      loadStrategy: 'on-user-interaction'
-    };
-  </script>
-  <script async src="https://cdn.snipcart.com/themes/v3.7.2/default/snipcart.js"></script>
-  <div hidden id="snipcart" data-api-key="YOUR_SNIPCART_PUBLIC_API_KEY"></div>
 
   <!-- Feedback Tool -->
   <button class="feedback-toggle" id="feedbackToggle" title="Leave feedback (shift-click to view all)">
@@ -112,178 +178,14 @@
   </div>
   <div class="feedback-panel-overlay" id="feedbackPanelOverlay"></div>
   <script src="feedback.js"></script>
-  <script src="spotify-links.js"></script>
+  <script src="banner-slides.js"></script>
+  <script src="episodes.js"></script>
 
   <script>
     // Mobile nav toggle
-    document.querySelector('.mobile-toggle').addEventListener('click', function () {
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
       document.getElementById('mainNav').classList.toggle('open');
     });
-
-    // ---- RSS Feed & Audio Player ----
-    const RSS_URL = '/api/rss';
-    const EPISODES_PER_PAGE = 8;
-
-    let allEpisodes = [];
-    // Vertical crop position (%) per artwork file, chosen so the faces show in the card
-    let artworkFocus = {};
-    const DEFAULT_ARTWORK_FOCUS = 25;
-    let visibleCount = 0;
-    let currentAudio = null;
-    let currentPlayBtn = null;
-
-    async function loadFeed() {
-      const grid = document.getElementById('episodeGrid');
-      try {
-        const res = await fetch(RSS_URL);
-        const text = await res.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(text, 'text/xml');
-        const items = xml.querySelectorAll('item');
-        const spotifyUrl = await spotifyLinks;
-        artworkFocus = await fetch('/artwork-focus.json').then(r => (r.ok ? r.json() : {})).catch(() => ({}));
-
-        allEpisodes = Array.from(items).map(item => {
-          const enclosure = item.querySelector('enclosure');
-          const itunesImage = item.getElementsByTagNameNS('*', 'image')[0];
-          const itunesDuration = item.getElementsByTagNameNS('*', 'duration')[0];
-          const desc = item.querySelector('description')?.textContent || '';
-          const tmp = document.createElement('div');
-          tmp.innerHTML = desc;
-          const plainDesc = tmp.textContent.substring(0, 180) + (tmp.textContent.length > 180 ? '...' : '');
-
-          return {
-            title: item.querySelector('title')?.textContent || '',
-            pubDate: item.querySelector('pubDate')?.textContent || '',
-            audioUrl: enclosure?.getAttribute('url') || '',
-            duration: itunesDuration?.textContent || '',
-            imageUrl: itunesImage?.getAttribute('href') || '',
-            description: plainDesc,
-            link: spotifyUrl(item.querySelector('title')?.textContent || ''),
-          };
-        });
-
-        grid.innerHTML = '';
-        showMore();
-
-        if (allEpisodes.length > EPISODES_PER_PAGE) {
-          document.getElementById('loadMoreBtn').style.display = '';
-        }
-      } catch (err) {
-        grid.innerHTML = '<p class="loading-msg">Could not load episodes. <a href="' + RSS_URL + '">View RSS feed directly</a>.</p>';
-        console.error('RSS fetch error:', err);
-      }
-    }
-
-    function showMore() {
-      const grid = document.getElementById('episodeGrid');
-      const next = allEpisodes.slice(visibleCount, visibleCount + EPISODES_PER_PAGE);
-      next.forEach((ep, i) => {
-        grid.insertAdjacentHTML('beforeend', buildCard(ep, visibleCount + i));
-      });
-      visibleCount += next.length;
-      if (visibleCount >= allEpisodes.length) {
-        document.getElementById('loadMoreBtn').style.display = 'none';
-      }
-    }
-
-    function buildCard(ep, idx) {
-      const date = new Date(ep.pubDate);
-      const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      const focus = artworkFocus[ep.imageUrl.split('/').pop()] ?? DEFAULT_ARTWORK_FOCUS;
-      const thumbStyle = ep.imageUrl
-        ? 'background-image:url(' + ep.imageUrl + ');background-size:cover;background-position:center ' + focus + '%;'
-        : '';
-
-      return `
-        <article class="episode-card">
-          <div class="episode-thumb" style="${thumbStyle}">
-            ${!ep.imageUrl ? '<div class="thumb-placeholder"><span>&#9654;</span></div>' : ''}
-            ${ep.duration ? '<span class="episode-duration">' + ep.duration + '</span>' : ''}
-          </div>
-          <div class="episode-info">
-            <time>${dateStr}</time>
-            <h3><a href="${ep.link}" target="_blank" rel="noopener">${ep.title}</a></h3>
-            <p>${ep.description}</p>
-            <div class="episode-player">
-              <button class="play-btn" data-idx="${idx}" aria-label="Play" onclick="togglePlay(this, ${idx})">&#9654;</button>
-              <div class="progress-bar" data-idx="${idx}" onclick="seek(event, ${idx})">
-                <div class="progress-fill" id="progress-${idx}" style="width:0%"></div>
-              </div>
-              <span class="time-label" id="time-${idx}">00:00 / ${ep.duration || '--:--'}</span>
-            </div>
-            <a href="${ep.audioUrl}" class="download-link" download>&#8615; Download</a>
-          </div>
-        </article>`;
-    }
-
-    function formatTime(secs) {
-      const h = Math.floor(secs / 3600);
-      const m = Math.floor((secs % 3600) / 60);
-      const s = Math.floor(secs % 60);
-      if (h > 0) return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
-      return m + ':' + String(s).padStart(2, '0');
-    }
-
-    function togglePlay(btn, idx) {
-      const ep = allEpisodes[idx];
-
-      if (currentAudio && currentPlayBtn && currentPlayBtn !== btn) {
-        currentAudio.pause();
-        currentPlayBtn.innerHTML = '&#9654;';
-        currentPlayBtn.classList.remove('playing');
-      }
-
-      if (btn._audio) {
-        if (btn._audio.paused) {
-          btn._audio.play();
-          btn.innerHTML = '&#10074;&#10074;';
-          btn.classList.add('playing');
-        } else {
-          btn._audio.pause();
-          btn.innerHTML = '&#9654;';
-          btn.classList.remove('playing');
-        }
-        currentAudio = btn._audio;
-        currentPlayBtn = btn;
-        return;
-      }
-
-      const audio = new Audio(ep.audioUrl);
-      btn._audio = audio;
-      currentAudio = audio;
-      currentPlayBtn = btn;
-
-      audio.addEventListener('timeupdate', () => {
-        if (!audio.duration) return;
-        const pct = (audio.currentTime / audio.duration) * 100;
-        document.getElementById('progress-' + idx).style.width = pct + '%';
-        document.getElementById('time-' + idx).textContent =
-          formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
-      });
-
-      audio.addEventListener('ended', () => {
-        btn.innerHTML = '&#9654;';
-        btn.classList.remove('playing');
-        document.getElementById('progress-' + idx).style.width = '0%';
-      });
-
-      audio.play();
-      btn.innerHTML = '&#10074;&#10074;';
-      btn.classList.add('playing');
-    }
-
-    function seek(event, idx) {
-      const bar = event.currentTarget;
-      const btn = document.querySelector('.play-btn[data-idx="' + idx + '"]');
-      if (!btn || !btn._audio || !btn._audio.duration) return;
-      const rect = bar.getBoundingClientRect();
-      const pct = (event.clientX - rect.left) / rect.width;
-      btn._audio.currentTime = pct * btn._audio.duration;
-    }
-
-    document.getElementById('loadMoreBtn').addEventListener('click', showMore);
-    loadFeed();
   </script>
 </body>
 </html>

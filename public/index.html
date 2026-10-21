@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/img/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="/img/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <title>The Generic Foiling Podcast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -15,14 +18,14 @@
   <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="#" class="logo">The Generic Foiling Podcast</a>
+      <a href="/" class="logo"><img src="/img/logo.png" alt="The Generic Foiling Podcast" width="56" height="56"></a>
       <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
       <nav class="main-nav" id="mainNav">
-        <a href="#" class="active">Home</a>
-        <a href="#episodes">Episodes</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-        <a href="#support">Support Us</a>
+        <a href="/" class="active">Home</a>
+        <a href="/episodes.html">Episodes</a>
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/support.html">Support Us</a>
         <a href="/shop.html">Shop</a>
         <button class="cart-btn snipcart-checkout" aria-label="Shopping cart">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
@@ -36,8 +39,9 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-text">
-        <h1>Welcome to the World's #1 Foiling Podcast</h1>
-        <p class="hero-subtitle">All manner of foiling chit chat, brought to you by <strong>Freddie Oldfield</strong> and <strong>Liam Proctor</strong>.</p>
+        <h1>Welcome to the World&rsquo;s #1 Foiling Podcast</h1>
+        <p class="hero-subtitle">Wing/Prone/Downwind/Kite/SUP/Foil Assist/Para foiling chat brought to you by <strong>Freddie Oldfield</strong> and <strong>Liam Proctor</strong>.</p>
+        <a href="https://www.buymeacoffee.com/gfpodcast" class="btn btn-yellow" target="_blank" rel="noopener">$$$ Support the Pod! $$$</a>
       </div>
       <div class="hero-artwork">
         <img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo/28158409/28158409-1673605107109-65e7fc5514372.jpg"
@@ -60,7 +64,11 @@
   <!-- Episodes -->
   <section class="episodes" id="episodes">
     <div class="container">
-      <h2 class="section-title">Latest Episodes</h2>
+      <h2 class="section-title">Our Episodes</h2>
+      <div class="section-intro">
+        <p>Go on, have a little listen. Be warned: It has been known to make grown men laugh out loud even mid gym session. Why our friend was listening to us in the gym we don&rsquo;t quite know&hellip;</p>
+        <p>If you&rsquo;re new to our podcasts and want to start from the beginning&hellip;..the early ones weren&rsquo;t quite the polished masterpieces we put out nowadays so stick with it.</p>
+      </div>
       <div class="episode-grid" id="episodeGrid">
         <div class="loading-msg">Loading episodes from feed...</div>
       </div>
@@ -73,35 +81,36 @@
   <!-- About / Hosts -->
   <section class="about" id="about">
     <div class="container">
-      <h2 class="section-title">Meet the Hosts</h2>
+      <h2 class="section-title">Show Hosts</h2>
+      <p class="section-intro">Your loyal Generic Foiling Podcast Co-Hosts, Prince Harry &amp; Fred Dibnah</p>
       <div class="hosts-grid">
 
         <div class="host-card">
           <div class="host-photo">
-            <div class="photo-placeholder">LP</div>
+            <img src="/img/liam.jpg" alt="Liam Proctor" width="800" height="533" loading="lazy">
           </div>
           <div class="host-details">
             <h3>Liam Proctor</h3>
             <span class="host-role">The Engineer</span>
-            <p>Watersports instructor and board builder. Liam brings the technical deep-dives on gear construction, materials, and design.</p>
+            <p>Watersports instructor, turned engineer, turned watersports instructor, turned engineer. At 33, he&rsquo;s certainly had more jobs than most! Liam brings the technical, analytical element to the podcast and brings Freddie back on track when he loses focus. A severe board building interest and engineering mindset gives Liam the technical knowhow to put the squeeze on the big dogs we end up chatting to.</p>
             <ul class="host-prefs">
-              <li><strong>Likes:</strong> Bananas, coffee, cars</li>
-              <li><strong>Dislikes:</strong> Rules, queuing</li>
+              <li><strong>Likes:</strong> Bananas, coffee &amp; old crap cars</li>
+              <li><strong>Dislikes:</strong> Rules, being told what to do &amp; queuing</li>
             </ul>
           </div>
         </div>
 
         <div class="host-card">
           <div class="host-photo">
-            <div class="photo-placeholder">FO</div>
+            <img src="/img/freddie.jpg" alt="Freddie Oldfield" width="800" height="533" loading="lazy">
           </div>
           <div class="host-details">
             <h3>Frederick von Oldfield</h3>
             <span class="host-role">The Sales Rep</span>
-            <p>Industry insider with connections to pro riders and brands. Freddie covers the business side and the latest product launches.</p>
+            <p>A completely average riding skillset meant Freddie had to settle for a job in the industry in order to stay involved. His main role is to make sure Liam doesn&rsquo;t go too deep and techy too often as his little brain can&rsquo;t handle it. Freddie&rsquo;s interests are in the pro riders and the business side of things, and he aims to give listeners a little inside knowledge of how their favourite brands operate.</p>
             <ul class="host-prefs">
-              <li><strong>Likes:</strong> Cholula, cooking, rugby, beer</li>
-              <li><strong>Dislikes:</strong> Downwind paddling, road rage, Duotone</li>
+              <li><strong>Likes:</strong> Cholula, cooking, rugby &amp; beer</li>
+              <li><strong>Dislikes:</strong> Downwind paddling, road rage &amp; Duotone</li>
             </ul>
           </div>
         </div>
@@ -114,27 +123,29 @@
   <section class="social" id="social">
     <div class="container">
       <h2 class="section-title">Latest From Instagram</h2>
-      <p class="social-tagline">World's #1 foiling social media content distributors</p>
-      <div class="insta-grid">
-        <div class="insta-placeholder"></div>
-        <div class="insta-placeholder"></div>
-        <div class="insta-placeholder"></div>
-        <div class="insta-placeholder"></div>
-        <div class="insta-placeholder"></div>
-        <div class="insta-placeholder"></div>
+      <p class="social-tagline">Follow updates and new stories on our Instagram channel.</p>
+      <div class="section-intro">
+        <p>Not only do we think we the world&rsquo;s #1 foiling podcasters, we think we&rsquo;re the world&rsquo;s #1 foiling social media content distributors too.</p>
+        <p>You&rsquo;ll rarely see footage of US riding (no-one wants to see that!) but we will share the content from others that&rsquo;s actually worth watching and you will find out when new episodes are released. Win, win!</p>
+        <p>Give our egos a massage and follow us on insta/facebook.</p>
       </div>
-      <a href="#" class="btn btn-yellow">Follow Us on Instagram</a>
+      <div class="insta-embed">
+        <iframe data-src="https://www.instagram.com/genericfoilingpodcast/embed" title="The Generic Foiling Podcast on Instagram" loading="lazy" scrolling="no"></iframe>
+      </div>
+      <a href="https://www.instagram.com/genericfoilingpodcast" class="btn btn-yellow" target="_blank" rel="noopener">Follow Us</a>
     </div>
   </section>
 
   <!-- Newsletter -->
   <section class="newsletter" id="contact">
     <div class="container">
-      <h2 class="section-title">Don't Miss Out</h2>
-      <p>Sign up below to get a monthly email on going's on, upcoming episodes and snippets we can't share to the public.</p>
-      <form class="newsletter-form" onsubmit="return false;">
-        <input type="email" placeholder="Email address *" required>
-        <input type="text" placeholder="First name (optional)">
+      <h2 class="section-title">Generic Foiling Newsletter</h2>
+      <p>Did you miss the Generic Foiling Newsletter sign-up pop-up?! Don&rsquo;t worry, you can sign up below!</p>
+      <form class="newsletter-form" action="https://gmail.us12.list-manage.com/subscribe/post?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" method="post" target="_blank">
+        <input type="email" name="EMAIL" placeholder="Email address *" required>
+        <input type="text" name="FNAME" placeholder="First name (optional)">
+        <!-- Mailchimp bot trap: keep hidden and empty -->
+        <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_0a5fd5ca7498cd5715ccaa6bc_929e2eace3" tabindex="-1" value=""></div>
         <button type="submit" class="btn btn-yellow">Subscribe</button>
       </form>
     </div>
@@ -145,7 +156,7 @@
     <div class="container">
       <h2 class="section-title">Support the Podcast</h2>
       <p>If you enjoy the show, consider buying us a coffee to keep it going!</p>
-      <a href="#" class="btn btn-yellow btn-lg">Buy Us a Coffee &#9749;</a>
+      <a href="https://www.buymeacoffee.com/gfpodcast" class="btn btn-yellow btn-lg" target="_blank" rel="noopener">Buy Us a Coffee &#9749;</a>
     </div>
   </section>
 
@@ -153,17 +164,18 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <nav class="footer-nav">
-        <a href="#">Home</a>
-        <a href="#episodes">Episodes</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-        <a href="#support">Support Us</a>
+        <a href="/">Home</a>
+        <a href="/episodes.html">Episodes</a>
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/support.html">Support Us</a>
         <a href="/shop.html">Shop</a>
       </nav>
       <div class="footer-social">
-        <a href="https://www.instagram.com/genericfoilingpodcast" aria-label="Instagram" target="_blank" rel="noopener">&#9679;</a>
-        <a href="https://www.youtube.com/@GenericFoilingPodcast" aria-label="YouTube" target="_blank" rel="noopener">&#9679;</a>
-        <a href="https://www.facebook.com/genericfoilingpodcast" aria-label="Facebook" target="_blank" rel="noopener">&#9679;</a>
+        <a href="https://www.instagram.com/genericfoilingpodcast" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.youtube.com/@GenericFoilingPodcast" aria-label="YouTube" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.7 3.1-5.7 3.1z"/></svg></a>
+        <a href="https://www.facebook.com/genericfoilingpodcast" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></a>
+        <a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" aria-label="Spotify" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22zm5 15.9a.7.7 0 0 1-1 .2c-2.7-1.6-6-2-10-1.1a.7.7 0 1 1-.3-1.4c4.3-1 8-.5 11 1.3.3.2.4.6.3 1zm1.3-3a.9.9 0 0 1-1.2.3c-3-1.9-7.7-2.4-11.3-1.3a.9.9 0 1 1-.5-1.7c4.1-1.2 9.3-.6 12.7 1.5.4.3.5.8.3 1.2zm.1-3.1C14.8 8.6 8.9 8.4 5.4 9.4a1 1 0 1 1-.6-2c4-1.2 10.5-1 14.6 1.5a1 1 0 0 1-1 1.8z"/></svg></a>
       </div>
       <p class="copyright">&copy; 2026 The Generic Foiling Podcast. All rights reserved.</p>
     </div>
@@ -370,6 +382,11 @@
       const pct = (event.clientX - rect.left) / rect.width;
       btn._audio.currentTime = pct * btn._audio.duration;
     }
+
+    const instaFrame = document.querySelector('.insta-embed iframe');
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { instaFrame.src = instaFrame.dataset.src; obs.disconnect(); }
+    }, { rootMargin: '300px' }).observe(instaFrame);
 
     document.getElementById('loadMoreBtn').addEventListener('click', showMore);
     loadFeed();

@@ -36,37 +36,54 @@
   </header>
 
   <main>
-    <section class="page-hero">
-      <div class="wrap">
-        <div class="eyebrow">The GFP Newsletter</div>
-        <h1>Read it here, not just your inbox.</h1>
-        <p>Episode round-ups, gear chat, and the odd rant. Sign up to get it by email, or just read back through everything right here on the site.</p>
-        <div class="signup-card">
-          <div>
-            <h2>Get the next one</h2>
-            <p>Straight to your inbox, no spam, unsubscribe whenever.</p>
-          </div>
-          <div>
-            <form class="nl-form" action="https://gmail.us12.list-manage.com/subscribe/post?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" method="post" target="_blank">
-              <input type="email" name="EMAIL" placeholder="you@email.com" aria-label="Email address" required>
-              <!-- Mailchimp bot trap: keep hidden and empty -->
-              <div class="nl-trap" aria-hidden="true"><input type="text" name="b_0a5fd5ca7498cd5715ccaa6bc_929e2eace3" tabindex="-1" value=""></div>
-              <button class="btn-gold" type="submit">Subscribe</button>
-            </form>
-          </div>
+    <section class="nl-hero">
+      <div class="wrap nl-hero-grid">
+        <div>
+          <div class="eyebrow">The GFP Newsletter</div>
+          <h1>Get the newsletter.<br>It&rsquo;s free, and it&rsquo;s actually good.</h1>
+          <p class="nl-hero-sub">Episode round-ups, gear chat, and the odd rant, written by Freddie and Liam and sent straight to your inbox.</p>
+        </div>
+
+        <div class="nl-signup-box" id="signup">
+          <h2>Sign me up</h2>
+          <p>Join the crew and get the next issue the moment it&rsquo;s out.</p>
+          <form class="nl-signup-form" action="https://gmail.us12.list-manage.com/subscribe/post?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" method="post" target="_blank">
+            <label>First name <span>(optional)</span>
+              <input type="text" name="FNAME" placeholder="Your name" autocomplete="given-name">
+            </label>
+            <label>Email
+              <input type="email" name="EMAIL" placeholder="you@email.com" autocomplete="email" required>
+            </label>
+            <!-- Mailchimp bot trap: keep hidden and empty -->
+            <div class="nl-trap" aria-hidden="true"><input type="text" name="b_0a5fd5ca7498cd5715ccaa6bc_929e2eace3" tabindex="-1" value=""></div>
+            <button class="btn-gold" type="submit">Subscribe &mdash; it&rsquo;s free</button>
+          </form>
+          <p class="nl-signup-note">No spam, no selling your email, unsubscribe whenever.</p>
         </div>
       </div>
     </section>
 
-    <section class="section issues-section">
+    <section class="section issues-section" id="past-issues">
       <div class="wrap">
         <div class="section-head">
-          <h2>Past Issues</h2>
+          <h2>Not convinced? Have a read</h2>
           <a class="archive-link" href="https://us12.campaign-archive.com/home/?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" target="_blank" rel="noopener">View the original emails &#8599;</a>
         </div>
         <!-- Filled from Mailchimp's archive by newsletter.js -->
         <div class="post-grid" id="issueList">
           <p class="posts-status">Loading past issues&hellip;</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="nl-band">
+      <div class="wrap nl-grid">
+        <div>
+          <h2>Enjoyed that? Get the next one</h2>
+          <p>Free, straight to your inbox, unsubscribe whenever.</p>
+        </div>
+        <div>
+          <a class="btn-gold" href="#signup">Sign me up</a>
         </div>
       </div>
     </section>

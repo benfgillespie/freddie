@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/img/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="/img/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <title>Moving Off WordPress</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/img/logo.png" alt="The Generic Foiling Podcast" width="56" height="56"></a>
+    </div>
+  </header>
+
+  <main class="guide">
+    <h1>Moving the GFP site off WordPress: costs &amp; how it all fits together</h1>
+    <p class="lead">What changes, what it costs, and how the shop and payments would work if you switch genericfoilingpod.com to the new site.</p>
+    <p class="muted">Prices checked 21 October 2026. Card fees are the providers&rsquo; standard UK rates. Rough conversions use $1 &asymp; &pound;0.78.</p>
+
+    <div class="need">
+      <h3 style="margin-top:0">The short version</h3>
+      <ul>
+        <li><strong>Hosting goes from &ldquo;something you pay Hostinger&rdquo; to &pound;0.</strong> The site runs on Ben&rsquo;s Vercel account, which he already pays for, and the GFP site fits comfortably inside it.</li>
+        <li><strong>The domain, podcast hosting and newsletter don&rsquo;t change.</strong></li>
+        <li><strong>For the shop, we recommend Stripe Payment Links:</strong> no monthly fee, about 2.3% on a typical tee order, and checkout with Apple Pay and Google Pay.</li>
+        <li><strong>Avoid Snipcart</strong> (what the new site is wired for at the moment) unless you sell more than about &pound;780 of merch every month. Below that it&rsquo;s a flat ~&pound;16/month on top of card fees.</li>
+        <li><strong>⚠️ The domain expires on 23 November 2026.</strong> Renew it whatever you decide.</li>
+      </ul>
+    </div>
+
+    <!-- Today -->
+    <section class="step">
+      <h2>What you run today</h2>
+      <p>From the outside, the current site is made up of:</p>
+      <table class="cost-table">
+        <thead><tr><th>Piece</th><th>Provider</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><td>Website (WordPress + Elementor + WooCommerce)</td><td>Hostinger</td><td>Your plan, which we can&rsquo;t see. Hostinger&rsquo;s Business plan renews at about <strong>&pound;13.99/month</strong> + VAT</td></tr>
+          <tr><td>Domain <code>genericfoilingpod.com</code></td><td>WordPress.com (Automattic)</td><td>About $13&ndash;20/year. <strong>Expires 23 Nov 2026</strong></td></tr>
+          <tr><td>Shop checkout</td><td>WooPayments (Stripe-based) + PayPal plugins</td><td>WooPayments UK cards: 1.5% + 25p, <em>plus 20% VAT on the fee</em></td></tr>
+          <tr><td>Podcast audio &amp; RSS feed</td><td>Spotify for Creators (Anchor)</td><td>Free</td></tr>
+          <tr><td>Newsletter</td><td>Mailchimp</td><td>Free up to 250 contacts / 500 emails a month</td></tr>
+          <tr><td>Contact form</td><td>Contact Form 7 (WordPress plugin)</td><td>Free</td></tr>
+          <tr><td>Paid WordPress add-ons</td><td>Elementor Pro, themes, etc.</td><td>Only if you bought them. Check your email for renewal receipts</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><p><strong>Worth checking:</strong> the domain&rsquo;s settings are managed at WordPress.com, but the site is hosted at Hostinger. Have a look for any <strong>WordPress.com plan</strong> you might still be paying for alongside Hostinger. It&rsquo;s a common leftover.</p></div>
+    </section>
+
+    <!-- New setup -->
+    <section class="step">
+      <h2>How the new setup fits together</h2>
+      <table class="cost-table">
+        <thead><tr><th>Piece</th><th>What it does</th><th>Cost to GFP</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GitHub</strong></td><td>Stores the website&rsquo;s files and every past version, so nothing is ever lost and you can undo anything.</td><td>Free</td></tr>
+          <tr><td><strong>Vercel</strong> (Ben&rsquo;s Pro account)</td><td>Puts the website on the internet. Fast, secure (https), and it updates within seconds of a change.</td><td><strong>&pound;0</strong>. Ben&rsquo;s Pro plan ($20/month) already covers it, and the GFP site uses a tiny fraction of the included allowance.</td></tr>
+          <tr><td><strong>Domain</strong></td><td>genericfoilingpod.com. It stays yours and simply points at Vercel instead of Hostinger.</td><td>Same as now (about $13&ndash;20/year)</td></tr>
+          <tr><td><strong>Spotify for Creators</strong></td><td>Hosts the episodes. The new site reads the feed automatically, so new episodes appear without anyone touching the website.</td><td>Free (no change)</td></tr>
+          <tr><td><strong>Mailchimp</strong></td><td>Newsletter sign-ups go straight into your existing list.</td><td>Free tier (no change)</td></tr>
+          <tr><td><strong>Resend</strong></td><td>Sends contact-form messages to thegenericfoilingpod@gmail.com.</td><td>Free. The free plan covers far more than a podcast contact form needs</td></tr>
+          <tr><td><strong>Stripe</strong></td><td>Takes card, Apple Pay and Google Pay payments for merch and pays them into your bank (see below).</td><td>No monthly fee. Pay per sale only</td></tr>
+        </tbody>
+      </table>
+      <h3>Why there&rsquo;s nothing to &ldquo;run&rdquo;</h3>
+      <p>WordPress is a program running on a server: it needs updates, plugin renewals and security patches, and it slows down as plugins pile up. The new site is just ready-made pages. There&rsquo;s nothing to update or hack, and it loads much faster.</p>
+    </section>
+
+    <!-- Shop -->
+    <section class="step">
+      <h2>The shop &amp; taking payments</h2>
+      <p>You sell four items (three tees and the beanie) at &pound;12&ndash;25. At that size, the big question is whether a shop tool&rsquo;s <em>monthly fee</em> is worth paying. Here are the realistic options:</p>
+
+      <h3>Option A: Stripe Payment Links <span class="badge">Recommended</span></h3>
+      <ul>
+        <li>Each product gets a <strong>Buy</strong> button that opens Stripe&rsquo;s own secure checkout page, with dropdowns for size and colour.</li>
+        <li>Customers pay by card, <strong>Apple Pay or Google Pay</strong>. Stripe collects their delivery address and emails them a receipt.</li>
+        <li>You see each order in the Stripe app (with the size, colour and address) and post it as you do now. Money lands in your bank account, usually within a few days.</li>
+        <li><strong>Cost:</strong> no monthly fee. 1.5% + 20p per sale on standard UK cards (2.5% + 20p on European cards, 3.15% + 20p on other international cards).</li>
+        <li><strong>Downside:</strong> no basket. Someone wanting a tee <em>and</em> a beanie checks out twice, or you add a ready-made &ldquo;Tee + Beanie bundle&rdquo; link.</li>
+      </ul>
+
+      <h3>Option B: Snipcart + Stripe (what the new site is built with now)</h3>
+      <ul>
+        <li>A proper basket that slides out on the site, so customers can buy several things in one checkout.</li>
+        <li><strong>Cost:</strong> Snipcart charges <strong>$20/month (~&pound;16) whenever sales are under $1,000 (~&pound;780) a month</strong>, and 2% of sales above that. That&rsquo;s <em>on top of</em> Stripe&rsquo;s 1.5% + 20p.</li>
+        <li>Billed in US dollars, so the cost moves with the exchange rate.</li>
+      </ul>
+
+      <h3>Option C: Shopify Starter</h3>
+      <ul>
+        <li>About <strong>&pound;5/month</strong>. You set the products up in Shopify and drop &ldquo;Buy&rdquo; buttons onto the site. It handles stock and shipping labels, which is handy if merch grows.</li>
+        <li>Card fees on top. Check Shopify&rsquo;s UK page for the current Starter rate before choosing this.</li>
+      </ul>
+
+      <h3>What a typical month costs</h3>
+      <p>Card fees here are for standard UK cards.</p>
+      <table class="cost-table num-table">
+        <thead><tr><th>Monthly sales</th><th>Stripe Payment Links</th><th>Snipcart + Stripe</th><th>Today (WooPayments)</th></tr></thead>
+        <tbody>
+          <tr><td>5 tees (&pound;125)</td><td><strong>&pound;2.88</strong> (2.3%)</td><td>&pound;18.48 (14.8%)</td><td>&pound;3.75 (3.0%)</td></tr>
+          <tr><td>10 tees (&pound;250)</td><td><strong>&pound;5.75</strong> (2.3%)</td><td>&pound;21.35 (8.5%)</td><td>&pound;7.50 (3.0%)</td></tr>
+          <tr><td>20 tees + 10 beanies (&pound;620)</td><td><strong>&pound;15.30</strong> (2.5%)</td><td>&pound;30.90 (5.0%)</td><td>&pound;20.16 (3.3%)</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">Today&rsquo;s figures include WooPayments&rsquo; 20% VAT on fees, and leave out the Hostinger hosting you&rsquo;d stop paying for. Snipcart&rsquo;s $20 is counted as &pound;15.60.</p>
+
+      <h3>Other payment details</h3>
+      <ul>
+        <li><strong>Whose account?</strong> The Stripe account should be in the podcast&rsquo;s name (Freddie and/or Liam), paying into your bank account, not Ben&rsquo;s. Setting it up takes about 15 minutes, with ID and bank details.</li>
+        <li><strong>PayPal:</strong> Stripe&rsquo;s checkout covers cards, Apple Pay and Google Pay, which is most people. If you want PayPal as well, it can be added, but it costs more (2.9% + 30p for UK PayPal payments).</li>
+        <li><strong>Disputes</strong> (someone tells their bank &ldquo;I didn&rsquo;t get it&rdquo;) cost &pound;20 each with Stripe, so keep proof of postage.</li>
+        <li><strong>Old orders:</strong> export your WooCommerce order and customer history before the WordPress site is switched off.</li>
+      </ul>
+    </section>
+
+    <!-- Monthly total -->
+    <section class="step">
+      <h2>Bottom line: monthly running costs</h2>
+      <table class="cost-table num-table">
+        <thead><tr><th></th><th>Today</th><th>New site (Stripe Payment Links)</th></tr></thead>
+        <tbody>
+          <tr><td>Hosting</td><td>Your Hostinger plan (up to ~&pound;14 + VAT)</td><td><strong>&pound;0</strong></td></tr>
+          <tr><td>Domain</td><td>~&pound;1&ndash;1.50</td><td>~&pound;1&ndash;1.50</td></tr>
+          <tr><td>Paid plugins</td><td>Whatever you pay (if anything)</td><td><strong>&pound;0</strong></td></tr>
+          <tr><td>Shop monthly fee</td><td>&pound;0</td><td><strong>&pound;0</strong></td></tr>
+          <tr><td>Card fees</td><td>1.5% + 25p + VAT per sale</td><td>1.5% + 20p per sale</td></tr>
+          <tr><td>Newsletter, podcast hosting, contact form</td><td>Free</td><td>Free</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Migration -->
+    <section class="step">
+      <h2>What the switch involves</h2>
+      <ol>
+        <li><strong>Renew the domain</strong> at WordPress.com before 23 November 2026.</li>
+        <li><strong>Set up Stripe</strong> in the podcast&rsquo;s name and create a Payment Link for each product (Claude can walk you through it). Then we swap the site&rsquo;s shop buttons over.</li>
+        <li><strong>Switch on the contact form</strong> so messages reach the GFP Gmail.</li>
+        <li><strong>Redirect old addresses</strong> so existing links keep working: <code>/about-us</code> &rarr; <code>/about</code>, <code>/episodes-list</code> &rarr; <code>/episodes</code>, and the old episode pages &rarr; the episodes list.</li>
+        <li><strong>Point the domain at Vercel.</strong> This means changing two settings in WordPress.com&rsquo;s domain panel. Ben does the Vercel side. The site switches over within an hour or so, with no downtime.</li>
+        <li><strong>Check everything</strong>, then export your WooCommerce orders and <strong>cancel Hostinger</strong> (and any plugin subscriptions).</li>
+      </ol>
+      <div class="tip">
+        <p><strong>Good to know:</strong> the site&rsquo;s files live on GitHub and its hosting is on Ben&rsquo;s account. If you ever want it fully separate from Ben, it can move to your own GitHub account and your own hosting in an afternoon. Cloudflare Pages and Netlify both have free plans that allow a shop. The domain, Stripe, Mailchimp and the podcast feed are all yours already.</p>
+      </div>
+    </section>
+
+    <section class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://vercel.com/pricing" target="_blank" rel="noopener">Vercel pricing</a>: Hobby is non-commercial only; Pro is $20/month with a $20 usage credit</li>
+        <li><a href="https://stripe.com/gb/pricing" target="_blank" rel="noopener">Stripe UK pricing</a>: card rates, disputes, Payment Links</li>
+        <li><a href="https://snipcart.com/pricing" target="_blank" rel="noopener">Snipcart pricing</a>: 2%, or $20/month under $1,000 in monthly sales</li>
+        <li><a href="https://woocommerce.com/document/woopayments/fees-and-debits/fees/" target="_blank" rel="noopener">WooPayments fees</a>: UK 1.5% + &pound;0.25, plus 20% VAT on fees</li>
+        <li><a href="https://www.paypal.com/uk/business/paypal-business-fees" target="_blank" rel="noopener">PayPal UK business fees</a></li>
+        <li><a href="https://www.shopify.com/uk/pricing" target="_blank" rel="noopener">Shopify UK pricing</a> (Starter price from third-party UK guides)</li>
+        <li>Mailchimp free plan reduced to 250 contacts / 500 sends in early 2026 (<a href="https://www.techradar.com/reviews/mailchimp" target="_blank" rel="noopener">TechRadar</a>)</li>
+        <li>Hostinger renewal price from third-party UK reviews; domain registrar and expiry from public WHOIS</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

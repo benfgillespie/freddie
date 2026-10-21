@@ -1165,3 +1165,69 @@ img { max-width: 100%; display: block; }
   .origins-inner > img { width: 140px; }
   .insta-embed iframe { height: 520px; }
 }
+
+/* ---------- Guide pages (/start, /costs) ---------- */
+.guide { width: 100%; max-width: 760px; margin: 0 auto; padding: 56px 16px 96px; }
+.guide h1 { font-size: 38px; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+.guide .lead { font-size: 18px; color: #b0b0b0; margin-bottom: 12px; }
+.guide h2 { font-size: 24px; font-weight: 800; color: #fff; margin: 0 0 12px; display: flex; align-items: center; gap: 12px; }
+.guide h3 { font-size: 17px; font-weight: 700; color: #fff; margin: 24px 0 8px; }
+.guide p, .guide li { font-size: 16px; color: #c8c8c8; }
+.guide p { margin-bottom: 12px; }
+.guide ol, .guide ul { padding-left: 22px; margin-bottom: 12px; }
+.guide li { margin-bottom: 8px; }
+.guide strong { color: #fff; }
+.num {
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+  background: #fbb904; color: #050505; font-size: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.step { background: #141414; border: 1px solid #262626; border-radius: 12px; padding: 28px; margin-top: 28px; }
+.need { background: #141414; border-left: 4px solid #1cb752; border-radius: 8px; padding: 18px 22px; margin-top: 28px; }
+.need ul { margin-bottom: 0; }
+.tip { background: #1d1a0f; border-left: 4px solid #fbb904; border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+.tip p:last-child { margin-bottom: 0; }
+kbd {
+  font-family: inherit; font-size: 14px; font-weight: 700; color: #fff;
+  background: #2a2a2a; border: 1px solid #3a3a3a; border-bottom-width: 3px;
+  border-radius: 5px; padding: 1px 7px; white-space: nowrap;
+}
+.code {
+  position: relative; margin: 12px 0 16px; background: #000; border: 1px solid #333;
+  border-radius: 8px; padding: 16px 92px 16px 16px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 15px;
+  color: #7ee2a0; overflow-x: auto; white-space: pre;
+}
+.code.prompt { white-space: pre-wrap; color: #e8e8e8; font-family: inherit; line-height: 1.6; max-height: 340px; overflow-y: auto; padding-right: 16px; padding-top: 56px; }
+.copy {
+  position: absolute; top: 10px; right: 10px; padding: 6px 14px; border-radius: 4px; border: 0;
+  background: #fbb904; color: #050505; font: 700 13px 'Open Sans', sans-serif; cursor: pointer;
+}
+.copy.done { background: #1cb752; color: #fff; }
+.screen { color: #9ad; font-style: italic; }
+.guide hr { border: 0; border-top: 1px solid #262626; margin: 48px 0 0; }
+.site-header .logo img { width: 56px; height: 56px; }
+@media (max-width: 600px) {
+  .guide h1 { font-size: 30px; }
+  .step { padding: 20px 18px; }
+  .code { font-size: 14px; }
+}
+.guide .muted { font-size: 14px; color: #8a8a8a; }
+.cost-table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 15px; }
+.cost-table th { text-align: left; color: #fbb904; font-size: 13px; text-transform: uppercase; letter-spacing: .4px; padding: 10px 12px 10px 0; border-bottom: 1px solid #333; }
+.cost-table td { color: #c8c8c8; padding: 12px 12px 12px 0; border-bottom: 1px solid #262626; vertical-align: top; }
+.cost-table td:first-child { color: #fff; }
+.num-table td:not(:first-child) { font-variant-numeric: tabular-nums; }
+.badge { display: inline-block; margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: #1cb752; color: #fff; font-size: 12px; font-weight: 700; vertical-align: middle; }
+.sources { margin-top: 40px; }
+.sources li { font-size: 14px; color: #8a8a8a; }
+@media (max-width: 600px) {
+  /* Stack descriptive tables; let number tables scroll sideways so columns stay comparable */
+  .cost-table:not(.num-table), .cost-table:not(.num-table) tbody, .cost-table:not(.num-table) tr, .cost-table:not(.num-table) td { display: block; width: 100%; }
+  .cost-table:not(.num-table) thead { display: none; }
+  .cost-table:not(.num-table) tr { padding: 12px 0; border-bottom: 1px solid #262626; }
+  .cost-table:not(.num-table) td { border: 0; padding: 2px 0; }
+  .cost-table:not(.num-table) td:first-child { font-weight: 700; margin-bottom: 4px; }
+  .num-table { display: block; overflow-x: auto; font-size: 14px; }
+  .num-table th, .num-table td { min-width: 110px; }
+}

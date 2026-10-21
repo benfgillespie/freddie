@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/img/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="/img/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <title>Freddie's Getting Started Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/img/logo.png" alt="The Generic Foiling Podcast" width="56" height="56"></a>
+    </div>
+  </header>
+
+  <main class="guide">
+    <h1>Freddie&rsquo;s guide to working on the website</h1>
+    <p class="lead">You&rsquo;re going to work on the new GFP website with <strong>Claude Code</strong>. It&rsquo;s Claude, but it can open, change and save the website&rsquo;s files on your Mac for you.</p>
+    <p class="lead">You tell it what you want in normal words, like <em>&ldquo;make the episode titles bigger&rdquo;</em>, and it does the fiddly bits.</p>
+
+    <div class="need">
+      <h3 style="margin-top:0">What you need</h3>
+      <ul>
+        <li>Your Mac</li>
+        <li>Your Claude subscription (the one you already pay for)</li>
+        <li>About 30 minutes, once. After that it&rsquo;s quick.</li>
+      </ul>
+    </div>
+
+    <!-- Step 1 -->
+    <section class="step">
+      <h2><span class="num">1</span> Open Terminal</h2>
+      <p>Terminal is an app that&rsquo;s already on your Mac. Instead of clicking things, you type instructions. It looks a bit hacker-ish, but you&rsquo;ll only type a few words in it.</p>
+      <ol>
+        <li>Press <kbd>&#8984; Cmd</kbd> + <kbd>Space</kbd>. A search bar appears.</li>
+        <li>Type <strong>Terminal</strong> and press <kbd>Return</kbd>.</li>
+        <li>A window with some text and a blinking cursor opens. That&rsquo;s it.</li>
+      </ol>
+      <div class="tip"><p><strong>How to paste things in:</strong> click a yellow <strong>Copy</strong> button on this page, click in the Terminal window, press <kbd>&#8984; Cmd</kbd> + <kbd>V</kbd>, then press <kbd>Return</kbd>.</p></div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step">
+      <h2><span class="num">2</span> Install Claude Code</h2>
+      <p>Copy this, paste it into Terminal, and press <kbd>Return</kbd>:</p>
+      <div class="code"><button class="copy">Copy</button>curl -fsSL https://claude.ai/install.sh | bash</div>
+      <p>Lots of text will scroll past. Wait until it stops and the blinking cursor is back (usually under a minute).</p>
+      <p>Now <strong>quit Terminal completely</strong> (<kbd>&#8984; Cmd</kbd> + <kbd>Q</kbd>) and open it again, the same way as in step 1. This lets your Mac notice the new app.</p>
+      <h3>Check it worked</h3>
+      <p>Paste this and press <kbd>Return</kbd>:</p>
+      <div class="code"><button class="copy">Copy</button>claude --version</div>
+      <p>If you see a version number (something like <span class="screen">2.1.0 (Claude Code)</span>), you&rsquo;re done with this step. 🎉</p>
+      <div class="tip">
+        <p><strong>If it says &ldquo;command not found&rdquo;:</strong> paste this, press <kbd>Return</kbd>, then quit and reopen Terminal and try again:</p>
+        <div class="code"><button class="copy">Copy</button>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc</div>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step">
+      <h2><span class="num">3</span> Make a folder for the website</h2>
+      <p>The website will live in its own folder inside your <strong>Documents</strong> folder. Paste this and press <kbd>Return</kbd>:</p>
+      <div class="code"><button class="copy">Copy</button>mkdir -p ~/Documents/GFP-Website</div>
+      <p>Nothing visible happens, and that&rsquo;s fine. If you open Finder and go to <strong>Documents</strong>, there&rsquo;s now an empty folder called <strong>GFP-Website</strong>. Don&rsquo;t put anything in it. Claude will fill it in a minute.</p>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step">
+      <h2><span class="num">4</span> Go into the folder and start Claude</h2>
+      <p>First, tell Terminal to &ldquo;go into&rdquo; that folder (<code>cd</code> means &ldquo;change directory&rdquo;, which is nerd for &ldquo;open folder&rdquo;):</p>
+      <div class="code"><button class="copy">Copy</button>cd ~/Documents/GFP-Website</div>
+      <p>Then start Claude Code:</p>
+      <div class="code"><button class="copy">Copy</button>claude</div>
+      <h3>The first time only, it asks a few setup questions</h3>
+      <ol>
+        <li><strong>Pick a colour theme</strong>: any is fine. Use the arrow keys, then press <kbd>Return</kbd>.</li>
+        <li><strong>How do you want to log in?</strong> Choose <span class="screen">Claude account with subscription</span>.</li>
+        <li>Your web browser opens. Log in to Claude if asked, then click <strong>Authorize</strong>. Go back to Terminal.</li>
+        <li>If it asks <span class="screen">Do you trust the files in this folder?</span>, choose <strong>Yes</strong>.</li>
+      </ol>
+      <p>You&rsquo;ll then see a box where you can type to Claude. You&rsquo;re in! 🙌</p>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step">
+      <h2><span class="num">5</span> Paste in this message, and Claude does the rest</h2>
+      <p>Copy the whole message below, paste it into Claude, and press <kbd>Return</kbd>. Claude will walk you through everything else, one step at a time: making a GitHub account (where the website&rsquo;s files are kept), installing a couple of tools, downloading the website, and showing it to you.</p>
+      <div class="code prompt" id="setupPrompt"><button class="copy">Copy</button>Hi Claude! I'm Freddie, co-host of The Generic Foiling Podcast. My mate Ben has built our new website and I want to work on it with you. I'm NOT technical at all, so please:
+- go one step at a time, and wait for me to say I've done each thing before moving on
+- explain everything in plain, simple English with no jargon
+- tell me exactly what to click or type whenever I need to do something myself
+
+The folder you're running in right now (~/Documents/GFP-Website) is where the website should live. Here's what I need:
+
+1. GITHUB ACCOUNT. The website's files are kept on GitHub, in Ben's private project "benfgillespie/freddie". I don't have a GitHub account yet. Walk me through signing up at https://github.com/signup on the free plan, confirming my email, and turning on two-factor login (a passkey using Touch ID is probably easiest, and remind me to save the recovery codes somewhere safe). Then tell me to message Ben my GitHub username so he can invite me to the project, and explain how to accept the invite when the email arrives. Wait until I tell you I've accepted it.
+
+2. TOOLS. Check whether my Mac has Git, the GitHub command-line tool (gh) and Node.js, and install whatever is missing in the simplest way you can. If my Mac pops up a box asking to install "command line developer tools", tell me to click Install and wait for it to finish.
+
+3. CONNECT TO GITHUB. Help me log in with "gh auth login" (GitHub.com, HTTPS, log in with a web browser), and set up Git with my name and email.
+
+4. GET THE WEBSITE. Download (clone) benfgillespie/freddie into this current folder. Then read CLAUDE.md in the project so you know how it all works.
+
+5. SHOW ME IT. Run "npm install", start the site with "npm run dev", and open http://localhost:3000 in my browser so I can see it.
+
+6. QUICK LESSON. Finish with a short, simple cheat sheet of what to say to you to: make a change, see it, save my work to GitHub, get Ben's latest changes, and undo something.
+
+If anything goes wrong, explain what happened in simple words and fix it. If you can't fix it, tell me exactly what to send Ben.</div>
+      <div class="tip">
+        <p><strong>Claude will ask permission before doing things</strong>, like <span class="screen">Do you want to run this command?</span> Read what it says, then choose <strong>Yes</strong> (press <kbd>Return</kbd>).</p>
+        <p><strong>If it asks for your Mac password</strong>, type it and press <kbd>Return</kbd>. Nothing appears on screen while you type. That&rsquo;s normal, it&rsquo;s a security thing.</p>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- Day to day -->
+    <section class="step">
+      <h2><span class="num">&#9733;</span> Every time after that</h2>
+      <ol>
+        <li>Open Terminal (<kbd>&#8984; Cmd</kbd> + <kbd>Space</kbd>, type <strong>Terminal</strong>, <kbd>Return</kbd>).</li>
+        <li>Go into the website folder:
+          <div class="code"><button class="copy">Copy</button>cd ~/Documents/GFP-Website</div>
+        </li>
+        <li>Start Claude:
+          <div class="code"><button class="copy">Copy</button>claude</div>
+        </li>
+        <li>Ask for what you want, in normal words.</li>
+      </ol>
+
+      <h3>Things you can say</h3>
+      <ul>
+        <li>&ldquo;Start the website and open it in my browser&rdquo;</li>
+        <li>&ldquo;Change the homepage headline to &hellip;&rdquo;</li>
+        <li>&ldquo;Use the photo called liam-new.jpg in my Downloads folder for Liam&rsquo;s picture&rdquo;</li>
+        <li>&ldquo;The shop looks squashed on my phone. Can you fix it?&rdquo;</li>
+        <li>&ldquo;Undo that last change&rdquo;</li>
+        <li><strong>&ldquo;Save my work to GitHub&rdquo;</strong>: do this at the end of every session. It backs everything up and lets Ben see it.</li>
+        <li><strong>&ldquo;Get Ben&rsquo;s latest changes&rdquo;</strong>: do this at the start if Ben&rsquo;s been tinkering.</li>
+      </ul>
+
+      <h3>Handy to know</h3>
+      <ul>
+        <li><strong>Seeing your changes:</strong> refresh the browser tab showing <strong>localhost:3000</strong>. Only you can see that version. It&rsquo;s running on your Mac.</li>
+        <li><strong>Want it online</strong> to show Liam or check on your phone? Save to GitHub, then message Ben and he&rsquo;ll put it up.</li>
+        <li><strong>Stuck?</strong> Tell Claude exactly what you see. You can drag a screenshot straight into the Terminal window.</li>
+        <li><strong>Nothing can really break.</strong> Every saved version is kept, so you can always go back.</li>
+        <li><strong>To leave Claude:</strong> type <code>/exit</code> and press <kbd>Return</kbd>, or just close the window.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        // Copy the block's text without the button label
+        var text = Array.from(btn.parentNode.childNodes)
+          .filter(function (n) { return n !== btn; })
+          .map(function (n) { return n.textContent; }).join('').trim();
+        var done = function () {
+          btn.textContent = 'Copied!'; btn.classList.add('done');
+          setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1800);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done);
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); ta.remove(); done();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -24,7 +24,11 @@ for HTML/CSS changes a browser refresh is enough.
   Blob, so it's empty when running locally)
 - `api/rss.js` — proxies the Anchor/Spotify podcast feed (episodes load from `/api/rss`)
 - `api/feedback.js` — storage for the feedback tool
-- `vercel.json` — serves `public/` with clean URLs; no build step
+- `vercel.json` — serves `public/` with clean URLs; no build step. Also sends a
+  `noindex` header on every page so search engines ignore this preview copy.
+  **Remove that header when the site goes live on genericfoilingpod.com.**
+- `public/start.html` — Freddie's getting-started guide; `public/costs.html` — the
+  WordPress-to-Vercel migration costs (neither is linked from the site's menus)
 
 ## Services
 - Shop: Snipcart (script on every page)

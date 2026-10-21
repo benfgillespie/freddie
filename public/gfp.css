@@ -592,6 +592,11 @@ body.has-player .feedback-toggle { bottom: 110px; }
 }
 .product-options select:focus { outline: none; border-color: var(--gold); }
 .product .btn-gold { width: 100%; text-align: center; }
+.support-band p { max-width: 62ch; font-size: 16px; line-height: 1.6; }
+.support-band p + p { margin-top: 12px; }
+.support-band p a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+.support-band .btn-gold { font-size: 21px; padding: 20px 38px; box-shadow: 6px 6px 0 #000; white-space: nowrap; }
+.support-band .btn-gold:hover { box-shadow: 8px 8px 0 #000; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 920px) {

@@ -14,9 +14,20 @@ Setup takes about 20 minutes and you only do it once.
 GitHub is where the site's files live online. It keeps every version, so nothing
 you do can't be undone.
 
-1. Go to **https://github.com/signup** and create a free account.
-2. **Send Ben your GitHub username.** He'll add you to the project.
-3. You'll get an email invite. Click **Accept**.
+1. Go to **https://github.com/signup**.
+2. Enter your email, choose a password and pick a **username** (anything you like,
+   e.g. `freddie-gfp`). Choose the **Free** plan if asked.
+3. GitHub emails you a code. Type it in to confirm your email.
+4. GitHub may ask you to turn on **two-factor authentication** (a second check when
+   you log in). The easiest option is a **passkey**, which uses your Mac's Touch ID
+   or your iPhone. Otherwise use an authenticator app. Save the recovery codes it
+   gives you somewhere safe, for example in Notes or a password manager.
+5. **Send Ben your GitHub username.** He'll invite you to the project.
+6. You'll get an email from GitHub: "benfgillespie invited you to
+   benfgillespie/freddie". Click **View invitation**, then **Accept invitation**.
+   (The invite expires after 7 days. If you miss it, ask Ben to send it again.)
+
+You don't need to learn GitHub itself. Claude handles all of it for you later.
 
 ## 2. Get a Claude account
 

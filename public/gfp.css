@@ -674,6 +674,9 @@ body.has-player .feedback-toggle { bottom: 110px; }
 .blog-hero { min-height: 440px; }
 .blog-hero .banner-content { padding-top: 180px; padding-bottom: 52px; }
 .blog-hero .hero-sub { margin-bottom: 0; }
+.blog-intro { padding-bottom: 0; }
+.blog-intro p { max-width: 68ch; font-size: 19px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 16px; }
+.blog-intro p:first-child { color: var(--text); }
 .blog-empty { grid-column: 1 / -1; border: 1px dashed var(--border-3); padding: 40px 32px; text-align: center; }
 .blog-empty h3 { font-size: 26px; margin-bottom: 8px; }
 .blog-empty p { color: var(--text-secondary); margin: 0; }

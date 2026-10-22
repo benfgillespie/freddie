@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "sample",
+    "draft": true,
+    "title": "Sample post: this is what a blog post looks like",
+    "date": "2026-10-22",
+    "author": "Freddie",
+    "image": "/img/banner-home-3.jpg",
+    "excerpt": "A placeholder so you can see the layout. Only shows in your preview, never on the live site."
+  }
+]

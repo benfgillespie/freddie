@@ -394,6 +394,7 @@ img { display: block; max-width: 100%; }
 .post-body figure { margin: 28px 0; }
 .post-body figure img { width: 100%; height: auto; border: 1px solid var(--border-1); }
 .post-body figure.video { max-width: 420px; }
+.post-body figure.embed iframe { display: block; width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border-1); }
 .post-body figure a { display: block; }
 .post-body a { color: var(--text); border-bottom: 1px solid var(--gold); }
 .post-body a:hover { color: var(--gold); }

@@ -9,7 +9,7 @@
   <title>About Us | The Generic Foiling Podcast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="gfp.css">
   <link rel="stylesheet" href="feedback.css">
 </head>
@@ -55,18 +55,15 @@
     </section>
 
     <section class="about-stats">
-      <div class="wrap about-stats-row">
-        <div><strong id="aboutEpisodes">155</strong><span>Episodes</span></div>
-        <div><strong>819+</strong><span>Listener ratings</span></div>
-        <div><strong>2022</strong><span>Hit record</span></div>
-        <div><strong>Every</strong><span>Flavour of foiling</span></div>
+      <div class="wrap">
+        <p><strong id="aboutEpisodes">155</strong> episodes since we first hit record in 2022, <strong>819+</strong> listener ratings, and every flavour of foiling.</p>
       </div>
     </section>
 
     <!-- Origins -->
     <section class="section">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head ruled">
           <h2>How it started</h2>
         </div>
         <div class="origins-grid">
@@ -117,41 +114,8 @@
       </div>
     </section>
 
-    <!-- Reviews -->
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>What listeners say</h2>
-          <a class="see-all" href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">&#9733;&#9733;&#9733;&#9733;&#9733; 819+ ratings &rarr;</a>
-        </div>
-        <div class="review-grid">
-          <figure class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <h3>Better than therapy</h3>
-            <blockquote>Even though I would love to be on the water more often, at least I can take part in others&rsquo; sessions! Love it!!!</blockquote>
-            <figcaption>MattOnFoil &middot; Apple Podcasts, Switzerland</figcaption>
-          </figure>
-          <figure class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <h3>Love this podcast</h3>
-            <blockquote>The way it should be. I love the authenticity and how relatable it is.</blockquote>
-            <figcaption>Tholowell &middot; Apple Podcasts, USA</figcaption>
-          </figure>
-          <figure class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <h3>Great coverage</h3>
-            <blockquote>Look forward to listening every week. Really great coverage of everything foiling, including interviews with top athletes such as Ellie Aldridge and Olivia Piana.</blockquote>
-            <figcaption>FluidFoiling &middot; Podcast Addict</figcaption>
-          </figure>
-          <figure class="review-card">
-            <div class="review-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <h3>Mostly great&hellip;</h3>
-            <blockquote>&hellip;apart from Freddie. Just as their illustrious guest is about to drop some genuinely fascinating technical insight, he&rsquo;ll jump in with &ldquo;What&rsquo;s your favourite pizza?&rdquo; At first you&rsquo;re cringing behind the sofa, but then&hellip; somehow&hellip; you start to find his painfully northern quips endearing. Keep up the supremely mediocre, but weirdly addictive, great work!</blockquote>
-            <figcaption>Salcombe Foiler &middot; Apple Podcasts, UK</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
+
+    <section class="reviews-band" id="reviews" aria-label="Listener reviews"></section>
 
     <section class="nl-band duo-band">
       <div class="wrap duo-grid">
@@ -238,6 +202,7 @@
   </div>
   <div class="feedback-panel-overlay" id="feedbackPanelOverlay"></div>
   <script src="feedback.js"></script>
+  <script src="reviews.js"></script>
   <script src="banner-slides.js"></script>
 
   <script>

@@ -7,6 +7,11 @@
 // Tee-only photos are .webp cut-outs (no white background); they're shown whole on a soft panel.
 // fit: shown on the product page. colourPhotos: the photo shown when that colour is picked.
 // images: the first photo is the one on the shop page; the rest show on the product's own page.
+
+// When the stock counts below were last checked. Online orders after this time are taken off
+// them automatically (see _stock.js), so set it to now whenever you change any counts.
+export const STOCK_COUNTED_AT = '2026-10-25T00:00:00Z';
+
 export const PRODUCTS = [
   {
     id: 'gfp-mens-logo-tee',

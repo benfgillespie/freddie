@@ -112,6 +112,10 @@ for HTML/CSS changes a browser refresh is enough. Open pages with `open http://l
 - Shop: own basket + Stripe Checkout. Products, stock ("Size|Colour" counts) and postage live in
   `api/_shop.js`; `/api/checkout` needs `STRIPE_SECRET_KEY` in Vercel (Ben). Freddie tells you
   stock changes; restart the dev server after editing `api/` files.
+- Paid orders come back through `/api/stripe-webhook` (needs `STRIPE_WEBHOOK_SECRET` and a Blob
+  store, i.e. `BLOB_READ_WRITE_TOKEN`) and are taken off the stock automatically (`api/_stock.js`).
+  **Whenever you change stock counts in `_shop.js`, set `STOCK_COUNTED_AT` to now**, or sales
+  already made would be taken off the new counts too. The local preview shows the raw counts.
 - Support Us: Buy Me a Coffee — https://www.buymeacoffee.com/gfpodcast
 - Newsletter: Mailchimp (forms post straight to the GFP list)
 - Podcast email: thegenericfoilingpod@gmail.com

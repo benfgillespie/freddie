@@ -75,6 +75,17 @@
       }
       document.getElementById('postBody').innerHTML = body;
 
+      // Photo strips inside a post scroll sideways with the arrows
+      document.querySelectorAll('#postBody .post-gallery').forEach(g => {
+        const track = g.querySelector('.gallery-track');
+        g.querySelectorAll('.gallery-arrow').forEach(b => b.addEventListener('click', () => {
+          const dir = Number(b.dataset.dir);
+          const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 5;
+          if (dir > 0 && atEnd) track.scrollTo({ left: 0, behavior: 'smooth' });
+          else track.scrollBy({ left: dir * (track.querySelector('.gallery-item').offsetWidth + 24), behavior: 'smooth' });
+        }));
+      });
+
       // List is newest first, so "newer" is the one before this in the list
       const newer = all[index - 1];
       const older = all[index + 1];

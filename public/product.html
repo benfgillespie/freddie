@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/img/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="/img/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <title>Shop | The Generic Foiling Podcast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gfp.css">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <img src="/img/gfp-icon.png" alt="Generic Foiling Podcast icon" width="38" height="42">
+        <span class="brand-word">Generic<br>Foiling Podcast</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="/episodes.html">Episodes</a>
+        <a href="/newsletter.html">Newsletter</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/about.html">About Us</a>
+        <a href="/shop.html" class="active">Shop</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn-gold" href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Listen Now</a>
+        <button type="button" class="cart-btn" aria-label="Basket">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span class="cart-count"></span>
+        </button>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-controls="mainNav">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section product-page">
+      <div class="wrap">
+        <a class="back-link" href="/shop.html">&larr; Back to the shop</a>
+        <div class="product-detail" id="productPage"><p class="posts-status">Loading&hellip;</p></div>
+      </div>
+    </section>
+
+    <section class="reviews-band" id="reviews" aria-label="Listener reviews"></section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer bordered">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/img/gfp-icon.png" alt="Generic Foiling Podcast icon" width="38" height="42">
+          <p>Two mates, multiple mics, and a genuine love of foiling in all its flavours. New episodes most weeks.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="/episodes.html">Episodes</a>
+          <a href="/newsletter.html">Newsletter</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/about.html">About Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Listen On</h4>
+          <a href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://podcasts.apple.com/us/podcast/the-generic-foiling-podcast/id1637901696" target="_blank" rel="noopener">Apple Podcasts</a>
+          <a href="https://www.youtube.com/@GenericFoilingPodcast" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/shop.html">Shop</a>
+          <a href="https://www.buymeacoffee.com/gfpodcast" target="_blank" rel="noopener">Buy us a coffee</a>
+          <a href="https://www.instagram.com/genericfoilingpodcast/" target="_blank" rel="noopener">Instagram</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <small>&copy; 2026 Generic Foiling Podcast. All rights reserved.</small>
+        <span class="wanglordz-link">
+          <img src="/img/wang-lordz.png" alt="Wang Lordz" width="35" height="22">
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Basket -->
+  <div class="basket" id="basket" hidden>
+    <aside class="basket-panel" role="dialog" aria-label="Your basket">
+      <div class="basket-head">
+        <h2>Your basket</h2>
+        <button type="button" class="basket-close" aria-label="Close basket">&times;</button>
+      </div>
+      <div class="basket-items"></div>
+      <div class="basket-summary" hidden>
+        <label class="basket-region">Posting to
+          <select id="basketRegion"></select>
+        </label>
+        <div class="basket-row"><span>Subtotal</span><span class="basket-subtotal"></span></div>
+        <div class="basket-row"><span>Postage</span><span class="basket-postage"></span></div>
+        <div class="basket-row total"><span>Total</span><span class="basket-total"></span></div>
+        <button type="button" class="btn-gold checkout-btn">Checkout</button>
+        <p class="basket-message" aria-live="polite"></p>
+        <p class="basket-note">Secure payment by Stripe: card, Apple Pay or Google Pay.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Feedback Tool -->
+  <button class="feedback-toggle" id="feedbackToggle" title="Leave feedback (shift-click to view all)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="feedback-count" id="feedbackCount"></span>
+  </button>
+  <div class="feedback-banner" id="feedbackBanner">
+    <span>Feedback Mode &mdash; click anywhere to leave feedback</span>
+    <button id="feedbackDone">Done</button>
+  </div>
+  <div class="feedback-popup" id="feedbackPopup">
+    <textarea id="feedbackText" placeholder="Leave your feedback..." rows="3"></textarea>
+    <div class="feedback-popup-actions">
+      <button id="feedbackCancel" class="feedback-popup-btn cancel">Cancel</button>
+      <button id="feedbackSubmit" class="feedback-popup-btn submit">Submit</button>
+    </div>
+  </div>
+  <div class="feedback-panel" id="feedbackPanel">
+    <div class="feedback-panel-header">
+      <h3>Feedback</h3>
+      <button id="feedbackPanelClose">&times;</button>
+    </div>
+    <div class="feedback-panel-list" id="feedbackPanelList"></div>
+  </div>
+  <div class="feedback-panel-overlay" id="feedbackPanelOverlay"></div>
+  <script src="feedback.js"></script>
+  <script src="reviews.js"></script>
+  <script src="shop.js"></script>
+
+  <script>
+    // Mobile nav toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+      document.getElementById('mainNav').classList.toggle('open');
+    });
+
+  </script>
+</body>
+</html>

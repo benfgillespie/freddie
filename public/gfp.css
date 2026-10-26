@@ -601,7 +601,7 @@ body.has-player { padding-bottom: 96px; }
 .product h3 { font-size: 19px; line-height: 1.15; }
 .product-price { font-family: 'Anton', sans-serif; font-size: 20px; color: var(--gold); flex: none; }
 .product-body > p { color: var(--text-secondary); font-size: 14px; line-height: 1.5; margin: 0 0 16px; }
-.product-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; margin-bottom: 14px; }
+.product-options { display: flex; flex-direction: column; gap: 14px; margin-top: auto; margin-bottom: 14px; }
 .product-options label { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 12px; color: var(--text-muted-1); }
 .product-options select {
   display: block; width: 100%; margin-top: 5px;
@@ -959,3 +959,26 @@ body.basket-open { overflow: hidden; }
   .post-nav { grid-template-columns: 1fr; }
   .post-nav .newer { text-align: left; }
 }
+
+/* Card titles in normal case, like the blog cards (hosts' names and big headlines stay in capitals) */
+.hero-ep h3, .ep-card h3, .product h3, .expect-card h3, .contact-card h3, .coasters h3 {
+  text-transform: none; font-family: 'Barlow', sans-serif; font-weight: 700;
+}
+
+/* Quieter page top on every page except the home page (no gold label, normal-case headline) */
+.blog-hero .eyebrow, .contact-hero .eyebrow, .about-hero .eyebrow, .ep-hero .eyebrow, .nl-hero .eyebrow, .shop-hero .eyebrow { display: none; }
+.blog-hero h1, .contact-hero h1, .about-hero h1, .ep-hero h1, .nl-hero h1, .shop-hero h1 { font-family: 'Barlow', sans-serif; text-transform: none; font-weight: 700; font-size: 46px; letter-spacing: -0.01em; }
+
+/* Colour circles and size buttons */
+.option-label { display: block; margin-bottom: 7px; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 12px; color: var(--text-muted-1); }
+.option-label .option-picked { font-weight: 600; color: var(--text); }
+.option-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.opt { cursor: pointer; font-family: 'Barlow Condensed', sans-serif; }
+.opt-colour { width: 30px; height: 30px; border-radius: 50%; background: var(--swatch); border: 2px solid var(--border-3); padding: 0; box-shadow: 0 0 0 2px var(--bg) inset; }
+.opt-colour.active { border-color: var(--gold); box-shadow: 0 0 0 2px var(--bg) inset, 0 0 0 2px var(--gold); }
+.opt-size { min-width: 44px; padding: 8px 10px; background: var(--bg); color: var(--text); border: 1px solid var(--border-3); font-weight: 700; font-size: 16px; letter-spacing: 0.04em; }
+.opt-size.active { background: var(--gold); border-color: var(--gold); color: #0B0B0C; }
+.opt.out { opacity: 0.4; }
+.opt-size.out { text-decoration: line-through; }
+.opt-colour.out { background-image: linear-gradient(135deg, transparent 46%, #F2EFE6 47%, #F2EFE6 53%, transparent 54%); }
+.opt:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }

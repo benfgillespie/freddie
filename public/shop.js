@@ -62,14 +62,20 @@
     return cutout(p.images[0]) ? others.find(src => !cutout(src)) : (others.find(cutout) || others[0]);
   }
 
-  // Size/colour dropdowns, stock note and Add to basket button (cards and product page)
+  // Colour circles and S/M/L/XL buttons, stock note and Add to basket button (cards and product page)
+  const SIZE_LABEL = { Small: 'S', Medium: 'M', Large: 'L', 'X Large': 'XL' };
+  const SWATCH = { Blue: '#4a5c93', Black: '#151515', Lilac: '#b9a6d6', Chocolate: '#5a3a28', Charcoal: '#3a3a3c', Navy: '#1f2a44', Burgundy: '#6b1f2a' };
+
   function buyControls(p) {
     return `
       <div class="product-options">
         ${Object.entries(p.options).map(([name, values]) => `
-          <label>${esc(name)}
-            <select data-option="${esc(name)}">${values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join('')}</select>
-          </label>`).join('')}
+          <div class="option-group" data-option="${esc(name)}" data-value="">
+            <span class="option-label">${esc(name)}<b class="option-picked"></b></span>
+            <div class="option-choices">${values.map(v => name === 'Colour'
+              ? `<button type="button" class="opt opt-colour" data-v="${esc(v)}" style="--swatch:${SWATCH[v] || '#888'}" aria-label="${esc(v)}" title="${esc(v)}"></button>`
+              : `<button type="button" class="opt opt-size" data-v="${esc(v)}" aria-label="${esc(v)}">${esc(SIZE_LABEL[v] || v)}</button>`).join('')}</div>
+          </div>`).join('')}
       </div>
       <div class="stock-note" aria-live="polite"></div>
       <button type="button" class="btn-gold add-btn">Add to basket</button>`;
@@ -78,9 +84,12 @@
   function wire(card) {
     const p = products.find(x => x.id === card.dataset.id);
     const start = firstAvailable(p);
-    card.querySelectorAll('select').forEach(s => {
-      s.value = start[s.dataset.option];
-      s.addEventListener('change', () => { refresh(card, p); showColour(card, p); });
+    card.querySelectorAll('.option-group').forEach(g => {
+      g.dataset.value = start[g.dataset.option];
+      g.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+        g.dataset.value = b.dataset.v;
+        refresh(card, p); showColour(card, p);
+      }));
     });
     card.querySelector('.add-btn').addEventListener('click', () => add(card, p));
     refresh(card, p);
@@ -131,17 +140,20 @@
   }
 
   function choiceOf(card) {
-    return Object.fromEntries(Array.from(card.querySelectorAll('select')).map(s => [s.dataset.option, s.value]));
+    return Object.fromEntries(Array.from(card.querySelectorAll('.option-group')).map(g => [g.dataset.option, g.dataset.value]));
   }
 
   // Mark each option sold out given the other choices, and update the note and button
   function refresh(card, p) {
     const choice = choiceOf(card);
-    card.querySelectorAll('select').forEach(s => {
-      Array.from(s.options).forEach(o => {
-        const n = stockFor(p, { ...choice, [s.dataset.option]: o.value });
-        o.textContent = o.value + (n ? '' : ' – sold out');
+    card.querySelectorAll('.option-group').forEach(g => {
+      g.querySelectorAll('.opt').forEach(b => {
+        const n = stockFor(p, { ...choice, [g.dataset.option]: b.dataset.v });
+        b.classList.toggle('out', !n);
+        b.classList.toggle('active', b.dataset.v === g.dataset.value);
+        b.setAttribute('aria-pressed', b.dataset.v === g.dataset.value ? 'true' : 'false');
       });
+      g.querySelector('.option-picked').textContent = g.dataset.option === 'Colour' ? ': ' + g.dataset.value : '';
     });
     const left = stockFor(p, choice) - ((inBasket(p.id, choice) || {}).qty || 0);
     const note = card.querySelector('.stock-note');

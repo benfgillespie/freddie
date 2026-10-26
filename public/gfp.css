@@ -536,10 +536,11 @@ body.has-player { padding-bottom: 96px; }
 .about-stats p { margin: 0; padding: 22px 0; text-align: center; font-size: 18px; color: var(--text-secondary); }
 .about-stats strong { color: var(--gold); font-weight: 700; }
 
-.origins-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: start; }
+.origins-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: stretch; }
 .origins-text p { color: var(--text-secondary); font-size: 17px; line-height: 1.65; margin: 0 0 18px; }
 .origins-text p.lead { color: var(--text); font-size: 21px; line-height: 1.5; }
-.origins-photo img { width: 100%; height: auto; border: 1px solid var(--border-1); box-shadow: 8px 8px 0 #000; }
+.origins-photo { position: relative; min-height: 390px; }
+.origins-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 88%; border: 1px solid var(--border-1); box-shadow: 8px 8px 0 #000; }
 .coasters { margin-top: 30px; border: 1px solid var(--border-1); border-left: 4px solid var(--gold); padding: 18px 22px; background: #141412; }
 .coasters-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-size: 13px; }
 .coasters h3 { font-size: 22px; margin: 2px 0 12px; }
@@ -547,7 +548,7 @@ body.has-player { padding-bottom: 96px; }
 
 .about-hosts { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .about-host { border: 1px solid var(--border-1); }
-.about-host img { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-bottom: 1px solid var(--border-1); }
+.about-host img { width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; object-position: center 40%; border-bottom: 1px solid var(--border-1); }
 .about-host-body { padding: 26px 28px 30px; }
 .about-host h3 { font-size: 28px; }
 .about-host .host-role { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-size: 14px; margin: 4px 0 14px; }
@@ -880,7 +881,8 @@ body.basket-open { overflow: hidden; }
   .shop-hero .banner-content, .contact-hero .banner-content, .blog-hero .banner-content { padding-top: 8px; padding-bottom: 40px; }
   .contact-grid { grid-template-columns: 1fr; }
   .origins-grid, .about-hosts { grid-template-columns: 1fr; gap: 36px; }
-  .origins-photo { max-width: 420px; }
+  .origins-photo { max-width: 420px; min-height: 0; }
+  .origins-photo img { position: static; height: auto; }
   .expect-grid { grid-template-columns: 1fr 1fr; }
   #episodeGrid { grid-template-columns: 1fr 1fr; }
   .player-inner { flex-wrap: wrap; gap: 10px 14px; }

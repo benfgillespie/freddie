@@ -195,7 +195,7 @@
           <div class="post-card-media">
             ${post.image ? `<img src="${escapeHtml(post.image)}" alt="" loading="lazy">` : ''}
             ${post.draft ? '<div class="num">Draft</div>' : ''}
-            ${post.foilmag ? '<span class="foilmag-tag">As featured in Foil Mag</span>' : ''}
+            ${post.foilmag ? '<span class="foilmag-tag">As featured in Foiling Magazine</span>' : ''}
           </div>
           <div class="post-card-body">
             <span class="issue-date">${formatDate(post.date)}${post.author ? ' · ' + escapeHtml(post.author) : ''}</span>

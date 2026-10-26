@@ -120,10 +120,7 @@ for HTML/CSS changes a browser refresh is enough. Open pages with `open http://l
 - `public/*.html` — the six pages: index (home), episodes, about, shop, support, contact
 - `public/style.css` — all styles
 - `public/img/`, `public/audio/` — photos, logo, Coasters Chat audio
-- `public/feedback.js` — "pin a comment on the page" review tool (stores data in Vercel
-  Blob, so it's empty when running locally)
 - `api/rss.js` — proxies the Anchor/Spotify podcast feed (episodes load from `/api/rss`)
-- `api/feedback.js` — storage for the feedback tool
 - `vercel.json` — serves `public/` with clean URLs; no build step. Also sends a
   `noindex` header on every page so search engines ignore this preview copy.
   **Remove that header when the site goes live on genericfoilingpod.com.**

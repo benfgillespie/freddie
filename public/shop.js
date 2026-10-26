@@ -35,7 +35,8 @@
       return `
         <article class="product js-product${soldOut ? ' is-sold-out' : ''}" data-id="${esc(p.id)}">
           <a class="product-media" href="${productUrl(p)}">
-            <img src="${esc(p.images[0])}" alt="${esc(p.name)}" width="600" height="650" loading="lazy">
+            <img class="main-photo" src="${esc(p.images[0])}" alt="${esc(p.name)}" width="600" height="650" loading="lazy">
+            ${hoverPhoto(p) ? `<img class="hover-photo" src="${esc(hoverPhoto(p))}" alt="">` : ''}
             ${soldOut ? '<div class="num">Sold out</div>' : ''}
             ${p.images.length > 1 ? `<span class="photo-count">${p.images.length} photos</span>` : ''}
           </a>
@@ -51,6 +52,14 @@
         </article>`;
     }).join('');
     grid.querySelectorAll('.js-product').forEach(wire);
+  }
+
+  // The photo that fades in when you hover a card: a worn shot for the tee cut-outs,
+  // otherwise the next photo (never the size guide)
+  function hoverPhoto(p) {
+    const others = p.images.filter(src => src !== p.images[0] && !src.includes('size-guide'));
+    const cutout = src => src.endsWith('.webp');
+    return cutout(p.images[0]) ? others.find(src => !cutout(src)) : (others.find(cutout) || others[0]);
   }
 
   // Size/colour dropdowns, stock note and Add to basket button (cards and product page)
@@ -83,7 +92,7 @@
     const src = (p.colourPhotos || {})[choiceOf(card).Colour];
     if (!src) return;
     if (detail && detail.contains(card)) showPhoto(src);
-    else card.closest('.product').querySelector('.product-media img').src = src;
+    else card.closest('.product').querySelector('.product-media .main-photo').src = src;
   }
 
   function showPhoto(src) {
@@ -242,6 +251,7 @@
     basket = []; save();
     banner.textContent = 'Cheers! Your order’s in. Stripe will email you a receipt, and we’ll get it in the post.';
     banner.hidden = false;
+    banner.scrollIntoView({ block: 'center' });
   } else if (order === 'cancelled') {
     banner.textContent = 'No worries, your basket’s still here whenever you’re ready.';
     banner.hidden = false;

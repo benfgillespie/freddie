@@ -33,10 +33,6 @@ async function readBody(req) {
 
 async function handleApi(req, res, url) {
   const name = url.pathname.replace(/^\/api\//, '').replace(/\/$/, '');
-  // The feedback tool stores data in Vercel Blob, which only works online
-  if (name === 'feedback' && !process.env.BLOB_READ_WRITE_TOKEN) {
-    return wrapRes(res).status(200).json([]);
-  }
   try {
     const mod = await import(path.join(ROOT, 'api', `${name}.js`));
     req.query = Object.fromEntries(url.searchParams);

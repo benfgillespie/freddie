@@ -509,7 +509,6 @@ img { display: block; max-width: 100%; }
 }
 .player-bar[hidden] { display: none; }
 body.has-player { padding-bottom: 96px; }
-body.has-player .feedback-toggle { bottom: 110px; }
 .player-inner { display: flex; align-items: center; gap: 18px; padding-top: 12px; padding-bottom: 12px; }
 .player-art { width: 56px; height: 56px; object-fit: cover; flex: none; border: 1px solid var(--border-3); }
 .player-info { flex: 0 1 300px; min-width: 0; }
@@ -666,6 +665,11 @@ body.has-player .feedback-toggle { bottom: 110px; }
 .product-media .num, .photo-count { border-radius: 0 0 10px 0; }
 .photo-count { border-radius: 6px; }
 .order-banner { border-radius: 10px; }
+
+.product-media .hover-photo { position: absolute; inset: 0; opacity: 0; transition: opacity 0.35s ease, transform 0.3s; background: radial-gradient(circle at 50% 38%, #34342e 0%, #1c1c19 70%); }
+@media (hover: hover) {
+  .product:hover .product-media .hover-photo { opacity: 1; }
+}
 
 /* Basket drawer */
 .basket { position: fixed; inset: 0; z-index: 120; background: rgba(5,5,6,0.7); display: flex; justify-content: flex-end; }
@@ -824,7 +828,6 @@ body.basket-open { overflow: hidden; }
   .player-progress { flex-basis: 100%; order: 5; }
   .player-speed, .player-download { display: none; }
   body.has-player { padding-bottom: 140px; }
-  body.has-player .feedback-toggle { bottom: 154px; }
 
   .menu-toggle { display: block; }
   .main-nav {

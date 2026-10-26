@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="gfp.css">
-  <link rel="stylesheet" href="feedback.css">
 </head>
 <body>
 
@@ -163,31 +162,6 @@
     </div>
   </footer>
 
-  <!-- Feedback Tool -->
-  <button class="feedback-toggle" id="feedbackToggle" title="Leave feedback (shift-click to view all)">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    <span class="feedback-count" id="feedbackCount"></span>
-  </button>
-  <div class="feedback-banner" id="feedbackBanner">
-    <span>Feedback Mode &mdash; click anywhere to leave feedback</span>
-    <button id="feedbackDone">Done</button>
-  </div>
-  <div class="feedback-popup" id="feedbackPopup">
-    <textarea id="feedbackText" placeholder="Leave your feedback..." rows="3"></textarea>
-    <div class="feedback-popup-actions">
-      <button id="feedbackCancel" class="feedback-popup-btn cancel">Cancel</button>
-      <button id="feedbackSubmit" class="feedback-popup-btn submit">Submit</button>
-    </div>
-  </div>
-  <div class="feedback-panel" id="feedbackPanel">
-    <div class="feedback-panel-header">
-      <h3>Feedback</h3>
-      <button id="feedbackPanelClose">&times;</button>
-    </div>
-    <div class="feedback-panel-list" id="feedbackPanelList"></div>
-  </div>
-  <div class="feedback-panel-overlay" id="feedbackPanelOverlay"></div>
-  <script src="feedback.js"></script>
   <script src="reviews.js"></script>
   <script src="banner-slides.js"></script>
   <script src="episodes.js"></script>

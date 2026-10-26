@@ -10,7 +10,7 @@
 
 // When the stock counts below were last checked. Online orders after this time are taken off
 // them automatically (see _stock.js), so set it to now whenever you change any counts.
-export const STOCK_COUNTED_AT = '2026-10-26T10:57:56Z';
+export const STOCK_COUNTED_AT = '2026-10-26T12:28:40Z';
 
 export const PRODUCTS = [
   {

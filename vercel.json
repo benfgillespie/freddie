@@ -2,6 +2,7 @@
   "buildCommand": "",
   "outputDirectory": "public",
   "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -28,6 +29,92 @@
       "source": "/costs",
       "destination": "/start#costs",
       "permanent": false
+    },
+    {
+      "source": "/archives/podcast/:slug*",
+      "destination": "/episodes",
+      "permanent": true
+    },
+    {
+      "source": "/archives/album/:slug*",
+      "destination": "/episodes",
+      "permanent": true
+    },
+    {
+      "source": "/archives/series/:slug*",
+      "destination": "/episodes",
+      "permanent": true
+    },
+    {
+      "source": "/archives/author/:slug*",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/archives/:path*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/episodes-list",
+      "destination": "/episodes",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/product/gfp-logo-tee",
+      "destination": "/product?id=gfp-mens-logo-tee",
+      "permanent": true
+    },
+    {
+      "source": "/product/womens-gfp-logo-tee",
+      "destination": "/product?id=gfp-womens-logo-tee",
+      "permanent": true
+    },
+    {
+      "source": "/product/mens-wang-lordz-logo-tee",
+      "destination": "/product?id=gfp-wang-lordz-tee",
+      "permanent": true
+    },
+    {
+      "source": "/product/the-famous-gfp-beanie",
+      "destination": "/product?id=gfp-beanie",
+      "permanent": true
+    },
+    {
+      "source": "/product/:slug+",
+      "destination": "/shop",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/:slug*",
+      "destination": "/shop",
+      "permanent": true
+    },
+    {
+      "source": "/cart",
+      "destination": "/shop#basket",
+      "permanent": true
+    },
+    {
+      "source": "/checkout",
+      "destination": "/shop#basket",
+      "permanent": true
+    },
+    {
+      "source": "/my-account",
+      "destination": "/shop",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
     }
   ]
 }

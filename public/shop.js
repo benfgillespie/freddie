@@ -249,9 +249,12 @@
   const banner = document.getElementById('orderBanner');
   if (!banner) { /* product page */ } else if (order === 'thanks') {
     basket = []; save();
-    banner.textContent = 'Cheers! Your order’s in. Stripe will email you a receipt, and we’ll get it in the post.';
-    banner.hidden = false;
-    banner.scrollIntoView({ block: 'center' });
+    const popup = document.getElementById('orderThanks');
+    const closeThanks = () => { popup.hidden = true; history.replaceState(null, '', location.pathname); };
+    popup.hidden = false;
+    popup.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeThanks));
+    popup.addEventListener('click', e => { if (e.target === popup) closeThanks(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !popup.hidden) closeThanks(); });
   } else if (order === 'cancelled') {
     banner.textContent = 'No worries, your basket’s still here whenever you’re ready.';
     banner.hidden = false;

@@ -671,6 +671,17 @@ body.has-player { padding-bottom: 96px; }
   .product:hover .product-media .hover-photo { opacity: 1; }
 }
 
+/* Thank-you popup after paying */
+.order-thanks { position: fixed; inset: 0; z-index: 130; background: rgba(5,5,6,0.8); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.order-thanks[hidden] { display: none; }
+.order-thanks-box { position: relative; width: min(520px, 100%); background: #141412; border: 1px solid var(--border-3); border-top: 4px solid var(--gold); border-radius: 14px; padding: 40px 36px 34px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+.order-thanks-box h2 { font-size: 40px; line-height: 1.05; margin: 8px 0 16px; }
+.order-thanks-box p { color: var(--text-secondary); font-size: 17px; line-height: 1.6; margin: 0 0 14px; }
+.order-thanks-help a { color: var(--gold); white-space: nowrap; }
+.order-thanks-box .btn-gold { margin-top: 12px; border-radius: 8px; }
+.order-thanks-close { position: absolute; top: 10px; right: 14px; background: none; border: none; color: var(--text-muted-1); font-size: 34px; line-height: 1; cursor: pointer; }
+.order-thanks-close:hover { color: var(--gold); }
+
 /* Basket drawer */
 .basket { position: fixed; inset: 0; z-index: 120; background: rgba(5,5,6,0.7); display: flex; justify-content: flex-end; }
 .basket[hidden] { display: none; }

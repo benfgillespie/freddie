@@ -119,6 +119,18 @@
     </div>
   </footer>
 
+  <!-- Thank-you popup after paying -->
+  <div class="order-thanks" id="orderThanks" hidden>
+    <div class="order-thanks-box" role="dialog" aria-modal="true" aria-labelledby="orderThanksTitle">
+      <button type="button" class="order-thanks-close" data-close aria-label="Close">&times;</button>
+      <div class="eyebrow">Order confirmed</div>
+      <h2 id="orderThanksTitle">Cheers! Your order&rsquo;s in.</h2>
+      <p>Thanks for supporting the pod. We&rsquo;ll aim to ship it out ASAP! Stripe will email you a receipt with your order details.</p>
+      <p class="order-thanks-help">Any issues, drop us an email at <a href="mailto:thegenericfoilingpod@gmail.com">thegenericfoilingpod@gmail.com</a> and we&rsquo;ll sort it.</p>
+      <button type="button" class="btn-gold" data-close>Back to the shop</button>
+    </div>
+  </div>
+
   <!-- Basket -->
   <div class="basket" id="basket" hidden>
     <aside class="basket-panel" role="dialog" aria-label="Your basket">

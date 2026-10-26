@@ -87,7 +87,7 @@ you've offered and he's said yes. Then:
    session doesn't carry over.
 4. Put it live. Tell him beforehand that his Mac will ask permission, and to press Yes.
 5. Wait for it to appear (usually under a minute), check the live site really shows the
-   change, then tell him: "It's live! Have a look: https://generic-foiling-podcast.vercel.app"
+   change, then tell him: "It's live! Have a look: https://genericfoilingpod.com"
    along with the page he changed.
 6. Before he finishes for the day, if there are saved changes that aren't live yet, ask
    whether he wants to put them live (through this gate) or leave them for next time.
@@ -122,8 +122,8 @@ for HTML/CSS changes a browser refresh is enough. Open pages with `open http://l
 - `public/img/`, `public/audio/` — photos, logo, Coasters Chat audio
 - `api/rss.js` — proxies the Anchor/Spotify podcast feed (episodes load from `/api/rss`)
 - `vercel.json` — serves `public/` with clean URLs; no build step. Also sends a
-  `noindex` header on every page so search engines ignore this preview copy.
-  **Remove that header when the site goes live on genericfoilingpod.com.**
+  `noindex` header, but only on the old generic-foiling-podcast.vercel.app address, so Google
+  indexes genericfoilingpod.com and not a duplicate copy.
   It also redirects the old WordPress addresses (`/archives/…`, `/product/…`, `/about-us`, etc.)
   and rewrites `/sitemap.xml` to `api/sitemap.js`, which lists the pages, published blog posts
   and shop products by itself. `public/robots.txt` points Google at it.
@@ -146,7 +146,7 @@ for HTML/CSS changes a browser refresh is enough. Open pages with `open http://l
 ### Git and publishing
 - Branch: `main` only. A save point is a commit with a clear message. Putting it live is
   `git pull --rebase` then `git push`.
-- **Every push to `main` publishes** to https://generic-foiling-podcast.vercel.app (Vercel
+- **Every push to `main` publishes** to https://genericfoilingpod.com (Vercel
   Git integration, live in under a minute). Push only via Gate 2.
 - Never `git push --force`, never rewrite pushed history, and don't run `vercel` commands.
 - The repo is **public**: never commit passwords, API keys or tokens. They go in Vercel

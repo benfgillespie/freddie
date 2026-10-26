@@ -6,6 +6,7 @@
   "headers": [
     {
       "source": "/(.*)",
+      "has": [{ "type": "host", "value": "generic-foiling-podcast.vercel.app" }],
       "headers": [
         {
           "key": "X-Robots-Tag",

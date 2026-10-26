@@ -75,6 +75,96 @@
       }
       document.getElementById('postBody').innerHTML = body;
 
+      // PDF viewer — if this post has a pdf field, render it with PDF.js
+      if (post.pdf) {
+        var pdfScript = document.createElement('script');
+        pdfScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        pdfScript.onload = function () {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          var container = document.getElementById('pdf-viewer');
+          if (!container) return;
+
+          pdfjsLib.getDocument(post.pdf).promise.then(function (pdf) {
+            var total = pdf.numPages;
+            var canvases = [];
+
+            // Render all pages stacked
+            for (var i = 1; i <= total; i++) {
+              (function (pageNum) {
+                var wrap = document.createElement('div');
+                wrap.className = 'pdf-canvas-wrap';
+                wrap.title = 'Click to view full screen';
+                var c = document.createElement('canvas');
+                wrap.appendChild(c);
+                container.appendChild(wrap);
+                canvases[pageNum - 1] = c;
+
+                pdf.getPage(pageNum).then(function (page) {
+                  var vp = page.getViewport({ scale: 2 });
+                  c.width  = vp.width;
+                  c.height = vp.height;
+                  c.style.width  = '100%';
+                  c.style.height = 'auto';
+                  page.render({ canvasContext: c.getContext('2d'), viewport: vp });
+                });
+
+                wrap.addEventListener('click', function () { openModal(pageNum); });
+              })(i);
+            }
+
+            // Fullscreen modal — shows already-rendered canvases as images (no re-render)
+            function openModal(startPage) {
+              var mPage = startPage;
+              var modal = document.createElement('div');
+              modal.className = 'pdf-modal';
+              modal.innerHTML =
+                '<div class="pdf-modal-nav">' +
+                  '<button class="pdf-modal-prev">&#8249; Prev</button>' +
+                  '<span class="pdf-modal-counter">Page ' + mPage + ' of ' + total + '</span>' +
+                  '<button class="pdf-modal-next">Next &#8250;</button>' +
+                  '<button class="pdf-modal-close">&#10005; Close</button>' +
+                '</div>' +
+                '<div class="pdf-modal-canvas-wrap">' +
+                  '<img class="pdf-modal-img" src="" alt="Magazine page">' +
+                '</div>';
+              document.body.appendChild(modal);
+              document.body.style.overflow = 'hidden';
+
+              var img    = modal.querySelector('.pdf-modal-img');
+              var mCtr   = modal.querySelector('.pdf-modal-counter');
+              var mPrev  = modal.querySelector('.pdf-modal-prev');
+              var mNext  = modal.querySelector('.pdf-modal-next');
+              var mClose = modal.querySelector('.pdf-modal-close');
+              var wrap   = modal.querySelector('.pdf-modal-canvas-wrap');
+
+              function showModal(num) {
+                var c = canvases[num - 1];
+                if (c) img.src = c.toDataURL();
+                wrap.scrollTo(0, 0);
+                mCtr.textContent = 'Page ' + num + ' of ' + total;
+                mPrev.disabled = num === 1;
+                mNext.disabled = num === total;
+              }
+
+              mPrev.addEventListener('click',  function () { if (mPage > 1)     showModal(--mPage); });
+              mNext.addEventListener('click',  function () { if (mPage < total) showModal(++mPage); });
+
+              function closeModal() { document.body.removeChild(modal); document.body.style.overflow = ''; }
+              mClose.addEventListener('click', closeModal);
+              modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+              document.addEventListener('keydown', function esc(e) {
+                if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', esc); }
+                if (e.key === 'ArrowRight' && mPage < total) showModal(++mPage);
+                if (e.key === 'ArrowLeft'  && mPage > 1)    showModal(--mPage);
+              });
+
+              showModal(mPage);
+            }
+          });
+        };
+        document.head.appendChild(pdfScript);
+      }
+
       // Photo strips inside a post scroll sideways with the arrows
       document.querySelectorAll('#postBody .post-gallery').forEach(g => {
         const track = g.querySelector('.gallery-track');

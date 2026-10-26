@@ -896,7 +896,27 @@ body.basket-open { overflow: hidden; }
   .contact-row { grid-template-columns: 1fr; }
   .contact-box { padding: 24px 20px; box-shadow: 5px 5px 0 #000; }
   .header-actions .cart-btn { padding: 8px 9px; }
-  .header-actions:has(.cart-btn) .btn-gold { display: none; } /* no room for both on a phone */
+  /* ---- PDF viewer ---- */
+.pdf-viewer-wrap { width: 100%; }
+.pdf-nav { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.pdf-nav button { background: var(--gold); color: #000; border: none; border-radius: 4px; padding: 7px 14px; font-size: 15px; cursor: pointer; font-family: inherit; font-weight: 600; }
+.pdf-nav button:disabled { opacity: 0.35; cursor: default; }
+.pdf-nav .pdf-counter { font-size: 14px; color: var(--text-muted, #888); flex: 1; text-align: center; }
+.pdf-nav .pdf-fs-btn { margin-left: auto; }
+.pdf-canvas-wrap { position: relative; cursor: zoom-in; }
+.pdf-canvas-wrap canvas { display: block; width: 100%; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,.18); }
+.pdf-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #888; background: rgba(0,0,0,.04); border-radius: 6px; }
+
+.pdf-modal { position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9000; display: flex; flex-direction: column; }
+.pdf-modal-nav { display: flex; align-items: center; gap: 10px; padding: 12px 16px; flex-shrink: 0; flex-wrap: wrap; }
+.pdf-modal-nav button { background: var(--gold); color: #000; border: none; border-radius: 4px; padding: 7px 14px; font-size: 16px; cursor: pointer; font-family: inherit; font-weight: 600; }
+.pdf-modal-nav button:disabled { opacity: 0.35; cursor: default; }
+.pdf-modal-nav .pdf-modal-counter { font-size: 14px; color: #aaa; flex: 1; text-align: center; }
+.pdf-modal-nav .pdf-modal-close { margin-left: auto; background: #333; color: #fff; }
+.pdf-modal-canvas-wrap { flex: 1; overflow: auto; display: flex; justify-content: center; align-items: flex-start; padding: 8px 16px 24px; }
+.pdf-modal-img { display: block; max-width: 100%; border-radius: 4px; }
+
+.header-actions:has(.cart-btn) .btn-gold { display: none; } /* no room for both on a phone */
   .origins-text p.lead { font-size: 19px; }
   .about-host-body { padding: 22px 20px 24px; }
   #episodeGrid { grid-template-columns: 1fr; }

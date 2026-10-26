@@ -124,7 +124,7 @@
         <p class="product-description">${esc(p.description)}</p>
         ${p.fit ? `<p class="product-fit"><strong>Fit:</strong> ${esc(p.fit)}</p>` : ''}
         ${buyControls(p)}
-        <p class="product-postage">Postage from £3.50 in the UK. We also post to Europe, the USA, Australia and New Zealand.</p>
+        <p class="product-postage">Postage from £3.50 in the UK. We also post to Europe, the USA, Australia and New Zealand. <a href="/shop-terms.html">Postage &amp; returns</a></p>
       </div>`;
     detail.querySelectorAll('.product-thumbs button').forEach(b => b.addEventListener('click', () => showPhoto(b.dataset.src)));
     wire(detail.querySelector('.js-product'));

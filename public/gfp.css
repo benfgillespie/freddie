@@ -819,6 +819,44 @@ body.basket-open { overflow: hidden; }
 .post-hero { margin: -8px 0 32px; }
 .post-hero img { width: 100%; height: auto; border: 1px solid var(--border-1); }
 
+/* ---------- Foil Mag articles: flick through the magazine spreads ---------- */
+.foilmag-badge { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 14px; color: #000; background: var(--gold); padding: 5px 12px; margin: 0 0 22px; }
+.post-card-media .foilmag-tag { position: absolute; left: 0; bottom: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12px; color: #000; background: var(--gold); padding: 4px 10px; }
+.mag { margin: 8px 0 36px; }
+.mag-divider { border: none; border-top: 3px solid var(--gold); width: 60px; margin: 48px 0 32px; }
+.post-body .post-lead { font-size: 20px; line-height: 1.6; color: var(--text); }
+.post-body .post-credit { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: var(--text-muted-1); margin-bottom: 32px; }
+.post-body figure.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mag-stage { position: relative; background: #141412; border: 1px solid var(--border-1); aspect-ratio: 1191 / 780; overflow: hidden; cursor: zoom-in; touch-action: pan-y; }
+.mag-stage img { display: block; width: 100%; height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+.mag-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: none; background: rgba(11,11,12,0.75); color: var(--text); font-size: 28px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.mag-arrow:hover { background: var(--gold); color: #000; }
+.mag-arrow:disabled { opacity: 0; pointer-events: none; }
+.mag-arrow.prev { left: 12px; }
+.mag-arrow.next { right: 12px; }
+.mag-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 14px; color: var(--text-muted-1); }
+.mag-zoom-btn { background: none; border: none; border-bottom: 2px solid var(--gold); padding: 0 0 2px; font: inherit; color: var(--gold); cursor: pointer; }
+.mag-thumbs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.mag-thumbs button { flex: 0 0 auto; width: 120px; padding: 0; border: 2px solid transparent; background: none; cursor: pointer; opacity: 0.55; }
+.mag-thumbs button.on, .mag-thumbs button:hover { opacity: 1; }
+.mag-thumbs button.on { border-color: var(--gold); }
+.mag-thumbs img { display: block; width: 100%; height: auto; }
+
+/* Full-screen reader: tap or click to zoom, drag to move around */
+.mag-reader { position: fixed; inset: 0; z-index: 9000; background: #050506; display: flex; flex-direction: column; }
+.mag-reader[hidden] { display: none; }
+.mag-reader-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; flex-shrink: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 14px; color: var(--text-muted-1); }
+.mag-reader-bar .count { flex: 1; text-align: center; }
+.mag-reader-bar button { background: #1d1d1a; color: var(--text); border: 1px solid var(--border-3); min-width: 42px; height: 40px; padding: 0 12px; font: inherit; font-size: 18px; cursor: pointer; }
+.mag-reader-bar button:hover { border-color: var(--gold); color: var(--gold); }
+.mag-reader-bar button:disabled { opacity: 0.3; pointer-events: none; }
+.mag-reader-bar .close { font-size: 14px; }
+.mag-view { flex: 1; overflow: auto; display: flex; cursor: zoom-in; -webkit-overflow-scrolling: touch; }
+.mag-view.zoomed { cursor: grab; }
+.mag-view.dragging { cursor: grabbing; }
+.mag-view img { margin: auto; display: block; max-width: none; user-select: none; -webkit-user-drag: none; }
+.mag-reader-tip { text-align: center; padding: 8px 14px 12px; font-size: 13px; color: var(--text-muted-2); flex-shrink: 0; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 920px) {
   .banner-hero { display: block; min-height: 0; }
@@ -896,27 +934,7 @@ body.basket-open { overflow: hidden; }
   .contact-row { grid-template-columns: 1fr; }
   .contact-box { padding: 24px 20px; box-shadow: 5px 5px 0 #000; }
   .header-actions .cart-btn { padding: 8px 9px; }
-  /* ---- PDF viewer ---- */
-.pdf-viewer-wrap { width: 100%; }
-.pdf-nav { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-.pdf-nav button { background: var(--gold); color: #000; border: none; border-radius: 4px; padding: 7px 14px; font-size: 15px; cursor: pointer; font-family: inherit; font-weight: 600; }
-.pdf-nav button:disabled { opacity: 0.35; cursor: default; }
-.pdf-nav .pdf-counter { font-size: 14px; color: var(--text-muted, #888); flex: 1; text-align: center; }
-.pdf-nav .pdf-fs-btn { margin-left: auto; }
-.pdf-canvas-wrap { position: relative; cursor: zoom-in; }
-.pdf-canvas-wrap canvas { display: block; width: 100%; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,.18); }
-.pdf-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #888; background: rgba(0,0,0,.04); border-radius: 6px; }
-
-.pdf-modal { position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9000; display: flex; flex-direction: column; }
-.pdf-modal-nav { display: flex; align-items: center; gap: 10px; padding: 12px 16px; flex-shrink: 0; flex-wrap: wrap; }
-.pdf-modal-nav button { background: var(--gold); color: #000; border: none; border-radius: 4px; padding: 7px 14px; font-size: 16px; cursor: pointer; font-family: inherit; font-weight: 600; }
-.pdf-modal-nav button:disabled { opacity: 0.35; cursor: default; }
-.pdf-modal-nav .pdf-modal-counter { font-size: 14px; color: #aaa; flex: 1; text-align: center; }
-.pdf-modal-nav .pdf-modal-close { margin-left: auto; background: #333; color: #fff; }
-.pdf-modal-canvas-wrap { flex: 1; overflow: auto; display: flex; justify-content: center; align-items: flex-start; padding: 8px 16px 24px; }
-.pdf-modal-img { display: block; max-width: 100%; border-radius: 4px; }
-
-.header-actions:has(.cart-btn) .btn-gold { display: none; } /* no room for both on a phone */
+  .header-actions:has(.cart-btn) .btn-gold { display: none; } /* no room for both on a phone */
   .origins-text p.lead { font-size: 19px; }
   .about-host-body { padding: 22px 20px 24px; }
   #episodeGrid { grid-template-columns: 1fr; }
@@ -931,6 +949,11 @@ body.basket-open { overflow: hidden; }
   .nl-signup-box { padding: 26px 20px; }
   .post { padding: 40px 0 56px; }
   .post-wrap { padding: 0 16px; }
+  .mag-arrow { width: 36px; height: 36px; font-size: 22px; }
+  .mag-arrow.prev { left: 6px; }
+  .mag-arrow.next { right: 6px; }
+  .mag-thumbs button { width: 88px; }
+  .mag-reader-bar { padding: 8px; gap: 6px; }
   .post h1 { font-size: 34px; }
   .post-body { font-size: 16px; }
   .post-nav { grid-template-columns: 1fr; }

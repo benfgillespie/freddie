@@ -23,6 +23,163 @@
     })
     .then(all => all.filter(p => isPreview || !p.draft));
 
+  // ---- Foil Mag article: flick through the spreads, open full screen to zoom in and read ----
+  // <div class="mag" data-dir="/img/blog/foil-mag/<slug>" data-pages="4" data-title="...">
+  // expects page-1.jpg (on-page size) and page-1-full.jpg (sharp enough to read when zoomed).
+  function magazine(el) {
+    const dir = el.dataset.dir, total = Number(el.dataset.pages), title = el.dataset.title || 'Foil Mag';
+    const src = (n, full) => `${dir}/page-${n}${full ? '-full' : ''}.jpg`;
+    const pages = Array.from({ length: total }, (_, i) => i + 1);
+    let page = 1;
+
+    el.innerHTML = `
+      <div class="mag-stage" title="Open full screen to zoom in and read">
+        <img src="${src(1)}" alt="${escapeHtml(title)}, page 1 of ${total}">
+        <button class="mag-arrow prev" aria-label="Previous pages">&lsaquo;</button>
+        <button class="mag-arrow next" aria-label="Next pages">&rsaquo;</button>
+      </div>
+      <div class="mag-bar"><span class="mag-count"></span><button class="mag-zoom-btn">&#128269; Full screen &amp; zoom to read</button></div>
+      <div class="mag-thumbs">${pages.map(n => `<button aria-label="Page ${n}"><img src="${src(n)}" alt="" loading="lazy"></button>`).join('')}</div>`;
+
+    const stage = el.querySelector('.mag-stage'), img = stage.querySelector('img');
+    const prev = stage.querySelector('.prev'), next = stage.querySelector('.next');
+    const thumbs = el.querySelectorAll('.mag-thumbs button');
+
+    function show(n) {
+      page = Math.min(Math.max(n, 1), total);
+      img.src = src(page);
+      img.alt = `${title}, page ${page} of ${total}`;
+      prev.disabled = page === 1;
+      next.disabled = page === total;
+      el.querySelector('.mag-count').textContent = `Page ${page} of ${total}`;
+      thumbs.forEach((t, i) => t.classList.toggle('on', i + 1 === page));
+      if (page < total) new Image().src = src(page + 1);
+    }
+
+    prev.addEventListener('click', e => { e.stopPropagation(); show(page - 1); });
+    next.addEventListener('click', e => { e.stopPropagation(); show(page + 1); });
+    thumbs.forEach((t, i) => t.addEventListener('click', () => show(i + 1)));
+    el.querySelector('.mag-zoom-btn').addEventListener('click', () => openReader());
+
+    // Swipe sideways on a phone to turn the page, tap to open full screen
+    let startX = null;
+    stage.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) { show(page + (dx < 0 ? 1 : -1)); e.preventDefault(); }
+    });
+    stage.addEventListener('click', () => openReader());
+
+    function openReader() {
+      const reader = document.createElement('div');
+      reader.className = 'mag-reader';
+      reader.innerHTML = `
+        <div class="mag-reader-bar">
+          <button class="prev" aria-label="Previous pages">&lsaquo;</button>
+          <button class="next" aria-label="Next pages">&rsaquo;</button>
+          <span class="count"></span>
+          <button class="out" aria-label="Zoom out">&minus;</button>
+          <button class="in" aria-label="Zoom in">+</button>
+          <button class="close">&#10005; Close</button>
+        </div>
+        <div class="mag-view"><img alt=""></div>
+        <div class="mag-reader-tip">Tap or click the page to zoom in, then drag to move around.</div>`;
+      document.body.appendChild(reader);
+      document.body.style.overflow = 'hidden';
+
+      const view = reader.querySelector('.mag-view'), big = view.querySelector('img');
+      const steps = [1, 1.75, 2.5, 3.5];
+      let zoom = 0, ratio = 1191 / 780;
+
+      function fitWidth() { return Math.min(view.clientWidth, view.clientHeight * ratio); }
+
+      // Zoom keeping the spot under the finger/cursor (or the middle) where it is
+      function setZoom(z, x, y) {
+        zoom = Math.min(Math.max(z, 0), steps.length - 1);
+        const before = big.getBoundingClientRect();
+        const vr = view.getBoundingClientRect();
+        if (x == null) { x = vr.left + vr.width / 2; y = vr.top + vr.height / 2; }
+        const fx = before.width ? (x - before.left) / before.width : 0.5;
+        const fy = before.height ? (y - before.top) / before.height : 0.5;
+        big.style.width = Math.round(fitWidth() * steps[zoom]) + 'px';
+        const after = big.getBoundingClientRect();
+        view.scrollLeft += after.left + fx * after.width - x;
+        view.scrollTop += after.top + fy * after.height - y;
+        view.classList.toggle('zoomed', zoom > 0);
+        reader.querySelector('.out').disabled = zoom === 0;
+        reader.querySelector('.in').disabled = zoom === steps.length - 1;
+      }
+
+      function go(n) {
+        show(n);
+        reader.querySelector('.prev').disabled = page === 1;
+        reader.querySelector('.next').disabled = page === total;
+        reader.querySelector('.count').textContent = `Page ${page} of ${total}`;
+        big.alt = img.alt;
+        big.src = src(page);              // quick version first, then swap in the sharp one
+        const sharp = new Image(), want = page;
+        sharp.onload = () => { if (page === want) big.src = sharp.src; };
+        sharp.src = src(page, true);
+        setZoom(0);
+        view.scrollTo(0, 0);
+      }
+
+      // Drag with the mouse to move around a zoomed page (fingers scroll it natively)
+      let drag = null, moved = false;
+      view.addEventListener('pointerdown', e => {
+        moved = false;
+        if (e.pointerType !== 'mouse') return;
+        drag = { x: e.clientX, y: e.clientY };
+        e.preventDefault();
+      });
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp);
+      function onMove(e) {
+        if (!drag) return;
+        const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+        if (Math.abs(dx) + Math.abs(dy) > 4) { moved = true; view.classList.add('dragging'); }
+        view.scrollLeft -= dx; view.scrollTop -= dy;
+        drag = { x: e.clientX, y: e.clientY };
+      }
+      function onUp() { drag = null; view.classList.remove('dragging'); }
+
+      view.addEventListener('click', e => {
+        if (moved) return;
+        if (e.target !== big) { if (zoom === 0) close(); return; }
+        setZoom(zoom === steps.length - 1 ? 0 : zoom + 1, e.clientX, e.clientY);
+      });
+
+      function onKey(e) {
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowRight' && page < total) go(page + 1);
+        else if (e.key === 'ArrowLeft' && page > 1) go(page - 1);
+        else if (e.key === '+' || e.key === '=') setZoom(zoom + 1);
+        else if (e.key === '-') setZoom(zoom - 1);
+      }
+      function onResize() { setZoom(zoom); }
+      document.addEventListener('keydown', onKey);
+      window.addEventListener('resize', onResize);
+
+      function close() {
+        document.removeEventListener('keydown', onKey);
+        window.removeEventListener('resize', onResize);
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', onUp);
+        reader.remove();
+        document.body.style.overflow = '';
+      }
+
+      reader.querySelector('.prev').addEventListener('click', () => go(page - 1));
+      reader.querySelector('.next').addEventListener('click', () => go(page + 1));
+      reader.querySelector('.in').addEventListener('click', () => setZoom(zoom + 1));
+      reader.querySelector('.out').addEventListener('click', () => setZoom(zoom - 1));
+      reader.querySelector('.close').addEventListener('click', close);
+      go(page);
+    }
+
+    show(1);
+  }
+
   // ---- List page ----
   const list = document.getElementById('blogList');
   if (list) {
@@ -38,6 +195,7 @@
           <div class="post-card-media">
             ${post.image ? `<img src="${escapeHtml(post.image)}" alt="" loading="lazy">` : ''}
             ${post.draft ? '<div class="num">Draft</div>' : ''}
+            ${post.foilmag ? '<span class="foilmag-tag">As featured in Foil Mag</span>' : ''}
           </div>
           <div class="post-card-body">
             <span class="issue-date">${formatDate(post.date)}${post.author ? ' · ' + escapeHtml(post.author) : ''}</span>
@@ -68,102 +226,14 @@
       document.title = post.title + ' | The Generic Foiling Podcast';
       document.getElementById('postMeta').textContent = formatDate(post.date) + (post.author ? ' · ' + post.author : '');
       document.getElementById('postTitle').textContent = post.title;
-      if (post.image) {
+      // Foil Mag posts open on the magazine itself, so they skip the big top photo
+      if (post.image && !post.foilmag) {
         const fig = document.getElementById('postImage');
         fig.querySelector('img').src = post.image;
         fig.hidden = false;
       }
       document.getElementById('postBody').innerHTML = body;
-
-      // PDF viewer — if this post has a pdf field, render it with PDF.js
-      if (post.pdf) {
-        var pdfScript = document.createElement('script');
-        pdfScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-        pdfScript.onload = function () {
-          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-          var container = document.getElementById('pdf-viewer');
-          if (!container) return;
-
-          pdfjsLib.getDocument(post.pdf).promise.then(function (pdf) {
-            var total = pdf.numPages;
-            var canvases = [];
-
-            // Render all pages stacked
-            for (var i = 1; i <= total; i++) {
-              (function (pageNum) {
-                var wrap = document.createElement('div');
-                wrap.className = 'pdf-canvas-wrap';
-                wrap.title = 'Click to view full screen';
-                var c = document.createElement('canvas');
-                wrap.appendChild(c);
-                container.appendChild(wrap);
-                canvases[pageNum - 1] = c;
-
-                pdf.getPage(pageNum).then(function (page) {
-                  var vp = page.getViewport({ scale: 2 });
-                  c.width  = vp.width;
-                  c.height = vp.height;
-                  c.style.width  = '100%';
-                  c.style.height = 'auto';
-                  page.render({ canvasContext: c.getContext('2d'), viewport: vp });
-                });
-
-                wrap.addEventListener('click', function () { openModal(pageNum); });
-              })(i);
-            }
-
-            // Fullscreen modal — shows already-rendered canvases as images (no re-render)
-            function openModal(startPage) {
-              var mPage = startPage;
-              var modal = document.createElement('div');
-              modal.className = 'pdf-modal';
-              modal.innerHTML =
-                '<div class="pdf-modal-nav">' +
-                  '<button class="pdf-modal-prev">&#8249; Prev</button>' +
-                  '<span class="pdf-modal-counter">Page ' + mPage + ' of ' + total + '</span>' +
-                  '<button class="pdf-modal-next">Next &#8250;</button>' +
-                  '<button class="pdf-modal-close">&#10005; Close</button>' +
-                '</div>' +
-                '<div class="pdf-modal-canvas-wrap">' +
-                  '<img class="pdf-modal-img" src="" alt="Magazine page">' +
-                '</div>';
-              document.body.appendChild(modal);
-              document.body.style.overflow = 'hidden';
-
-              var img    = modal.querySelector('.pdf-modal-img');
-              var mCtr   = modal.querySelector('.pdf-modal-counter');
-              var mPrev  = modal.querySelector('.pdf-modal-prev');
-              var mNext  = modal.querySelector('.pdf-modal-next');
-              var mClose = modal.querySelector('.pdf-modal-close');
-              var wrap   = modal.querySelector('.pdf-modal-canvas-wrap');
-
-              function showModal(num) {
-                var c = canvases[num - 1];
-                if (c) img.src = c.toDataURL();
-                wrap.scrollTo(0, 0);
-                mCtr.textContent = 'Page ' + num + ' of ' + total;
-                mPrev.disabled = num === 1;
-                mNext.disabled = num === total;
-              }
-
-              mPrev.addEventListener('click',  function () { if (mPage > 1)     showModal(--mPage); });
-              mNext.addEventListener('click',  function () { if (mPage < total) showModal(++mPage); });
-
-              function closeModal() { document.body.removeChild(modal); document.body.style.overflow = ''; }
-              mClose.addEventListener('click', closeModal);
-              modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
-              document.addEventListener('keydown', function esc(e) {
-                if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', esc); }
-                if (e.key === 'ArrowRight' && mPage < total) showModal(++mPage);
-                if (e.key === 'ArrowLeft'  && mPage > 1)    showModal(--mPage);
-              });
-
-              showModal(mPage);
-            }
-          });
-        };
-        document.head.appendChild(pdfScript);
-      }
+      document.querySelectorAll('#postBody .mag').forEach(magazine);
 
       // Photo strips inside a post scroll sideways with the arrows
       document.querySelectorAll('#postBody .post-gallery').forEach(g => {

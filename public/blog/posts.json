@@ -16,6 +16,33 @@
     "excerpt": "A run through of what kit I’m riding at this moment in time – Autumn 2026."
   },
   {
+    "slug": "kfc-iii",
+    "title": "The KFC III",
+    "date": "2025-11-01",
+    "author": "Freddie",
+    "image": "/img/blog/foil-mag/kfc-iii/page-1.jpg",
+    "excerpt": "Type “grassroots foil contest” into your local AI search engine, and there’s a pretty strong chance that the Kernow Foil Classic, held annually on the north coast of Cornwall in the UK, will be referenced pretty high up there.",
+    "foilmag": true
+  },
+  {
+    "slug": "podcasts-and-parawings",
+    "title": "Podcasts & Parawings",
+    "date": "2025-10-31",
+    "author": "Freddie",
+    "image": "/img/blog/foil-mag/podcasts-and-parawings/page-1.jpg",
+    "excerpt": "It was that time of year again, when the Generic Foiling Podcast boys pack up their mini-mics and get on a plane bound for the west coast US for the AWSI trade show…",
+    "foilmag": true
+  },
+  {
+    "slug": "west-coast-hustle",
+    "title": "West Coast Hustle",
+    "date": "2024-11-01",
+    "author": "Freddie",
+    "image": "/img/blog/foil-mag/west-coast-hustle/page-1.jpg",
+    "excerpt": "Having garnered a modest reputation in the foil world by way of their honest and occasionally sweary Generic Foiling Podcast, hosts Freddie Oldfield and Liam Proctor felt it was about time they took the show on the road to the USA…",
+    "foilmag": true
+  },
+  {
     "slug": "sample",
     "draft": true,
     "title": "Sample post: this is what a blog post looks like",

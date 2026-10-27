@@ -1045,4 +1045,6 @@ body.basket-open { overflow: hidden; }
 @media (min-width: 900px) { .interlude.right .interlude-text { padding-left: 50%; } }
 .interlude.photo-only { min-height: 72vh; }
 .interlude.photo-only::before { display: none; }
-@media (max-width: 720px) { .interlude.photo-only { min-height: 60vh; } }
+.interlude.photo-only { clip-path: inset(0); }
+.interlude.photo-only img { position: fixed; inset: var(--hdr, 0px) 0 0 0; width: 100%; height: calc(100vh - var(--hdr, 0px)); object-fit: cover; object-position: var(--p, center); }
+@media (max-width: 720px) { .interlude.photo-only { min-height: 60vh; } .interlude.photo-only img { object-position: var(--pm, var(--p, center)); } }

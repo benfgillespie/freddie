@@ -325,6 +325,40 @@
     </div>
   </footer>
 
+  <!-- Gentle newsletter pop-up: shows once, after a delay, bottom-right -->
+  <div class="nl-popup" id="nlPopup" role="dialog" aria-labelledby="nlPopupTitle" hidden>
+    <button type="button" class="nl-popup-close" aria-label="Close">&times;</button>
+    <div class="nl-popup-body">
+      <h2 id="nlPopupTitle">Get the newsletter</h2>
+    <p>Incredibly infrequent news, written mainly by Freddie and sometimes by Liam.</p>
+    <form class="nl-form" action="https://gmail.us12.list-manage.com/subscribe/post?u=0a5fd5ca7498cd5715ccaa6bc&amp;id=929e2eace3" method="post" target="_blank">
+      <input type="email" name="EMAIL" placeholder="you@email.com" aria-label="Email address" required>
+      <div class="nl-trap" aria-hidden="true"><input type="text" name="b_0a5fd5ca7498cd5715ccaa6bc_929e2eace3" tabindex="-1" value=""></div>
+      <button class="btn-gold" type="submit">Subscribe</button>
+    </form>
+    <small>No spam, unsubscribe whenever.</small>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var box = document.getElementById('nlPopup');
+      if (!box) return;
+      var KEY = 'gfpNewsletterPopup', DAY = 86400000, seen = null;
+      try { seen = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+      var now = Date.now();
+      var skip = seen && (seen.done || now - seen.at < 30 * DAY);
+      if (skip && location.search.indexOf('popup=now') < 0) return;
+      function remember(done) { try { localStorage.setItem(KEY, JSON.stringify({ at: Date.now(), done: !!done })); } catch (e) {} }
+      function close(done) { box.hidden = true; remember(done); }
+      box.querySelector('.nl-popup-close').addEventListener('click', function () { close(false); });
+      box.querySelector('form').addEventListener('submit', function () { setTimeout(function () { close(true); }, 300); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(false); });
+      function open() { if (box.hidden) { box.hidden = false; } }
+      if (location.search.indexOf('popup=now') >= 0) open(); else setTimeout(open, 20000);
+    })();
+  </script>
+
   <script src="reviews.js"></script>
   <script src="banner-slides.js"></script>
   <script src="spotify-links.js"></script>

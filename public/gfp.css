@@ -992,3 +992,21 @@ body.basket-open { overflow: hidden; }
   .contact-hero { min-height: clamp(480px, 32vw, 690px); }
   .blog-hero { min-height: clamp(440px, 29.3vw, 630px); }
 }
+
+/* Gentle newsletter pop-up (home page): round gold sticker bottom-right */
+.nl-popup { position: fixed; right: 24px; bottom: 24px; z-index: 8000; width: 380px; max-width: calc(100vw - 32px); aspect-ratio: 1; border-radius: 50%; background: var(--gold); color: #0B0B0C; box-shadow: 7px 7px 0 #000, 0 14px 50px rgba(0,0,0,0.55); transform: rotate(-4deg); animation: nlPopIn 0.5s ease both; display: flex; align-items: center; justify-content: center; }
+.nl-popup[hidden] { display: none; }
+@keyframes nlPopIn { from { opacity: 0; transform: translateY(18px) rotate(-4deg) scale(0.92); } to { opacity: 1; transform: rotate(-4deg); } }
+@media (prefers-reduced-motion: reduce) { .nl-popup { animation: none; } }
+.nl-popup-body { width: 72%; text-align: center; transform: rotate(4deg); }
+.nl-popup h2 { font-size: 34px; line-height: 0.98; margin: 0 0 8px; color: #0B0B0C; }
+.nl-popup p { margin: 0 0 12px; font-size: 15px; line-height: 1.4; font-weight: 500; color: #0B0B0C; }
+.nl-popup .nl-form { flex-direction: column; gap: 8px; }
+.nl-popup .nl-form input { width: 100%; min-width: 0; background: #fff; color: #0B0B0C; border: 2px solid #0B0B0C; border-radius: 999px; padding: 10px 16px; text-align: center; }
+.nl-popup .nl-form input::placeholder { color: #6b6b64; }
+.nl-popup .btn-gold { background: #0B0B0C; color: var(--gold); box-shadow: none; border-radius: 999px; padding: 11px 20px; }
+.nl-popup .btn-gold:hover { transform: none; background: #26261f; box-shadow: none; }
+.nl-popup small { display: block; margin-top: 8px; font-size: 11px; color: #3a3320; }
+.nl-popup-close { position: absolute; top: 13%; right: 13%; width: 32px; height: 32px; background: #0B0B0C; border: none; border-radius: 50%; color: var(--gold); font-size: 22px; line-height: 1; cursor: pointer; transform: rotate(4deg); }
+.nl-popup-close:hover { opacity: 0.75; }
+@media (max-width: 600px) { .nl-popup { right: 12px; bottom: 14px; width: 330px; } .nl-popup h2 { font-size: 28px; } .nl-popup p { font-size: 13px; margin-bottom: 8px; } .nl-popup-body { width: 76%; } }

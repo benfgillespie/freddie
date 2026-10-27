@@ -224,6 +224,11 @@
       }
       const body = await fetch('/blog/' + encodeURIComponent(post.slug) + '.html').then(r => (r.ok ? r.text() : ''));
       document.title = post.title + ' | The Generic Foiling Podcast';
+      if (window.gfpSeo) {
+        const plain = document.createElement('div');
+        plain.innerHTML = body;
+        gfpSeo({ title: document.title, description: post.excerpt || plain.textContent, image: post.image });
+      }
       document.getElementById('postMeta').textContent = formatDate(post.date) + (post.author ? ' · ' + post.author : '');
       document.getElementById('postTitle').textContent = post.title;
       // Foil Mag posts open on the magazine itself, so they skip the big top photo

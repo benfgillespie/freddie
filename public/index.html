@@ -8,6 +8,14 @@
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
   <title>The Generic Foiling Podcast — Wing, Prone &amp; Downwind</title>
   <meta name="description" content="Two mates talking foiling the way you'd actually talk about it — gear, sessions, the people doing it well, and the occasional disaster. New episodes most weeks.">
+  <link rel="canonical" href="https://genericfoilingpod.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Generic Foiling Podcast">
+  <meta property="og:title" content="The Generic Foiling Podcast — Wing, Prone &amp; Downwind">
+  <meta property="og:description" content="Two mates talking foiling the way you'd actually talk about it — gear, sessions, the people doing it well, and the occasional disaster. New episodes most weeks.">
+  <meta property="og:url" content="https://genericfoilingpod.com/">
+  <meta property="og:image" content="https://genericfoilingpod.com/img/share.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
@@ -15,7 +23,14 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9ZZ6R32H7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P9ZZ6R32H7');</script>
 </head>
-<body>
+<body class="has-bg">
+  <!-- Photo backdrop: stays put behind the page and changes as you scroll -->
+  <div class="page-bg" id="pageBg" aria-hidden="true">
+    <img class="on" src="/img/banner-home-3.jpg" alt="" style="--p:center 45%;--pm:88% 50%">
+    <img src="/img/banner-episodes-axis.jpg" alt="" style="--p:center 55%;--pm:55% 55%">
+    <img src="/img/banner-newsletter-2.jpg" alt="" style="--p:center 6%;--pm:30% 50%">
+  </div>
+
 
   <!-- Header -->
   <header class="site-header">
@@ -67,7 +82,7 @@
     </section>
 
     <!-- Topics -->
-    <section class="topics">
+    <section class="topics glass" data-bg="0">
       <div class="wrap topics-row">
         <span class="topic-chip">Wing</span>
         <span class="topic-chip">Prone</span>
@@ -80,7 +95,7 @@
     </section>
 
     <!-- Latest episodes -->
-    <section class="section" id="episodes">
+    <section class="section glass" id="episodes" data-bg="0">
       <div class="wrap">
         <div class="section-head ruled">
           <h2>Latest Episodes</h2>
@@ -122,8 +137,10 @@
       </div>
     </section>
 
+    <div class="interlude photo-only" data-bg="0" role="img" aria-label="Photo from the podcast"></div>
+
     <!-- Hosts -->
-    <section class="section" id="hosts">
+    <section class="section glass" id="hosts" data-bg="0">
       <div class="wrap">
         <div class="section-head">
           <h2>Meet the Hosts</h2>
@@ -148,8 +165,10 @@
       </div>
     </section>
 
+    <div class="interlude photo-only" data-bg="1" role="img" aria-label="Photo from the podcast"></div>
+
     <!-- Gallery -->
-    <section class="section">
+    <section class="section glass" data-bg="1">
       <div class="wrap">
         <div class="section-head">
           <h2>Behind the mics</h2>
@@ -256,10 +275,12 @@
       <button type="button" class="lightbox-arrow next" aria-label="Next photo">&rsaquo;</button>
     </div>
 
-    <!-- Newsletter -->
-    <section class="reviews-band" id="reviews" aria-label="Listener reviews"></section>
+    <div class="interlude photo-only" data-bg="2" role="img" aria-label="Photo from the podcast"></div>
 
-    <section class="nl-band duo-band">
+    <!-- Newsletter -->
+    <section class="reviews-band glass" id="reviews" data-bg="2" aria-label="Listener reviews"></section>
+
+    <section class="nl-band duo-band glass" data-bg="2">
       <div class="wrap duo-grid">
         <div class="duo-card">
           <h2>Get the newsletter</h2>
@@ -352,7 +373,7 @@
       function remember(done) { try { localStorage.setItem(KEY, JSON.stringify({ at: Date.now(), done: !!done })); } catch (e) {} }
       function close(done) { box.hidden = true; remember(done); }
       box.querySelector('.nl-popup-close').addEventListener('click', function () { close(false); });
-      box.querySelector('form').addEventListener('submit', function () { setTimeout(function () { close(true); }, 300); });
+      box.querySelector('form').addEventListener('gfp:subscribed', function () { remember(true); setTimeout(function () { box.hidden = true; }, 4000); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(false); });
       function open() { if (box.hidden) { box.hidden = false; } }
       if (location.search.indexOf('popup=now') >= 0) open(); else setTimeout(open, 20000);
@@ -362,6 +383,7 @@
   <script src="reviews.js"></script>
   <script src="banner-slides.js"></script>
   <script src="spotify-links.js"></script>
+  <script src="scrolly.js"></script>
 
   <script>
     // Mobile nav toggle
@@ -476,5 +498,6 @@
       });
     })();
   </script>
+  <script src="signup.js"></script>
 </body>
 </html>

@@ -117,6 +117,7 @@
       return;
     }
     document.title = p.name + ' | The Generic Foiling Podcast';
+    if (window.gfpSeo) gfpSeo({ title: document.title, description: p.description, image: p.images[0] });
     const soldOut = !Object.values(p.stock).some(n => n > 0);
     detail.innerHTML = `
       <div class="product-gallery">

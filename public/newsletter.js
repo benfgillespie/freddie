@@ -62,6 +62,11 @@
         return;
       }
       document.title = issueTitle(issue) + ' | The Generic Foiling Podcast';
+      if (window.gfpSeo) {
+        const plain = document.createElement('div');
+        plain.innerHTML = issue.html;
+        gfpSeo({ title: document.title, description: plain.textContent });
+      }
       document.getElementById('postMeta').textContent = 'Issue #' + issue.number + ' · ' + formatDate(issue.date);
       document.getElementById('postTitle').textContent = issueTitle(issue);
       document.getElementById('postBody').innerHTML = issue.html;

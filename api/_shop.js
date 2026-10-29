@@ -17,7 +17,7 @@ export const PRODUCTS = [
     id: 'gfp-mens-logo-tee',
     name: 'Mens GFP logo tee',
     price: 2500,
-    images: ['/img/shop/gfp-tee-blue.webp', '/img/shop/gfp-tee-black.webp', '/img/shop/worn-recording.jpg', '/img/shop/worn-dinner.jpg',
+    images: ['/img/shop/gfp-tee-blue.webp', '/img/shop/gfp-tee-black.webp', '/img/shop/worn-blue-tee.webp', '/img/shop/worn-recording.jpg', '/img/shop/worn-dinner.jpg',
       '/img/shop/worn-truck.jpg', '/img/shop/worn-flitelab.jpg', '/img/shop/worn-reading.jpg', '/img/shop/worn-awsi-chat.jpg', '/img/shop/size-guide.jpg'],
     description: 'Represent the spirit of GFP everywhere you go with the simple logo tee.',
     fit: 'Regular',

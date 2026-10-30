@@ -6,7 +6,7 @@ const TOPICS = ['Guest or episode idea', 'Brand partnership or sponsorship', 'Ge
 const TO = process.env.CONTACT_TO || 'thegenericfoilingpod@gmail.com';
 const FROM = process.env.CONTACT_FROM || 'GFP Website <onboarding@resend.dev>';
 const MIN_SECONDS = 4;            // a person takes longer than this to write a message
-const MAX_PER_HOUR = 3;           // messages per visitor per hour
+const MAX_PER_HOUR = 5;           // messages per visitor per hour
 const MAX_LINKS = 2;
 const SPAMMY = /\b(viagra|cialis|casino|crypto|bitcoin|forex|seo (services|expert)|backlinks?|guest post(s|ing)? (for|service)|loan offer|escort|porn|telegram|whatsapp me|click here)\b/i;
 
@@ -48,14 +48,14 @@ export default async function handler(req, res) {
   const now = Date.now();
   const recent = (seen.get(who) || []).filter(x => now - x < 3600_000);
   if (recent.length >= MAX_PER_HOUR) return res.status(429).json({ error: 'You’ve sent a few messages already. Please try again in a bit.' });
-  recent.push(now);
-  seen.set(who, recent);
-  if (seen.size > 5000) seen.clear();
+  // only messages that really get sent count towards the limit (see below)
+  const used = () => { recent.push(now); seen.set(who, recent); if (seen.size > 5000) seen.clear(); };
 
   const subject = `${topic} — from ${name}`;
   const key = process.env.RESEND_API_KEY;
   if (!key) {
     if (process.env.VERCEL) return res.status(503).json({ error: 'The form isn’t switched on yet. Please email us directly.' });
+    used();
     console.log('\n[contact form — preview only, not emailed]\n', subject, '\n', email, '\n', message, '\n');
     return res.status(200).json({ ok: true, preview: true });
   }
@@ -71,6 +71,7 @@ export default async function handler(req, res) {
       }),
     });
     if (!r.ok) { console.error('Resend said', r.status, await r.text()); throw new Error('send failed'); }
+    used();
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Contact send failed:', err);

@@ -1128,3 +1128,12 @@ body.basket-open { overflow: hidden; }
   .btn-gold:hover::after, .ep-card:hover .ep-card-body::before { animation: none; }
   .ep-card:hover { transform: none; }
 }
+
+/* Contact form: hidden trap box for bots, status line, thank-you */
+.contact-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.contact-status { margin: 0; min-height: 1.2em; font-size: 15px; color: var(--text-muted-1); }
+.contact-status.bad { color: #ff8a7a; }
+.contact-thanks { padding: 24px 0; }
+.contact-thanks .thanks-wave { height: 56px; width: auto; margin-bottom: 14px; }
+.contact-thanks h3 { font-size: 28px; margin-bottom: 8px; }
+.contact-thanks p { color: var(--text-secondary); margin: 0; }

@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="gfp.css?v=7">
+  <link rel="stylesheet" href="gfp.css?v=8">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9ZZ6R32H7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P9ZZ6R32H7');</script>
 </head>
@@ -87,8 +87,10 @@
             <label>Your message
               <textarea name="message" rows="6" required></textarea>
             </label>
+            <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
             <button class="btn-gold" type="submit">Send message</button>
-            <p class="contact-note">This opens your email app with your message ready to send to <a href="mailto:thegenericfoilingpod@gmail.com">thegenericfoilingpod@gmail.com</a>.</p>
+            <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
+            <p class="contact-note">Or email us directly at <a href="mailto:thegenericfoilingpod@gmail.com">thegenericfoilingpod@gmail.com</a>.</p>
           </form>
         </div>
 
@@ -189,14 +191,38 @@
       document.getElementById('mainNav').classList.toggle('open');
     });
 
-    // No form service is set up, so the form hands the message to the visitor's email app
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const f = e.target.elements;
-      const subject = f.topic.value + ' — from ' + f.name.value;
-      const body = f.message.value + '\n\n' + f.name.value + '\n' + f.email.value;
-      location.href = 'mailto:thegenericfoilingpod@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    });
+    // Contact form: sent to the server, which checks for spam and emails it on
+    (function () {
+      var form = document.getElementById('contactForm');
+      var status = document.getElementById('contactStatus');
+      var opened = Date.now();
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var f = form.elements, btn = form.querySelector('button[type=submit]');
+        status.className = 'contact-status';
+        status.textContent = 'Sending\u2026';
+        btn.disabled = true;
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name.value, email: f.email.value, topic: f.topic.value, message: f.message.value, website: f.website.value, t: opened })
+        }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (x) {
+            if (x.ok) {
+              form.innerHTML = '<div class="contact-thanks">' + (window.gfpWave ? gfpWave.markup('thanks-wave', 'draw') : '') + '<h3>Message sent.</h3><p>Thanks \u2014 we read everything and will get back to you soon.</p></div>';
+            } else {
+              status.className = 'contact-status bad';
+              status.textContent = (x.j && x.j.error) || 'Sorry, that didn\u2019t send. Please email us directly.';
+              btn.disabled = false;
+            }
+          })
+          .catch(function () {
+            status.className = 'contact-status bad';
+            status.textContent = 'Sorry, that didn\u2019t send. Please email us directly.';
+            btn.disabled = false;
+          });
+      });
+    })();
   </script>
   <script src="signup.js?v=2"></script>
   <script src="wave.js?v=5"></script>

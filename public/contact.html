@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="gfp.css?v=8">
+  <link rel="stylesheet" href="gfp.css?v=13">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9ZZ6R32H7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P9ZZ6R32H7');</script>
 </head>
@@ -65,30 +65,29 @@
     <section class="section">
       <div class="wrap contact-grid">
         <div class="contact-box">
-          <h2>Send us a message</h2>
+          <h2>What&rsquo;s on your mind?</h2>
           <form class="contact-form" id="contactForm">
+            <fieldset class="topic-pick">
+              <legend>I&rsquo;m getting in touch about&hellip;</legend>
+              <label class="pick"><input type="radio" name="topic" value="Guest or episode idea" checked><span>A guest or episode idea</span></label>
+              <label class="pick"><input type="radio" name="topic" value="Brand partnership or sponsorship"><span>A partnership</span></label>
+              <label class="pick"><input type="radio" name="topic" value="Gear question"><span>A gear question</span></label>
+              <label class="pick"><input type="radio" name="topic" value="Merch order"><span>My merch order</span></label>
+              <label class="pick"><input type="radio" name="topic" value="Just saying hi"><span>Just saying hi</span></label>
+            </fieldset>
             <div class="contact-row">
               <label>Your name
-                <input type="text" name="name" autocomplete="name" required>
+                <input type="text" name="name" autocomplete="name" placeholder="Who are you?" required>
               </label>
               <label>Your email
-                <input type="email" name="email" autocomplete="email" required>
+                <input type="email" name="email" autocomplete="email" placeholder="Where do we reply?" required>
               </label>
             </div>
-            <label>What&rsquo;s it about?
-              <select name="topic">
-                <option>Guest or episode idea</option>
-                <option>Brand partnership or sponsorship</option>
-                <option>Gear question</option>
-                <option>Merch order</option>
-                <option>Just saying hi</option>
-              </select>
-            </label>
             <label>Your message
-              <textarea name="message" rows="6" required></textarea>
+              <textarea name="message" rows="5" placeholder="Go on, we&rsquo;re listening&hellip;" required></textarea>
             </label>
             <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-            <button class="btn-gold" type="submit">Send message</button>
+            <button class="btn-gold" type="submit">Send it &rarr;</button>
             <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
             <p class="contact-note">Or email us directly at <a href="mailto:thegenericfoilingpod@gmail.com">thegenericfoilingpod@gmail.com</a>.</p>
           </form>

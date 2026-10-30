@@ -41,4 +41,39 @@
     el.classList.add('is-loading');
     el.insertAdjacentHTML('afterbegin', markup('loader-wave', 'pulse'));
   });
+
+// ---- Small touches ----
+var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Numbers count up the first time they scroll into view
+(function () {
+  var els = document.querySelectorAll('.count');
+  if (!els.length || calm || !('IntersectionObserver' in window)) return;
+  function run(el) {
+    var suffix = el.dataset.suffix || '';
+    var start = null;
+    function tick(ts) {
+      if (start === null) start = ts;
+      var u = Math.min((ts - start) / 1400, 1);
+      var e = 1 - Math.pow(1 - u, 3);
+      var to = parseInt(el.dataset.to, 10) || 0;
+      el.textContent = Math.round(to * e) + (u === 1 ? suffix : '');
+      if (u < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { io.unobserve(en.target); run(en.target); }
+    });
+  }, { threshold: 0.6 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+
+// Listen Now buttons get little sound bars that dance on hover
+document.querySelectorAll('a.btn-gold').forEach(function (a) {
+  if (!/^\s*Listen Now/i.test(a.textContent)) return;
+  a.classList.add('has-eq');
+  a.insertAdjacentHTML('afterbegin', '<span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>');
+});
 })();

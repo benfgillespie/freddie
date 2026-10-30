@@ -10,6 +10,7 @@
   let products = [];
   let shipping = [];
   let basket = [];
+  let bumpPending = false;
   try { basket = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { basket = []; }
 
   const money = pence => '£' + (pence / 100).toFixed(2).replace(/\.00$/, '');
@@ -105,7 +106,8 @@
   }
 
   function showPhoto(src) {
-    document.getElementById('mainPhoto').src = src;
+    const main = document.getElementById('mainPhoto');
+    if (main.getAttribute('src') !== src) { main.src = src; main.classList.remove('swap'); void main.offsetWidth; main.classList.add('swap'); }
     detail.querySelectorAll('.product-thumbs button').forEach(b => b.classList.toggle('active', b.dataset.src === src));
   }
 
@@ -262,6 +264,7 @@
     renderBasket();
     refresh(card, p);
     openBasket();
+    bumpPending = true;
   }
 
   // ---- Basket drawer ----
@@ -317,7 +320,9 @@
   regionSelect.addEventListener('change', renderBasket);
 
   function openBasket() { drawer.hidden = false; document.body.classList.add('basket-open'); message.textContent = ''; }
-  function closeBasket() { drawer.hidden = true; document.body.classList.remove('basket-open'); }
+  function closeBasket() { drawer.hidden = true; document.body.classList.remove('basket-open'); if (bumpPending) setTimeout(bumpCount, 150); }
+  // The basket number bounces after adding; if the basket drawer is covering it, it bounces once the drawer closes
+  function bumpCount() { bumpPending = false; countEl.classList.remove('bump'); void countEl.offsetWidth; countEl.classList.add('bump'); }
   document.querySelector('.cart-btn').addEventListener('click', openBasket);
   drawer.querySelector('.basket-close').addEventListener('click', closeBasket);
   drawer.addEventListener('click', e => { if (e.target === drawer) closeBasket(); });

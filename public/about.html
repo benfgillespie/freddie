@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="gfp.css?v=4">
+  <link rel="stylesheet" href="gfp.css?v=5">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9ZZ6R32H7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P9ZZ6R32H7');</script>
 </head>
@@ -67,7 +67,7 @@
 
     <section class="about-stats">
       <div class="wrap">
-        <p><strong id="aboutEpisodes">155</strong> episodes since we first hit record in 2022, <strong>819+</strong> listener ratings, and every flavour of foiling.</p>
+        <p><strong id="aboutEpisodes" class="count" data-to="155">155</strong> episodes since we first hit record in 2022, <strong class="count" data-to="819" data-suffix="+">819+</strong> listener ratings, and every flavour of foiling.</p>
       </div>
     </section>
 
@@ -207,11 +207,11 @@
       const titles = new DOMParser().parseFromString(text, 'text/xml').querySelectorAll('item > title');
       for (const t of titles) {
         const m = t.textContent.trim().match(/^(\d+)\s*[-–—:]/);
-        if (m) { document.getElementById('aboutEpisodes').textContent = m[1]; break; }
+        if (m) { var ae = document.getElementById('aboutEpisodes'); ae.dataset.to = m[1]; ae.textContent = m[1]; break; }
       }
     }).catch(() => {});
   </script>
   <script src="signup.js?v=2"></script>
-  <script src="wave.js?v=2"></script>
+  <script src="wave.js?v=3"></script>
 </body>
 </html>

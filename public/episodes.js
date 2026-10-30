@@ -96,14 +96,14 @@
         <button type="button" class="ep-card-media" data-play="${ep.id}" aria-label="Play ${escapeHtml(label(ep))}">
           <img src="${escapeHtml(ep.image)}" alt="" loading="lazy" style="object-position: center ${ep.focus}%;">
           <div class="num">${ep.number || 'Bonus'}</div>
-          <span class="ep-play-icon" aria-hidden="true">${playing ? '&#10074;&#10074;' : '&#9654;'}</span>
+          <span class="ep-play-icon" aria-hidden="true">${playing ? '&#10074;&#10074;' : '&#9654;&#xFE0E;'}</span>
         </button>
         <div class="ep-card-body">
           <div class="ep-meta">${rank}${ep.date}${ep.duration ? ' &middot; ' + ep.duration : ''}</div>
           <h3><a href="/episode/${ep.slug}">${escapeHtml(ep.title)}</a></h3>
           <p>${escapeHtml(ep.description)}</p>
           <div class="ep-actions">
-            <button type="button" class="ep-play-btn" data-play="${ep.id}">${playing ? '&#10074;&#10074; Pause' : '&#9654; Play episode'}</button>
+            <button type="button" class="ep-play-btn" data-play="${ep.id}">${playing ? '&#10074;&#10074; Pause' : '&#9654;&#xFE0E; Play episode'}</button>
             <a class="ep-read" href="/episode/${ep.slug}">Read more &rarr;</a>
           </div>
         </div>
@@ -129,8 +129,8 @@
       const isCurrent = current && Number(el.dataset.id) === current.id;
       const playing = isCurrent && !audio.paused;
       el.classList.toggle('is-current', !!isCurrent);
-      el.querySelector('.ep-play-icon').innerHTML = playing ? '&#10074;&#10074;' : '&#9654;';
-      el.querySelector('.ep-play-btn').innerHTML = playing ? '&#10074;&#10074; Pause' : '&#9654; Play episode';
+      el.querySelector('.ep-play-icon').innerHTML = playing ? '&#10074;&#10074;' : '&#9654;&#xFE0E;';
+      el.querySelector('.ep-play-btn').innerHTML = playing ? '&#10074;&#10074; Pause' : '&#9654;&#xFE0E; Play episode';
     });
   }
 
@@ -179,7 +179,7 @@
   }
 
   audio.addEventListener('play', () => { playBtn.innerHTML = '&#10074;&#10074;'; playBtn.setAttribute('aria-label', 'Pause'); refreshCards(); });
-  audio.addEventListener('pause', () => { playBtn.innerHTML = '&#9654;'; playBtn.setAttribute('aria-label', 'Play'); refreshCards(); });
+  audio.addEventListener('pause', () => { playBtn.innerHTML = '&#9654;&#xFE0E;'; playBtn.setAttribute('aria-label', 'Play'); refreshCards(); });
   audio.addEventListener('loadedmetadata', () => { durEl.textContent = formatTime(audio.duration); });
   audio.addEventListener('timeupdate', () => {
     if (seeking || !audio.duration) return;

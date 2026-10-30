@@ -26,9 +26,9 @@
   }
   function refresh() {
     if (started && !audio.paused) btn.innerHTML = '&#10074;&#10074; Pause';
-    else if (!started && resumeAt > 10) btn.innerHTML = '&#9654; Resume from ' + formatTime(resumeAt);
-    else if (started && audio.currentTime > 10) btn.innerHTML = '&#9654; Resume';
-    else btn.innerHTML = '&#9654; Play episode';
+    else if (!started && resumeAt > 10) btn.innerHTML = '&#9654;&#xFE0E; Resume from ' + formatTime(resumeAt);
+    else if (started && audio.currentTime > 10) btn.innerHTML = '&#9654;&#xFE0E; Resume';
+    else btn.innerHTML = '&#9654;&#xFE0E; Play episode';
   }
   resumeAt = load();
   refresh();
@@ -66,7 +66,7 @@
   audio.addEventListener('ended', clearSaved);
   window.addEventListener('pagehide', function () { if (started && audio.currentTime > 0 && !audio.ended) save(audio.currentTime); });
   audio.addEventListener('pause', function () {
-    if (started && audio.currentTime > 0 && !audio.ended) save(audio.currentTime); playBtn.innerHTML = '&#9654;'; playBtn.setAttribute('aria-label', 'Play'); refresh(); });
+    if (started && audio.currentTime > 0 && !audio.ended) save(audio.currentTime); playBtn.innerHTML = '&#9654;&#xFE0E;'; playBtn.setAttribute('aria-label', 'Play'); refresh(); });
   audio.addEventListener('loadedmetadata', function () { durEl.textContent = formatTime(audio.duration); });
   audio.addEventListener('timeupdate', function () {
     if (started && audio.currentTime > 0 && Date.now() - lastSave > 4000) { lastSave = Date.now(); save(audio.currentTime); }

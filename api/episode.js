@@ -136,7 +136,7 @@ export default async function handler(req, res) {
             <p class="ep-tag">${ep.num ? 'Episode ' + esc(ep.num) : 'Bonus episode'}${dateStr ? ' &middot; ' + esc(dateStr) : ''}${len ? ' &middot; ' + esc(len) : ''}</p>
             <h1>${esc(nice)}</h1>
             <div class="ep-listen">
-              ${ep.audio ? `<button type="button" class="btn-gold" id="epPlay" data-audio="${esc(ep.audio)}" data-title="${esc(ep.title)}" data-image="${esc(ep.image)}" data-tag="${ep.num ? 'Episode ' + esc(ep.num) : 'Bonus episode'}">&#9654; Play episode</button>` : ''}
+              ${ep.audio ? `<button type="button" class="btn-gold" id="epPlay" data-audio="${esc(ep.audio)}" data-title="${esc(ep.title)}" data-image="${esc(ep.image)}" data-tag="${ep.num ? 'Episode ' + esc(ep.num) : 'Bonus episode'}">&#9654;&#xFE0E; Play episode</button>` : ''}
               <a class="btn-outline" id="epSpotify" href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Spotify</a>
               <a class="btn-outline" href="https://podcasts.apple.com/us/podcast/the-generic-foiling-podcast/id1637901696" target="_blank" rel="noopener">Apple Podcasts</a>
               <a class="btn-outline" href="https://www.youtube.com/@GenericFoilingPodcast" target="_blank" rel="noopener">YouTube</a>
@@ -166,7 +166,7 @@ export default async function handler(req, res) {
       </div>
       <div class="player-controls">
         <button type="button" class="player-skip" data-skip="-15" aria-label="Back 15 seconds">&minus;15</button>
-        <button type="button" class="player-play" id="playerPlay" aria-label="Play">&#9654;</button>
+        <button type="button" class="player-play" id="playerPlay" aria-label="Play">&#9654;&#xFE0E;</button>
         <button type="button" class="player-skip" data-skip="30" aria-label="Forward 30 seconds">+30</button>
       </div>
       <div class="player-progress">
@@ -182,7 +182,7 @@ export default async function handler(req, res) {
   <script>
     (function () { var t = document.querySelector('.menu-toggle'); if (t) t.addEventListener('click', function () { document.getElementById('mainNav').classList.toggle('open'); }); })();
   </script>
-  <script src="/ep-player.js?v=2"></script>
+  <script src="/ep-player.js?v=3"></script>
   <script src="/spotify-links.js"></script>
   <script>
     // Point the Spotify button at this exact episode

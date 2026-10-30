@@ -112,7 +112,10 @@ export default async function handler(req, res) {
   <meta property="og:description" content="${esc(desc)}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${esc(ep.image || SITE + '/img/share.jpg')}">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="${esc(ep.title)}">
+  <meta name="twitter:description" content="${esc(desc)}">
+  <meta name="twitter:image" content="${esc(ep.image || SITE + '/img/share.jpg')}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">

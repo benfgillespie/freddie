@@ -76,4 +76,83 @@ document.querySelectorAll('a.btn-gold').forEach(function (a) {
   a.classList.add('has-eq');
   a.insertAdjacentHTML('afterbegin', '<span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>');
 });
+
+// ---- Motion round 2: things slide in, footer logo draws, homepage photos drift ----
+
+// Blocks fade and slide up the first time they scroll into view
+(function () {
+  if (calm || !('IntersectionObserver' in window)) return;
+  var sel = '.section-head, .section-sub, .host-photo, .host-bio-card, .ep-card, .product, .expect-card, .contact-card, .coasters, .topic-chip, .duo-card, .post-card';
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  function scan() {
+    var fresh = document.querySelectorAll(sel);
+    var batch = {};
+    fresh.forEach(function (el) {
+      if (el.dataset.rev) return;
+      el.dataset.rev = '1';
+      var p = el.parentElement, n = batch[p ? p.className : ''] = (batch[p ? p.className : ''] || 0) + 1;
+      el.style.setProperty('--d', Math.min(n - 1, 5) * 0.08 + 's');
+      el.classList.add('js-rev');
+      io.observe(el);
+    });
+  }
+  scan();
+  // a fast scroll can jump straight past a block: anything now above the bottom of the screen just shows
+  var sq = false;
+  window.addEventListener('scroll', function () {
+    if (sq) return; sq = true;
+    requestAnimationFrame(function () {
+      sq = false;
+      var vh = window.innerHeight;
+      document.querySelectorAll('.js-rev:not(.in)').forEach(function (el) {
+        if (el.getBoundingClientRect().top < -60) { el.classList.add('in'); io.unobserve(el); }
+      });
+    });
+  }, { passive: true });
+  var t = null;
+  new MutationObserver(function () { clearTimeout(t); t = setTimeout(scan, 60); }).observe(document.body, { childList: true, subtree: true });
+})();
+
+// Footer logo draws itself when the footer scrolls into view (and again on hover)
+(function () {
+  var img = document.querySelector('.footer-brand img');
+  if (!img) return;
+  var holder = document.createElement('span');
+  holder.innerHTML = markup('footer-wave', 'draw');
+  var svg = holder.firstChild;
+  svg.classList.remove('go');
+  img.replaceWith(svg);
+  svg.addEventListener('mouseenter', function () { replay(svg); });
+  if (!('IntersectionObserver' in window) || calm) { svg.classList.add('go'); return; }
+  var io = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { replay(svg); io.disconnect(); }
+  }, { threshold: 0.5 });
+  io.observe(svg);
+})();
+
+// The homepage photo bands push in very slowly as you scroll past them
+(function () {
+  var bands = document.querySelectorAll('.interlude.photo-only');
+  if (!bands.length || calm) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var vh = window.innerHeight;
+    bands.forEach(function (b) {
+      var r = b.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      var p = Math.min(Math.max((vh - r.top) / (vh + r.height), 0), 1);
+      b.style.setProperty('--z', (1 + 0.07 * p).toFixed(4));
+    });
+  }
+  function ask() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', ask, { passive: true });
+  window.addEventListener('resize', ask);
+  update();
+})();
+
 })();

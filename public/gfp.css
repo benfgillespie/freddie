@@ -1101,3 +1101,30 @@ body.basket-open { overflow: hidden; }
 .product-main-photo img.swap { animation: photo-in .35s ease; }
 @keyframes photo-in { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .eq i, .cart-count.bump, .stock-note.low, .product-main-photo img.swap { animation: none !important; } }
+
+/* Motion round 2: slide-in, button shine, card lift + ripple, footer logo, photo drift */
+.js-rev { opacity: 0; translate: 0 26px; transition: opacity .7s ease var(--d, 0s), translate .7s ease var(--d, 0s), transform .25s ease, border-color .2s; }
+.js-rev.in { opacity: 1; translate: 0 0; }
+
+.btn-gold { position: relative; overflow: hidden; }
+.btn-gold::after { content: ''; position: absolute; top: 0; bottom: 0; left: -70%; width: 45%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.6), transparent); transform: skewX(-20deg); pointer-events: none; opacity: 0; }
+.btn-gold:hover::after, .btn-gold:focus-visible::after { animation: btn-shine .75s ease; }
+@keyframes btn-shine { 0% { left: -70%; opacity: 1; } 100% { left: 130%; opacity: 1; } }
+
+.ep-card { transition: transform .25s ease, border-color .2s, box-shadow .25s ease; }
+.ep-card:hover { transform: translateY(-5px); box-shadow: 0 10px 22px rgba(0,0,0,.45); }
+.ep-card-body { position: relative; }
+.ep-card-body::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 16px; opacity: 0; pointer-events: none; transition: opacity .25s ease;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='22' viewBox='0 0 48 22'%3E%3Cpath d='M0 11 Q12 -1 24 11 T48 11' fill='none' stroke='%23FFAC00' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x 0 0 / 36px 16px; }
+.ep-card:hover .ep-card-body::before, .ep-card:focus-visible .ep-card-body::before { opacity: 1; animation: ep-ripple 1.2s linear infinite; }
+@keyframes ep-ripple { from { background-position-x: 0; } to { background-position-x: 36px; } }
+
+.footer-wave { height: 42px; width: 38px; margin-bottom: 14px; cursor: default; }
+
+.interlude.photo-only img { transform: scale(var(--z, 1)); will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-rev { opacity: 1; translate: none; transition: none; }
+  .btn-gold:hover::after, .ep-card:hover .ep-card-body::before { animation: none; }
+  .ep-card:hover { transform: none; }
+}

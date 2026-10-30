@@ -1065,3 +1065,19 @@ body.basket-open { overflow: hidden; }
 .zoombox-close:hover, .zoombox-arrow:hover { color: var(--gold); }
 .zoombox-hint { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 14px; color: var(--text-dim, #b8b8b0); pointer-events: none; text-shadow: 0 1px 8px rgba(0,0,0,.9); margin: 0; }
 @media (max-width: 720px) { .zoombox-arrow { top: auto; bottom: 40px; transform: none; } }
+
+/* Animated logo: the icon drawn as one line (see wave.js) */
+.gfp-wave { display: block; overflow: visible; }
+.gfp-wave path { fill: none; stroke: var(--gold); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.gfp-wave .draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.gfp-wave.go .draw { animation: gfp-draw 1.5s cubic-bezier(.5,0,.2,1) both; }
+@keyframes gfp-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.gfp-wave .base { opacity: .22; }
+.gfp-wave .pulse { stroke-dasharray: .14 .86; animation: gfp-run 1.8s linear infinite; }
+@keyframes gfp-run { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.brand-wave { height: 42px; width: 38px; }
+.posts-status.is-loading { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 40px 0; }
+.loader-wave { height: 70px; width: auto; }
+.nl-thanks .thanks-wave { height: 52px; width: auto; margin: 0 0 10px; }
+.nl-popup .nl-thanks .thanks-wave path { stroke: #0B0B0C; }
+@media (prefers-reduced-motion: reduce) { .gfp-wave.go .draw, .gfp-wave .pulse { animation-duration: .01s; } }

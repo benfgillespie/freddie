@@ -28,7 +28,7 @@
         var note = document.createElement('p');
         note.className = 'nl-thanks' + (good ? '' : ' nl-thanks-error');
         note.setAttribute('role', 'status');
-        note.innerHTML = message;
+        note.innerHTML = (good && window.gfpWave ? gfpWave.markup('thanks-wave', 'draw') : '') + message;
         form.parentNode.insertBefore(note, form);
         form.hidden = true;
         form.dispatchEvent(new CustomEvent('gfp:subscribed', { bubbles: true }));

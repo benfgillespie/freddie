@@ -45,6 +45,12 @@
     return (h ? h + ' hr ' : '') + m + ' min';
   }
 
+
+  // Same rule the server uses to name each episode page
+  function episodeSlug(raw) {
+    return raw.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 90).replace(/-+$/, '');
+  }
+
   function parseEpisode(item, i, focus) {
     const raw = item.querySelector('title')?.textContent.trim() || '';
     // Titles look like "155 - Guest - Topic"; split off the number for the badge
@@ -56,6 +62,7 @@
     const pubDate = item.querySelector('pubDate')?.textContent;
     return {
       id: i,
+      slug: episodeSlug(raw),
       number: m ? m[1] : null,
       title: (m ? m[2] : raw).replace(/\s+-\s+/g, ' — '),
       description: shorten(desc, 150),
@@ -93,9 +100,12 @@
         </button>
         <div class="ep-card-body">
           <div class="ep-meta">${rank}${ep.date}${ep.duration ? ' &middot; ' + ep.duration : ''}</div>
-          <h3>${escapeHtml(ep.title)}</h3>
+          <h3><a href="/episode/${ep.slug}">${escapeHtml(ep.title)}</a></h3>
           <p>${escapeHtml(ep.description)}</p>
-          <button type="button" class="ep-play-btn" data-play="${ep.id}">${playing ? '&#10074;&#10074; Pause' : '&#9654; Play episode'}</button>
+          <div class="ep-actions">
+            <button type="button" class="ep-play-btn" data-play="${ep.id}">${playing ? '&#10074;&#10074; Pause' : '&#9654; Play episode'}</button>
+            <a class="ep-read" href="/episode/${ep.slug}">Read more &rarr;</a>
+          </div>
         </div>
       </article>`;
   }

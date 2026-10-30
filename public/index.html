@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="gfp.css?v=14">
+  <link rel="stylesheet" href="gfp.css?v=15">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9ZZ6R32H7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P9ZZ6R32H7');</script>
 </head>
@@ -95,7 +95,7 @@
         </div>
         <!-- Filled from the podcast feed on load; these are the fallback if the feed is unavailable -->
         <div class="ep-grid" id="latestEpisodes">
-          <a class="ep-card" href="https://open.spotify.com/episode/6woCYXwrOAWHIgnrRGp3b8" target="_blank" rel="noopener">
+          <a class="ep-card" href="/episode/155-nicolas-caillou-f-one-frigate-v2">
             <div class="ep-card-media">
               <img src="https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/28158409/28158409-1792405987478-0d4a88b9a68c6.jpg" alt="Episode 155 artwork" loading="lazy">
               <div class="num">155</div>
@@ -105,7 +105,7 @@
               <p>We finally managed to sit down with Nico at AWSI this year. This was a goal we never achieved in 2025&hellip;</p>
             </div>
           </a>
-          <a class="ep-card" href="https://open.spotify.com/episode/3xRJuePkTHEMEYvXSjVV9g" target="_blank" rel="noopener">
+          <a class="ep-card" href="/episode/an-x-foils-and-gfp-debrief-of-awsi-2026-a-little-midweek-brucey-bonus">
             <div class="ep-card-media">
               <img src="https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/28158409/28158409-1792066585152-0059d910ddd89.jpg" alt="Bonus episode artwork" loading="lazy">
               <div class="num">Bonus</div>
@@ -115,7 +115,7 @@
               <p>A relatively raw and indepth debrief into the AWSI event for 2026 with ourselves and the guys from the X Foils podcast&hellip;</p>
             </div>
           </a>
-          <a class="ep-card" href="https://open.spotify.com/episode/0I8H5ApBe1sA4RaFr3PLgR" target="_blank" rel="noopener">
+          <a class="ep-card" href="/episode/154-kernow-foil-classic-2026-the-official-debrief-w-chris-burke">
             <div class="ep-card-media">
               <img src="https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/28158409/28158409-1791797287483-0337311a3de49.jpg" alt="Episode 154 artwork" loading="lazy">
               <div class="num">154</div>
@@ -405,8 +405,12 @@
         title: (m ? m[2] : raw).replace(/\s+-\s+/g, ' — '),
         description: shorten(desc, 130),
         image: item.getElementsByTagNameNS('*', 'image')[0]?.getAttribute('href') || '',
-        link: spotifyUrl(raw),
+        link: '/episode/' + episodeSlug(raw),
       };
+    }
+
+    function episodeSlug(raw) {
+      return raw.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 90).replace(/-+$/, '');
     }
 
     async function loadLatestEpisodes() {
@@ -419,7 +423,7 @@
         if (!episodes.length) return;
 
         document.getElementById('latestEpisodes').innerHTML = episodes.slice(0, 3).map(ep => `
-          <a class="ep-card" href="${escapeHtml(ep.link)}" target="_blank" rel="noopener">
+          <a class="ep-card" href="${escapeHtml(ep.link)}">
             <div class="ep-card-media">
               <img src="${escapeHtml(ep.image)}" alt="${ep.number ? 'Episode ' + ep.number : 'Bonus episode'} artwork" loading="lazy">
               <div class="num">${ep.number || 'Bonus'}</div>

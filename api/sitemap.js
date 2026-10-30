@@ -1,6 +1,7 @@
 // /sitemap.xml (rewritten here in vercel.json) for Google: the main pages, every published
 // blog post and every shop product, so new posts and products are picked up without editing this.
 import { PRODUCTS } from './_shop.js';
+import { parseEpisodes } from './episode.js';
 
 const SITE = 'https://genericfoilingpod.com';
 const PAGES = ['/', '/episodes', '/about', '/blog', '/shop', '/newsletter', '/contact', '/privacy', '/shop-terms'];
@@ -17,6 +18,13 @@ export default async function handler(req, res) {
     }
   } catch (err) {
     console.error('Sitemap: blog posts unavailable', err);
+  }
+
+  try {
+    const xml = await fetch('https://anchor.fm/s/a86ee904/podcast/rss').then(r => r.text());
+    for (const ep of parseEpisodes(xml)) urls.push({ path: '/episode/' + ep.slug });
+  } catch (err) {
+    console.error('Sitemap: episodes unavailable', err);
   }
 
   for (const product of PRODUCTS) {

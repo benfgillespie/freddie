@@ -116,6 +116,10 @@
     {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"
+    },
+    {
+      "source": "/episode/:slug",
+      "destination": "/api/episode?slug=:slug"
     }
   ]
 }

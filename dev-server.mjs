@@ -64,6 +64,8 @@ async function serveFile(res, pathname) {
 http.createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   if (url.pathname.startsWith('/api/')) return handleApi(req, res, url);
+  const ep = url.pathname.match(/^\/episode\/([^/]+)\/?$/);
+  if (ep) { url.pathname = '/api/episode'; url.searchParams.set('slug', decodeURIComponent(ep[1])); return handleApi(req, res, url); }
   return serveFile(res, url.pathname);
 }).listen(PORT, () => {
   console.log(`Generic Foiling Podcast running at http://localhost:${PORT}`);

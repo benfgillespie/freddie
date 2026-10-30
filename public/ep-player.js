@@ -13,6 +13,11 @@
   var durEl = document.getElementById('playerDuration');
   var speedBtn = document.getElementById('playerSpeed');
   var started = false, seeking = false;
+  // remember where each listener stopped (in their own browser only)
+  var KEY = 'gfpResume:' + ep.audio, resumeAt = 0, lastSave = 0;
+  function load() { try { return Number(localStorage.getItem(KEY)) || 0; } catch (e) { return 0; } }
+  function save(t) { try { if (t > 10) localStorage.setItem(KEY, String(Math.floor(t))); else localStorage.removeItem(KEY); } catch (e) {} }
+  function clearSaved() { try { localStorage.removeItem(KEY); } catch (e) {} }
 
   function formatTime(secs) {
     secs = Math.max(0, Math.floor(secs || 0));
@@ -20,8 +25,13 @@
     return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(s).padStart(2, '0');
   }
   function refresh() {
-    btn.innerHTML = (started && !audio.paused) ? '&#10074;&#10074; Pause' : '&#9654; Play episode';
+    if (started && !audio.paused) btn.innerHTML = '&#10074;&#10074; Pause';
+    else if (!started && resumeAt > 10) btn.innerHTML = '&#9654; Resume from ' + formatTime(resumeAt);
+    else if (started && audio.currentTime > 10) btn.innerHTML = '&#9654; Resume';
+    else btn.innerHTML = '&#9654; Play episode';
   }
+  resumeAt = load();
+  refresh();
   function toggle() {
     if (!started) {
       started = true;
@@ -39,6 +49,9 @@
           artwork: ep.image ? [{ src: ep.image, sizes: '1400x1400' }] : []
         });
       }
+      if (resumeAt > 10) {
+        audio.addEventListener('loadedmetadata', function jump() { audio.removeEventListener('loadedmetadata', jump); if (resumeAt < audio.duration - 30) audio.currentTime = resumeAt; }, { once: true });
+      }
       audio.play();
     } else {
       audio.paused ? audio.play() : audio.pause();
@@ -50,9 +63,13 @@
   }
 
   audio.addEventListener('play', function () { playBtn.innerHTML = '&#10074;&#10074;'; playBtn.setAttribute('aria-label', 'Pause'); refresh(); });
-  audio.addEventListener('pause', function () { playBtn.innerHTML = '&#9654;'; playBtn.setAttribute('aria-label', 'Play'); refresh(); });
+  audio.addEventListener('ended', clearSaved);
+  window.addEventListener('pagehide', function () { if (started && audio.currentTime > 0 && !audio.ended) save(audio.currentTime); });
+  audio.addEventListener('pause', function () {
+    if (started && audio.currentTime > 0 && !audio.ended) save(audio.currentTime); playBtn.innerHTML = '&#9654;'; playBtn.setAttribute('aria-label', 'Play'); refresh(); });
   audio.addEventListener('loadedmetadata', function () { durEl.textContent = formatTime(audio.duration); });
   audio.addEventListener('timeupdate', function () {
+    if (started && audio.currentTime > 0 && Date.now() - lastSave > 4000) { lastSave = Date.now(); save(audio.currentTime); }
     if (seeking || !audio.duration) return;
     seek.value = (audio.currentTime / audio.duration) * 1000;
     timeEl.textContent = formatTime(audio.currentTime);

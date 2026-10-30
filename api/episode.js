@@ -179,7 +179,7 @@ export default async function handler(req, res) {
   <script>
     (function () { var t = document.querySelector('.menu-toggle'); if (t) t.addEventListener('click', function () { document.getElementById('mainNav').classList.toggle('open'); }); })();
   </script>
-  <script src="/ep-player.js"></script>
+  <script src="/ep-player.js?v=2"></script>
   <script src="/spotify-links.js"></script>
   <script>
     // Point the Spotify button at this exact episode

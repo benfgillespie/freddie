@@ -209,6 +209,11 @@
           .then(function (x) {
             if (x.ok) {
               form.innerHTML = '<div class="contact-thanks">' + (window.gfpWave ? gfpWave.markup('thanks-wave', 'draw') : '') + '<h3>Message sent.</h3><p>Thanks \u2014 we read everything and will get back to you soon.</p></div>';
+              // bring the whole box back into view, just below the sticky header
+              var hdr = document.querySelector('.site-header');
+              var box = form.closest('.contact-box') || form;
+              var y = box.getBoundingClientRect().top + window.pageYOffset - (hdr ? hdr.offsetHeight : 0) - 24;
+              window.scrollTo({ top: Math.max(y, 0), behavior: 'smooth' });
             } else {
               status.className = 'contact-status bad';
               status.textContent = (x.j && x.j.error) || 'Sorry, that didn\u2019t send. Please email us directly.';

@@ -10,7 +10,7 @@
 
 // When the stock counts below were last checked. Online orders after this time are taken off
 // them automatically (see _stock.js), so set it to now whenever you change any counts.
-export const STOCK_COUNTED_AT = '2026-10-26T12:28:40Z';
+export const STOCK_COUNTED_AT = '2026-10-30T12:18:56Z';
 
 export const PRODUCTS = [
   {
@@ -23,7 +23,7 @@ export const PRODUCTS = [
     fit: 'Regular',
     options: { Size: ['Small', 'Medium', 'Large', 'X Large'], Colour: ['Blue', 'Black'] },
     colourPhotos: { Blue: '/img/shop/gfp-tee-blue.webp', Black: '/img/shop/gfp-tee-black.webp' },
-    stock: { 'X Large|Blue': 1 },
+    stock: { 'X Large|Blue': 1, 'Large|Black': 1 },
   },
   {
     id: 'gfp-wang-lordz-tee',
@@ -35,7 +35,7 @@ export const PRODUCTS = [
     fit: 'Regular',
     options: { Size: ['Small', 'Medium', 'Large', 'X Large'], Colour: ['Blue', 'Black', 'Lilac'] },
     colourPhotos: { Black: '/img/shop/wang-lordz-black.webp', Blue: '/img/shop/wang-lordz-blue.webp', Lilac: '/img/shop/wang-lordz-lilac.webp' },
-    stock: { 'Small|Black': 1, 'Medium|Blue': 3, 'Medium|Black': 1, 'X Large|Blue': 2, 'X Large|Black': 1 },
+    stock: { 'Small|Black': 1, 'Medium|Blue': 3, 'Medium|Black': 1, 'X Large|Blue': 2, 'X Large|Black': 2, 'Large|Lilac': 2 },
   },
   {
     id: 'gfp-beanie',
@@ -45,7 +45,7 @@ export const PRODUCTS = [
     description: 'Just in time for Christmas – the best present a foiler could ever hope for! Our first range of headwear – simple, subtle, stylish….. how could you resist?!',
     options: { Colour: ['Chocolate', 'Charcoal', 'Navy', 'Burgundy'] },
     colourPhotos: { Chocolate: '/img/shop-beanie.jpg', Charcoal: '/img/shop/beanie-4.jpg', Navy: '/img/shop/beanie-1.jpg', Burgundy: '/img/shop/beanie-3.jpg' },
-    stock: { Chocolate: 4, Charcoal: 1, Navy: 1 },
+    stock: { Chocolate: 2, Charcoal: 1, Navy: 1 },
   },
   {
     id: 'gfp-womens-logo-tee',

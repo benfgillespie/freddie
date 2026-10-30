@@ -137,7 +137,94 @@
         <p class="product-postage">Postage from £3.50 in the UK. We also post to Europe, the USA, Australia and New Zealand. <a href="/shop-terms.html">Postage &amp; returns</a></p>
       </div>`;
     detail.querySelectorAll('.product-thumbs button').forEach(b => b.addEventListener('click', () => showPhoto(b.dataset.src)));
+    setupZoom(p);
     wire(detail.querySelector('.js-product'));
+  }
+
+  // Click the big photo to blow it up full screen; click again to zoom right in, then drag or swipe to look around
+  function setupZoom(p) {
+    const main = document.getElementById('mainPhoto');
+    const many = p.images.length > 1;
+    const box = document.createElement('div');
+    box.className = 'zoombox';
+    box.hidden = true;
+    box.innerHTML = `
+      <button type="button" class="zoombox-close" aria-label="Close">&times;</button>
+      ${many ? '<button type="button" class="zoombox-arrow prev" aria-label="Previous photo">&lsaquo;</button><button type="button" class="zoombox-arrow next" aria-label="Next photo">&rsaquo;</button>' : ''}
+      <div class="zoombox-scroll"><img alt=""></div>
+      <p class="zoombox-hint">Tap the photo to zoom in</p>`;
+    document.body.appendChild(box);
+    const scroll = box.querySelector('.zoombox-scroll');
+    const img = box.querySelector('img');
+    const hint = box.querySelector('.zoombox-hint');
+    let index = 0;
+
+    function show(i) {
+      index = (i + p.images.length) % p.images.length;
+      scroll.classList.remove('zoomed');
+      hint.textContent = 'Tap the photo to zoom in';
+      img.src = p.images[index];
+      img.alt = p.name;
+    }
+    function open() {
+      show(Math.max(0, p.images.indexOf(main.getAttribute('src'))));
+      box.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      box.hidden = true;
+      document.body.style.overflow = '';
+      showPhoto(p.images[index]);
+    }
+    function toggleZoom(e) {
+      const rect = img.getBoundingClientRect();
+      const fx = (e.clientX - rect.left) / rect.width, fy = (e.clientY - rect.top) / rect.height;
+      const zoomed = scroll.classList.toggle('zoomed');
+      hint.textContent = zoomed ? 'Drag or swipe to look around. Tap to zoom out' : 'Tap the photo to zoom in';
+      if (zoomed) {
+        scroll.scrollLeft = fx * img.offsetWidth - scroll.clientWidth / 2;
+        scroll.scrollTop = fy * img.offsetHeight - scroll.clientHeight / 2;
+      }
+    }
+
+    main.addEventListener('click', open);
+    main.tabIndex = 0;
+    main.setAttribute('role', 'button');
+    main.setAttribute('aria-label', 'Enlarge photo');
+    main.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    img.addEventListener('click', toggleZoom);
+    scroll.addEventListener('click', e => { if (e.target === scroll) close(); });
+    box.querySelector('.zoombox-close').addEventListener('click', close);
+    if (many) {
+      box.querySelector('.prev').addEventListener('click', () => show(index - 1));
+      box.querySelector('.next').addEventListener('click', () => show(index + 1));
+    }
+    document.addEventListener('keydown', e => {
+      if (box.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (many && e.key === 'ArrowLeft') show(index - 1);
+      else if (many && e.key === 'ArrowRight') show(index + 1);
+    });
+
+    // Drag to look around when zoomed in (touch screens just swipe)
+    let drag = null;
+    scroll.addEventListener('mousedown', e => {
+      if (!scroll.classList.contains('zoomed')) return;
+      drag = { x: e.clientX, y: e.clientY, l: scroll.scrollLeft, t: scroll.scrollTop, moved: false };
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true;
+      scroll.scrollLeft = drag.l - dx;
+      scroll.scrollTop = drag.t - dy;
+    });
+    window.addEventListener('mouseup', () => {
+      if (drag && drag.moved) { img.addEventListener('click', stopOnce, { capture: true, once: true }); }
+      drag = null;
+    });
+    function stopOnce(e) { e.stopImmediatePropagation(); }
   }
 
   function choiceOf(card) {

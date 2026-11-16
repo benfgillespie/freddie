@@ -824,7 +824,7 @@ body.basket-open { overflow: hidden; }
 .post-hero img { width: 100%; height: auto; border: 1px solid var(--border-1); }
 
 /* ---------- Foil Mag articles: flick through the magazine spreads ---------- */
-.foilmag-badge { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 14px; color: #000; background: var(--gold); padding: 5px 12px; margin: 0 0 22px; }
+.foilmag-badge { text-decoration: none; display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 14px; color: #000; background: var(--gold); padding: 5px 12px; margin: 0 0 22px; }
 .post-card-media .foilmag-tag { position: absolute; left: 0; bottom: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12px; color: #000; background: var(--gold); padding: 4px 10px; }
 .mag { margin: 8px 0 36px; }
 .mag-divider { border: none; border-top: 3px solid var(--gold); width: 60px; margin: 48px 0 32px; }
@@ -1214,3 +1214,5 @@ body.basket-open { overflow: hidden; }
 .ep-actions .ep-play-btn { margin-top: 0; padding-top: 0; }
 .ep-read { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-secondary); }
 .ep-read:hover { color: var(--gold); }
+a.foilmag-badge { transition: background .15s, transform .15s; }
+a.foilmag-badge:hover { background: #fff; transform: translateY(-1px); }

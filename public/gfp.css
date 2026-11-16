@@ -1216,3 +1216,6 @@ body.basket-open { overflow: hidden; }
 .ep-read:hover { color: var(--gold); }
 a.foilmag-badge { transition: background .15s, transform .15s; }
 a.foilmag-badge:hover { background: #fff; transform: translateY(-1px); }
+
+.see-all-group{display:flex;gap:18px;flex-wrap:wrap}
+.ep-card-media .foilmag-tag{position:absolute;left:0;bottom:0;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:#000;background:var(--gold);padding:4px 10px}

@@ -15,7 +15,10 @@
     "author": "Freddie",
     "image": "/img/blog/foil-mag/kfc-2026/page-1.jpg",
     "excerpt": "Four years in, and the Kernow Foil Classic has morphed into an absolute phenomenon of an event. Freddie’s report from Gwithian for Foiling Magazine.",
-    "foilmag": true
+    "foilmag": true,
+    "foilmagIssue": 30,
+    "cardImage": "/img/blog/foil-mag/kfc-2026/card.jpg",
+    "imagePosition": "center 20%"
   },
   {
     "slug": "hood-river-trip-guide",

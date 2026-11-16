@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="gfp.css?v=19">
+  <link rel="stylesheet" href="gfp.css?v=21">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9ZZ6R32H7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P9ZZ6R32H7');</script>
 </head>
@@ -93,8 +93,8 @@
     <section class="section" id="episodes">
       <div class="wrap">
         <div class="section-head ruled">
-          <h2>Latest Episodes</h2>
-          <a class="see-all" href="/episodes.html">All Episodes &rarr;</a>
+          <h2>Latest News</h2>
+          <span class="see-all-group"><a class="see-all" href="/episodes.html">Episodes</a><a class="see-all" href="/blog">Blog</a><a class="see-all" href="/newsletter">Newsletter &rarr;</a></span>
         </div>
         <!-- Filled from the podcast feed on load; these are the fallback if the feed is unavailable -->
         <div class="ep-grid" id="latestEpisodes">
@@ -409,11 +409,53 @@
         description: shorten(desc, 130),
         image: item.getElementsByTagNameNS('*', 'image')[0]?.getAttribute('href') || '',
         link: '/episode/' + episodeSlug(raw),
+        date: new Date(item.querySelector('pubDate')?.textContent || 0).toISOString().slice(0, 10),
+        kind: 'Episode',
       };
     }
 
     function episodeSlug(raw) {
       return raw.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 90).replace(/-+$/, '');
+    }
+
+    function renderLatest(items) {
+      const latest = items.slice().sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+      document.getElementById('latestEpisodes').innerHTML = latest.map(it => `
+        <a class="ep-card" href="${escapeHtml(it.link)}">
+          <div class="ep-card-media">
+            <img src="${escapeHtml(it.image)}" alt="${escapeHtml(it.kind)}: ${escapeHtml(it.title)}" loading="lazy"${it.pos ? ` style="object-position:${escapeHtml(it.pos)}"` : ''}>
+            <div class="num">${it.kind === 'Episode' ? (it.number || 'Bonus') : escapeHtml(it.kind)}</div>
+            ${it.mag ? `<span class="foilmag-tag">${escapeHtml(it.mag)}</span>` : ''}
+          </div>
+          <div class="ep-card-body">
+            <h3>${escapeHtml(it.title)}</h3>
+            <p>${escapeHtml(it.description)}</p>
+          </div>
+        </a>`).join('');
+    }
+
+    async function loadBlogItems() {
+      try {
+        const posts = await (await fetch('/blog/posts.json')).json();
+        const local = ['localhost', '127.0.0.1'].includes(location.hostname);
+        return posts.filter(p => local || !p.draft).map(p => ({
+          kind: 'Blog', title: p.title, date: p.date, image: p.cardImage || p.image, pos: p.imagePosition || '',
+          mag: p.foilmag ? 'As featured in Foiling Magazine' + (p.foilmagIssue ? ' · Issue ' + p.foilmagIssue : '') : '',
+          description: shorten(p.description || p.excerpt || '', 130),
+          link: '/blog-post?post=' + encodeURIComponent(p.slug),
+        }));
+      } catch (e) { return []; }
+    }
+
+    async function loadNewsletterItems() {
+      try {
+        const issues = await (await fetch('/api/newsletters')).json();
+        return issues.map(i => ({
+          kind: 'Newsletter', title: i.title, date: i.date, image: i.image || '/img/share.jpg',
+          description: shorten(i.excerpt || '', 130),
+          link: '/newsletter-issue?issue=' + i.number,
+        }));
+      } catch (e) { return []; }
     }
 
     async function loadLatestEpisodes() {
@@ -425,17 +467,10 @@
         const episodes = Array.from(xml.querySelectorAll('item')).map(item => parseEpisode(item, spotifyUrl));
         if (!episodes.length) return;
 
-        document.getElementById('latestEpisodes').innerHTML = episodes.slice(0, 3).map(ep => `
-          <a class="ep-card" href="${escapeHtml(ep.link)}">
-            <div class="ep-card-media">
-              <img src="${escapeHtml(ep.image)}" alt="${ep.number ? 'Episode ' + ep.number : 'Bonus episode'} artwork" loading="lazy">
-              <div class="num">${ep.number || 'Bonus'}</div>
-            </div>
-            <div class="ep-card-body">
-              <h3>${escapeHtml(ep.title)}</h3>
-              <p>${escapeHtml(ep.description)}</p>
-            </div>
-          </a>`).join('');
+        renderLatest(episodes);
+        // Add the newest blog posts and newsletter issues once they arrive, then re-sort by date
+        const extras = await Promise.all([loadBlogItems(), loadNewsletterItems()]);
+        renderLatest(episodes.concat(extras[0], extras[1]));
 
         const newestNumbered = episodes.find(ep => ep.number);
         if (newestNumbered) {

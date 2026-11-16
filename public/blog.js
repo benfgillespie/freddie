@@ -193,9 +193,9 @@
       list.innerHTML = all.map(post => `
         <a class="post-card" href="${postUrl(post)}">
           <div class="post-card-media">
-            ${post.image ? `<img src="${escapeHtml(post.image)}" alt="" loading="lazy">` : ''}
+            ${post.image ? `<img src="${escapeHtml(post.cardImage || post.image)}" alt="" loading="lazy"${post.imagePosition ? ` style="object-position:${escapeHtml(post.imagePosition)}"` : ''}>` : ''}
             ${post.draft ? '<div class="num">Draft</div>' : ''}
-            ${post.foilmag ? '<span class="foilmag-tag">As featured in Foiling Magazine</span>' : ''}
+            ${post.foilmag ? '<span class="foilmag-tag">As featured in Foiling Magazine' + (post.foilmagIssue ? ' &middot; Issue ' + post.foilmagIssue : '') + '</span>' : ''}
           </div>
           <div class="post-card-body">
             <span class="issue-date">${formatDate(post.date)}${post.author ? ' · ' + escapeHtml(post.author) : ''}</span>

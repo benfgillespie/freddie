@@ -6,7 +6,12 @@
   "headers": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "generic-foiling-podcast.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "generic-foiling-podcast.vercel.app"
+        }
+      ],
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -120,6 +125,16 @@
     {
       "source": "/episode/:slug",
       "destination": "/api/episode?slug=:slug"
+    },
+    {
+      "source": "/blog-post",
+      "has": [
+        {
+          "type": "query",
+          "key": "post"
+        }
+      ],
+      "destination": "/api/blog-post"
     }
   ]
 }

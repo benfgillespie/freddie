@@ -128,12 +128,6 @@
     },
     {
       "source": "/blog-post",
-      "has": [
-        {
-          "type": "query",
-          "key": "post"
-        }
-      ],
       "destination": "/api/blog-post"
     }
   ]

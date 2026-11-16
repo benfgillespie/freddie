@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
   let html;
-  try { html = await (await get(origin + '/blog-post.html')).text(); } catch (e) { return res.status(502).send('This page is unavailable right now. Please try again in a minute.'); }
+  try { html = await (await get(origin + '/blog-post-template.html')).text(); } catch (e) { return res.status(502).send('This page is unavailable right now. Please try again in a minute.'); }
 
   try {
     const posts = await (await get(origin + '/blog/posts.json')).json();

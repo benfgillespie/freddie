@@ -13,7 +13,7 @@
   }
 
   function postUrl(post) {
-    return '/blog-post.html?post=' + encodeURIComponent(post.slug);
+    return '/blog-post?post=' + encodeURIComponent(post.slug);
   }
 
   const posts = fetch('/blog/posts.json')

@@ -67,6 +67,8 @@ http.createServer((req, res) => {
   const ep = url.pathname.match(/^\/episode\/([^/]+)\/?$/);
   if (ep) { url.pathname = '/api/episode'; url.searchParams.set('slug', decodeURIComponent(ep[1])); return handleApi(req, res, url); }
   if (/^\/blog-post(\.html)?$/.test(url.pathname)) { url.pathname = '/api/blog-post'; return handleApi(req, res, url); }
+  if (/^\/product(\.html)?$/.test(url.pathname) && url.searchParams.get('id')) { url.pathname = '/api/product-page'; return handleApi(req, res, url); }
+  if (/^\/newsletter-issue(\.html)?$/.test(url.pathname)) { url.pathname = '/api/newsletter-issue-page'; return handleApi(req, res, url); }
   return serveFile(res, url.pathname);
 }).listen(PORT, () => {
   console.log(`Generic Foiling Podcast running at http://localhost:${PORT}`);

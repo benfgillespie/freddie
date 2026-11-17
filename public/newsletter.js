@@ -16,7 +16,7 @@
   }
 
   function issueUrl(issue) {
-    return '/newsletter-issue.html?issue=' + issue.number;
+    return '/newsletter-issue?issue=' + issue.number;
   }
 
   function failed(el) {

@@ -1,5 +1,8 @@
 User-agent: *
 Disallow: /api/
 Disallow: /start
+Disallow: /blog-post-template
+Disallow: /product-template
+Disallow: /newsletter-issue-template
 
 Sitemap: https://genericfoilingpod.com/sitemap.xml

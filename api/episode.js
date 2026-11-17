@@ -73,6 +73,9 @@ export default async function handler(req, res) {
 
   let notes = {};
   try { notes = JSON.parse(await fetchText(origin + '/episode-notes.json')); } catch (e) { /* none yet */ }
+  let guests = {};
+  try { guests = JSON.parse(await fetchText(origin + '/episode-guests.json')); } catch (e) { /* none */ }
+  const guestLine = (ep.num && guests[ep.num]) || '';
   const mine = (ep.num && notes[ep.num]) || notes[ep.slug] || null;
   const show = readNotes(ep.descHtml);
   const bullets = mine?.bullets?.length ? mine.bullets : show.bullets;
@@ -92,7 +95,7 @@ export default async function handler(req, res) {
   const dateStr = isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
   const len = fmtDuration(ep.duration);
   const nice = ep.title.replace(/^\s*\d+\s*[-–—:]\s*/, '');
-  const lead = ep.num ? 'Episode ' + ep.num + ': ' : 'Bonus episode: ';
+  const lead = (ep.num ? 'Episode ' + ep.num : 'Bonus episode') + (guestLine ? ' with ' + guestLine : '') + ': ';
   const body = bullets.length ? bullets.slice(0, 4).join('; ') + '.' : (intro[0] || nice);
   const desc = cut(lead + body, 300);
   const searchDesc = cut(lead + body, 158); // what Google usually shows
@@ -145,11 +148,13 @@ export default async function handler(req, res) {
           <div class="ep-info">
             <p class="ep-tag">${ep.num ? 'Episode ' + esc(ep.num) : 'Bonus episode'}${dateStr ? ' &middot; ' + esc(dateStr) : ''}${len ? ' &middot; ' + esc(len) : ''}</p>
             <h1>${esc(nice)}</h1>
+            ${guestLine ? `<p class="ep-guests">With <strong>${esc(guestLine)}</strong></p>` : ''}
             <div class="ep-listen">
               ${ep.audio ? `<button type="button" class="btn-gold" id="epPlay" data-audio="${esc(ep.audio)}" data-title="${esc(ep.title)}" data-image="${esc(ep.image)}" data-tag="${ep.num ? 'Episode ' + esc(ep.num) : 'Bonus episode'}">&#9654;&#xFE0E; Play episode</button>` : ''}
               <a class="btn-outline" id="epSpotify" href="https://open.spotify.com/show/7wBQo7HwIbwXE8NncFk25z" target="_blank" rel="noopener">Spotify</a>
               <a class="btn-outline" href="https://podcasts.apple.com/us/podcast/the-generic-foiling-podcast/id1637901696" target="_blank" rel="noopener">Apple Podcasts</a>
               <a class="btn-outline" href="https://www.youtube.com/@GenericFoilingPodcast" target="_blank" rel="noopener">YouTube</a>
+              <button type="button" class="btn-outline share-btn" data-share data-share-title="${esc(nice)}">Share</button>
             </div>
           </div>
         </div>
@@ -194,6 +199,7 @@ export default async function handler(req, res) {
   </script>
   <script src="/ep-player.js?v=3"></script>
   <script src="/spotify-links.js"></script>
+  <script src="/share.js?v=1"></script>
   <script>
     // Point the Spotify button at this exact episode
     if (typeof spotifyLinks !== 'undefined') spotifyLinks.then(function (f) { document.getElementById('epSpotify').href = f(${JSON.stringify(ep.title)}); });

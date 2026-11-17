@@ -140,6 +140,14 @@
     {
       "source": "/blog-post",
       "destination": "/api/blog-post"
+    },
+    {
+      "source": "/product",
+      "destination": "/api/product-page"
+    },
+    {
+      "source": "/newsletter-issue",
+      "destination": "/api/newsletter-issue-page"
     }
   ]
 }

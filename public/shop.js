@@ -21,7 +21,7 @@
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(basket)); } catch (e) {} };
   const inBasket = (id, choice) => basket.find(i => i.id === id && variantKey(products.find(p => p.id === id), i.choice) === variantKey(products.find(p => p.id === id), choice));
 
-  const productUrl = p => '/product.html?id=' + encodeURIComponent(p.id);
+  const productUrl = p => '/product?id=' + encodeURIComponent(p.id);
 
   // ---- Product cards (shop page) ----
   function firstAvailable(p) {

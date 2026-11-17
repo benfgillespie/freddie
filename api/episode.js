@@ -39,6 +39,12 @@ function readNotes(html) {
   return { bullets, paras };
 }
 
+function cut(t, max) {
+  t = String(t).replace(/\s+/g, ' ').trim();
+  if (t.length <= max) return t;
+  return t.slice(0, t.lastIndexOf(' ', max - 1)).replace(/[\s,.;:–—-]+$/, '') + '…';
+}
+
 function fmtDuration(d) {
   const p = d.split(':').map(Number);
   if (p.length === 3) return [p[0] ? p[0] + 'h' : '', p[1] ? p[1] + 'm' : ''].filter(Boolean).join(' ');
@@ -86,7 +92,11 @@ export default async function handler(req, res) {
   const dateStr = isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
   const len = fmtDuration(ep.duration);
   const nice = ep.title.replace(/^\s*\d+\s*[-–—:]\s*/, '');
-  const desc = (bullets.length ? 'We talk about: ' + bullets.slice(0, 4).join('; ') + '.' : (intro[0] || nice)).slice(0, 300);
+  const lead = ep.num ? 'Episode ' + ep.num + ': ' : 'Bonus episode: ';
+  const body = bullets.length ? bullets.slice(0, 4).join('; ') + '.' : (intro[0] || nice);
+  const desc = cut(lead + body, 300);
+  const searchDesc = cut(lead + body, 158); // what Google usually shows
+  const pageTitle = (ep.num ? nice + ' (Episode ' + ep.num + ')' : nice) + ' | The Generic Foiling Podcast';
   const url = `${SITE}/episode/${ep.slug}`;
   const ld = {
     '@context': 'https://schema.org', '@type': 'PodcastEpisode', name: ep.title, url, datePublished: isNaN(d) ? undefined : d.toISOString().slice(0, 10),
@@ -103,8 +113,8 @@ export default async function handler(req, res) {
   <link rel="icon" href="/img/favicon-32.png" sizes="32x32">
   <link rel="icon" href="/img/icon-192.png" sizes="192x192">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-  <title>${esc(ep.title)} | The Generic Foiling Podcast</title>
-  <meta name="description" content="${esc(desc)}">
+  <title>${esc(pageTitle)}</title>
+  <meta name="description" content="${esc(searchDesc)}">
   <link rel="canonical" href="${url}">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="The Generic Foiling Podcast">

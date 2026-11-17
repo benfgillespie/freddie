@@ -37,11 +37,6 @@
       "permanent": false
     },
     {
-      "source": "/archives/podcast/:slug*",
-      "destination": "/episodes",
-      "permanent": true
-    },
-    {
       "source": "/archives/album/:slug*",
       "destination": "/episodes",
       "permanent": true
@@ -115,9 +110,24 @@
       "source": "/my-account",
       "destination": "/shop",
       "permanent": true
+    },
+    {
+      "source": "/product",
+      "missing": [
+        {
+          "type": "query",
+          "key": "id"
+        }
+      ],
+      "destination": "/shop",
+      "permanent": false
     }
   ],
   "rewrites": [
+    {
+      "source": "/archives/podcast/:slug*",
+      "destination": "/api/old-episode?slug=:slug*"
+    },
     {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"

@@ -52,6 +52,11 @@
       "permanent": true
     },
     {
+      "source": "/archives/podcast/:slug*",
+      "destination": "/api/old-episode?slug=:slug*",
+      "permanent": false
+    },
+    {
       "source": "/archives/:path*",
       "destination": "/blog",
       "permanent": true
@@ -124,10 +129,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/archives/podcast/:slug*",
-      "destination": "/api/old-episode?slug=:slug*"
-    },
     {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"
